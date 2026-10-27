@@ -1,0 +1,4539 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RE-BORN • Nước Rửa Tay Vỏ Bưởi - Sạch Khuẩn Từ Tự Nhiên</title>
+  <meta name="description"
+    content="Chăm sóc đôi tay và không gian sống mỗi ngày lấy cảm hứng từ sự thanh khiết phục hồi của vỏ bưởi tái chế. Chế tác thủ công theo từng mẻ nhỏ với sự trân trọng tuyệt đối dành cho tự nhiên.">
+  <link rel="icon" type="image/png" href="assets/images/logo_emblem.png">
+
+  <!-- Google Fonts: Be Vietnam Pro & Noto Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
+
+  <!-- Unified Stylesheet -->
+  <style id="inlined-botanical-style">
+/* ==========================================================================
+   RE-BORN • Nước Rửa Tay Vỏ Bưởi Hữu Cơ - Sạch Khuẩn Từ Tự Nhiên
+   Unified Botanical Design System & Styling
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  /* ========================================================================
+     Design Tokens: Botanical Essence Color Palette
+     ======================================================================== */
+  /* Brand Core */
+  --color-primary: #315C3B;
+  /* Forest Green - Hero headlines, CTAs, nav */
+  --color-primary-dark: #194426;
+  /* Deep Forest Green */
+  --color-primary-hover: #26492F;
+  /* Deepened hover state */
+  --color-primary-container: #315C3B;
+  --color-on-primary: #FFFFFF;
+  --color-on-primary-container: #A3D3A9;
+  --color-primary-fixed: #BEEFC3;
+  --color-primary-fixed-dim: #A2D2A8;
+
+  --color-secondary: #638B50;
+  /* Pomelo Leaf Green - Vegetal accents & badges */
+  --color-secondary-dark: #426831;
+  --color-secondary-container: #C2EFAA;
+  --color-on-secondary-container: #486E37;
+
+  --color-tertiary: #363F32;
+  --color-tertiary-container: #4D5648;
+  --color-on-tertiary-container: #C0CAB9;
+  --color-soft-sage: #DDE7D5;
+  /* Soft Sage */
+
+  /* Supporting Canvas & Named Tokens */
+  --color-warm-cream: #F8F6EE;
+  /* Ambient base canvas (Warm paper/parchment) */
+  --color-pale-green: #EDF1E7;
+  /* Gentle alternating section & pill bg */
+  --color-muted-gray-green: #778074;
+  /* Secondary metadata, placeholder, inactive */
+  --color-sand-border: #E6E4D9;
+  /* Low-contrast hairline delimiters */
+
+  /* Surface Scale (Material 3 Botanical Extension) */
+  --color-surface: #F1FCF0;
+  --color-surface-dim: #D2DDD1;
+  --color-surface-bright: #F1FCF0;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #EBF7EA;
+  --color-surface-container: #E6F1E5;
+  --color-surface-container-high: #E0EBDF;
+  --color-surface-container-highest: #DAE6DA;
+  --color-on-surface: #141E17;
+  --color-on-surface-variant: #414941;
+  --color-inverse-surface: #29332B;
+  --color-inverse-on-surface: #E8F4E8;
+  --color-outline: #727970;
+  --color-outline-variant: #C1C9BF;
+  --color-surface-tint: #3C6846;
+
+  /* Semantic Component Mappings */
+  --color-bg-cream: var(--color-warm-cream);
+  --color-bg-main: var(--color-warm-cream);
+  --color-bg-alt: var(--color-pale-green);
+  --color-bg-card: #FFFFFF;
+  --color-bg-sage: var(--color-soft-sage);
+  --color-bg-sage-light: var(--color-surface-container-low);
+
+  --color-text-main: #29332B;
+  /* Botanical Charcoal - Body, headings, dividers */
+  --color-text-secondary: #414941;
+  /* Secondary copy */
+  --color-text-light: #778074;
+  /* Muted Gray-Green */
+  --color-text-white: #FFFFFF;
+
+  --color-border: var(--color-sand-border);
+  --color-border-subtle: var(--color-pale-green);
+  --color-border-focus: var(--color-primary);
+
+  --color-accent: #FFD75E;
+  /* Pomelo Gold / Citrus highlight */
+  --color-accent-dark: #E5BE49;
+  --color-accent-soft: #FFF9E6;
+
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+  --color-error-bg: #FFDAD6;
+  --color-error-border: #FFB4AB;
+  --color-on-error-container: #93000A;
+
+  --color-success: #315C3B;
+  --color-success-bg: #EBF7EA;
+
+  --color-warning: #D97706;
+  --color-warning-bg: #FFFBEB;
+
+  /* ========================================================================
+     Typography (Botanical Essence Typographic Standards)
+     - Display & Storytelling: Noto Serif
+     - Body, Labels & UI: Be Vietnam Pro (native Vietnamese diacritic optimized)
+     ======================================================================== */
+  --font-serif: 'Noto Serif', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-headline: var(--font-serif);
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
+
+  /* ========================================================================
+     Layout & Spacing Grid (Botanical Essence Scale)
+     ======================================================================== */
+  --gutter: 1.5rem;
+  /* 24px */
+  --gutter-desktop: 2.5rem;
+  /* 40px */
+  --margin: 1.25rem;
+  /* 20px */
+  --margin-tablet: 2.5rem;
+  /* 40px */
+  --margin-desktop: 5rem;
+  /* 80px */
+  --space-xs: 0.25rem;
+  /* 4px */
+  --space-sm: 0.5rem;
+  /* 8px */
+  --space-md: 1rem;
+  /* 16px */
+  --space-lg: 1.75rem;
+  /* 28px */
+  --space-xl: 3rem;
+  /* 48px */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ========================================================================
+     Shapes & Radii (Botanical Curvature & River Stone Geometry)
+     ======================================================================== */
+  --radius-xs: 0.25rem;
+  /* 4px: micro badges */
+  --radius-sm: 0.5rem;
+  /* 8px: form inputs, controls, standard dialogs */
+  --radius-default: 0.5rem;
+  /* 8px */
+  --radius-md: 0.75rem;
+  /* 12px */
+  --radius-lg: 1rem;
+  /* 16px: product cards, panels */
+  --radius-xl: 1.5rem;
+  /* 24px: banners, large modals */
+  --radius-2xl: 1.75rem;
+  /* 28px: hero, circular economy banners */
+  --radius-3xl: 2rem;
+  /* 32px: extra large containers */
+  --radius-full: 9999px;
+  /* pills, buttons, chips, tags */
+
+  /* ========================================================================
+     Elevation & Depth (Soft Ambient Botanical Diffusion)
+     ======================================================================== */
+  --shadow-ambient: 0 12px 32px -8px rgba(41, 51, 43, 0.06), 0 4px 12px -2px rgba(41, 51, 43, 0.04);
+  --shadow-xs: 0 1px 3px rgba(41, 51, 43, 0.04);
+  --shadow-sm: 0 2px 8px -2px rgba(41, 51, 43, 0.05);
+  --shadow-md: 0 6px 18px -4px rgba(41, 51, 43, 0.06);
+  --shadow-lg: 0 12px 32px -8px rgba(41, 51, 43, 0.08);
+  --shadow-hover: 0 16px 36px -8px rgba(49, 92, 59, 0.12);
+  --shadow-drawer: 0 16px 40px -8px rgba(41, 51, 43, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(49, 92, 59, 0.22);
+  --shadow-focus-error: 0 0 0 3px rgba(186, 26, 26, 0.18);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.25s ease-in-out;
+  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   CSS Reset & Base Styles
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-cream);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle botanical organic grain background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(40, 120, 68, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  z-index: -1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-label);
+  font-size: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Accessibility Focus Outline */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Layout Containers
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.container-wide {
+  max-width: 1440px;
+  padding-left: var(--gutter-desktop);
+  padding-right: var(--gutter-desktop);
+}
+
+.container-narrow {
+  max-width: 860px;
+}
+
+/* ==========================================================================
+   Typography Standards (Botanical Essence Scale)
+   ========================================================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-main);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h1 {
+  font-family: var(--font-headline);
+  font-size: 40px;
+  /* headline-lg */
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-family: var(--font-headline);
+  font-size: 40px;
+  /* headline-lg */
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-size: 26px;
+  /* headline-md */
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-size: 20px;
+  /* headline-sm */
+  font-weight: 600;
+  line-height: 28px;
+}
+
+p {
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  /* body-md */
+  font-weight: 400;
+  line-height: 28px;
+  /* line-height multiplier 1.75 to prevent Vietnamese diacritic collision */
+}
+
+.section-label {
+  font-family: var(--font-label);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+  /* label-caps */
+  font-weight: 600;
+  line-height: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  /* Forest Green #315C3B */
+  margin-bottom: var(--space-2);
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  background-color: var(--color-secondary);
+  /* Pomelo Leaf Green #638B50 */
+  border-radius: var(--radius-full);
+}
+
+.section-title {
+  font-family: var(--font-headline);
+  font-size: 40px;
+  /* headline-lg */
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: -0.015em;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-3);
+}
+
+.section-desc {
+  font-family: var(--font-body);
+  font-size: 18px;
+  /* body-lg */
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  max-width: 680px;
+  line-height: 30px;
+}
+
+/* ==========================================================================
+   Buttons (Standardized Hierarchy)
+   ========================================================================== */
+.btn {
+  font-family: var(--font-label);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.875rem 2rem;
+  /* 14px 32px */
+  font-size: 15px;
+  /* label-md */
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-full);
+  /* rounded-full */
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Primary Button: Forest Green #315C3B & Warm Cream Text */
+.btn-primary,
+.btn-primary-pill,
+.btn-auth-submit,
+.btn-checkout {
+  background-color: var(--color-primary);
+  color: var(--color-warm-cream) !important;
+  border-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(49, 92, 59, 0.18);
+}
+
+.btn-primary:hover,
+.btn-primary-pill:hover,
+.btn-auth-submit:hover,
+.btn-checkout:hover {
+  background-color: var(--color-primary-hover);
+  /* #26492F */
+  border-color: var(--color-primary-hover);
+  color: var(--color-warm-cream) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-primary:active,
+.btn-primary-pill:active,
+.btn-auth-submit:active,
+.btn-checkout:active {
+  transform: translateY(0);
+}
+
+/* Secondary / Ghost Button: Transparent + Forest Green Border */
+.btn-secondary,
+.btn-ghost,
+.btn-outline,
+.btn-outline-pill {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.btn-secondary:hover,
+.btn-ghost:hover,
+.btn-outline:hover,
+.btn-outline-pill:hover {
+  background-color: var(--color-pale-green);
+  /* #EDF1E7 */
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+/* Editorial Text Link */
+.link-editorial,
+.editorial-link {
+  color: var(--color-text-main);
+  font-family: var(--font-label);
+  font-size: 15px;
+  /* label-md */
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  text-decoration: underline;
+  text-decoration-color: var(--color-secondary);
+  /* Pomelo Leaf Green #638B50 */
+  text-underline-offset: 4px;
+  transition: color var(--transition-fast);
+}
+
+.link-editorial:hover,
+.editorial-link:hover {
+  color: var(--color-primary);
+}
+
+.btn-outline:hover,
+.btn-outline-pill:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  transform: translateY(-1px);
+}
+
+/* Danger Button */
+.btn-danger {
+  background-color: var(--color-error);
+  color: var(--color-text-white);
+  border-color: var(--color-error);
+  border-radius: var(--radius-md);
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+/* Icon Button */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-main);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background-color: var(--color-primary-soft);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Checkout Button */
+.btn-checkout {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-radius: var(--radius-md);
+  border: none;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+}
+
+.btn-checkout:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+/* Loading State for Buttons */
+.btn.is-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: calc(50% - 9px);
+  left: calc(50% - 9px);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Form Fields (Standardized Height 44-48px & Accessible Tokens)
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-4);
+  text-align: left;
+}
+
+.form-label,
+label {
+  font-family: var(--font-label);
+  font-size: 0.88rem;
+  /* 13.5px */
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-label .optional {
+  font-weight: 400;
+  color: var(--color-text-light);
+  font-size: 0.8rem;
+}
+
+.input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.form-input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  height: 48px;
+  padding: 0.75rem 1.25rem;
+  /* 12px 20px */
+  font-family: var(--font-label);
+  font-size: 15px;
+  /* label-md */
+  color: var(--color-text-main);
+  background-color: #ffffff;
+  border: 1px solid var(--color-sand-border);
+  border-radius: var(--radius-default);
+  /* 8px */
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.form-input:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  /* Forest Green #315C3B */
+  box-shadow: var(--shadow-focus);
+}
+
+.form-input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted-gray-green);
+  /* #778074 */
+}
+
+textarea {
+  height: auto;
+  min-height: 90px;
+  resize: vertical;
+}
+
+.input-icon-wrap input {
+  padding-right: 42px;
+}
+
+.input-icon-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-light);
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color var(--transition-fast);
+}
+
+.input-icon-btn:hover {
+  color: var(--color-primary);
+}
+
+/* Focus State */
+.form-input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Error State */
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea,
+input.input-error {
+  border-color: var(--color-error) !important;
+  box-shadow: var(--shadow-focus-error) !important;
+}
+
+.form-error-msg {
+  display: none;
+  font-size: 0.8rem;
+  color: var(--color-error);
+  margin-top: var(--space-1);
+  font-weight: 500;
+}
+
+.form-group.has-error .form-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Checkbox and Radio styling */
+.checkbox-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  margin-bottom: var(--space-3);
+  user-select: none;
+}
+
+.checkbox-wrap input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 4px;
+  background-color: #ffffff;
+  cursor: pointer;
+  margin-top: 2px;
+  flex-shrink: 0;
+  display: grid;
+  place-content: center;
+  transition: all var(--transition-fast);
+}
+
+.checkbox-wrap input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox-wrap input[type="checkbox"]:checked::before {
+  content: '✓';
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Radio Group in Checkout */
+.payment-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
+}
+
+.payment-option-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 12px 14px;
+  background-color: #ffffff;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  transition: all var(--transition-fast);
+}
+
+.payment-option-label:hover {
+  border-color: var(--color-primary-light);
+  background-color: var(--color-bg-sage-light);
+}
+
+.payment-option-label:has(input:checked) {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.payment-option-label input[type="radio"] {
+  accent-color: var(--color-primary);
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all var(--transition-normal);
+}
+
+.site-header.scrolled {
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-header-logo {
+  height: 48px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  display: block;
+  transition: transform var(--transition-fast);
+}
+
+.brand-logo:hover .brand-header-logo {
+  transform: scale(1.04);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  padding: 6px 0;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition-fast);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Fast Order Button on Header */
+.btn-fast-order {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.btn-fast-order:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 6px;
+  color: var(--color-text-main);
+}
+
+/* Mobile Navigation Drawer */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(38, 53, 43, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1090;
+}
+
+.mobile-nav-overlay.open {
+  display: block;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  max-width: 85vw;
+  height: 100%;
+  background: #ffffff;
+  z-index: 1100;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: -6px 0 24px rgba(41, 51, 43, 0.12);
+  border-left: 1px solid var(--color-border);
+  transition: right var(--transition-normal);
+}
+
+.mobile-nav-drawer.open {
+  right: 0;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.mobile-nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(230, 228, 217, 0.8);
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
+  text-decoration: none;
+}
+
+.mobile-nav-links a:hover {
+  color: var(--color-primary);
+  padding-left: 6px;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero-section {
+  padding: 60px 0 80px;
+  background: linear-gradient(180deg, var(--color-bg-cream) 0%, rgba(240, 246, 238, 0.6) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-xs);
+}
+
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+}
+
+.hero-title {
+  font-family: var(--font-headline);
+  font-size: 68px;
+  /* display-hero: Noto Serif 68px */
+  font-weight: 500;
+  color: var(--color-primary);
+  /* Forest Green #315C3B */
+  line-height: 78px;
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.02em;
+}
+
+.hero-title span {
+  color: var(--color-secondary);
+  /* Pomelo Leaf Green #638B50 */
+  display: block;
+}
+
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 18px;
+  /* body-lg */
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  /* #414941 */
+  line-height: 30px;
+  margin-bottom: var(--space-8);
+  max-width: 560px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-val {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.hero-visual-card {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+}
+
+.hero-visual-card img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.hero-visual-card:hover img {
+  transform: scale(1.02);
+}
+
+.hero-card-floating-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   Section: Triết Lý Bản Địa (Philosophy)
+   ========================================================================== */
+.philosophy-section {
+  padding: var(--space-20) 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.philosophy-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
+  align-items: flex-end;
+}
+
+.philosophy-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.step-card {
+  background-color: var(--color-bg-cream);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: var(--space-8) var(--space-6);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-light);
+}
+
+.step-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--color-primary-light);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+  font-family: monospace;
+}
+
+.step-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-2);
+}
+
+.step-card p {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Section: Danh Mục Sản Phẩm (Products Catalog)
+   ========================================================================== */
+.products-section {
+  padding: var(--space-20) 0;
+  background-color: var(--color-bg-cream);
+}
+
+.products-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-12);
+}
+
+.products-header .section-label {
+  justify-content: center;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.product-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-sand-border);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-ambient);
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -8px rgba(41, 51, 43, 0.10);
+  border-color: var(--color-secondary);
+}
+
+.product-image-wrap {
+  position: relative;
+  background-color: var(--color-bg-sage-light);
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.product-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.product-card:hover .product-image-wrap img {
+  transform: scale(1.05);
+}
+
+.product-pill-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--color-primary-dark);
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(49, 92, 59, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.product-stock-tag {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--color-primary-dark);
+  font-family: var(--font-label);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.product-stock-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+}
+
+.product-info {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-2);
+}
+
+.product-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.3;
+}
+
+.product-volume {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.product-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.product-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.product-original-price {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  text-decoration: line-through;
+}
+
+.product-aroma-notes {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  display: inline-block;
+  margin-bottom: var(--space-3);
+}
+
+.product-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin-bottom: var(--space-5);
+  flex: 1;
+}
+
+.product-actions-row {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.product-btn-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-2);
+}
+
+.btn-add-cart-quick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.btn-add-cart-quick:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.link-explore-ritual {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.link-explore-ritual:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: var(--color-bg-sage-light);
+}
+
+/* ==========================================================================
+   Section: Cấu Trúc Tầng Hương (Scent Pyramid)
+   ========================================================================== */
+.fragrance-section {
+  padding: var(--space-20) 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--color-border);
+}
+
+.fragrance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.scent-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.scent-tier {
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-bg-cream);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.scent-tier:hover,
+.scent-tier.active {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.tier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-1);
+}
+
+.tier-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.tier-time {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.tier-notes {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Section: Feedback Loop (Khảo Sát Khách Hàng R&D cho BMC)
+   ========================================================================== */
+.survey-section {
+  padding: var(--space-16) 0;
+  background-color: var(--color-bg-cream);
+  border-top: 1px solid var(--color-border);
+}
+
+.survey-card {
+  background: #ffffff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 28px;
+  padding: 42px 48px;
+  box-shadow: 0 10px 32px rgba(41, 51, 43, 0.05);
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.survey-info h3 {
+  font-size: 1.7rem;
+  color: var(--color-primary-dark);
+  font-family: var(--font-headline);
+  margin-bottom: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.survey-desc {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+/* Botanical Voucher Reward Card */
+.survey-reward-card {
+  background: linear-gradient(145deg, #f3f9f4 0%, #eaf4ec 100%);
+  border: 1.5px solid #c9e3cf;
+  border-radius: 20px;
+  padding: 20px 22px;
+}
+
+.reward-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.reward-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: rgba(49, 92, 59, 0.08);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(49, 92, 59, 0.16);
+  letter-spacing: 0.03em;
+}
+
+.reward-discount {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--color-primary);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 8px rgba(49, 92, 59, 0.2);
+}
+
+.reward-body h5 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
+}
+
+.reward-body p {
+  font-size: 0.84rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+.reward-perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid rgba(49, 92, 59, 0.12);
+  padding-top: 10px;
+}
+
+.perk-item {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.survey-options {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.survey-question {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.survey-q-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.q-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.survey-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.survey-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1.5px solid #dbe3da;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: var(--color-text-main);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.survey-pill-btn .pill-check {
+  display: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.survey-pill-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: #f7faf7;
+}
+
+.survey-pill-btn.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(49, 92, 59, 0.2);
+}
+
+.survey-pill-btn.active .pill-check {
+  display: inline-block;
+}
+
+.survey-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-fb-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+input.survey-text-input,
+.survey-input-wrap input[type="text"] {
+  width: 100%;
+  height: 48px;
+  padding: 11px 16px 11px 48px !important;
+  background: #ffffff;
+  border: 1.5px solid #dbe3da;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  color: var(--color-text-main);
+  transition: all 0.2s ease;
+}
+
+input.survey-text-input:focus,
+.survey-input-wrap input[type="text"]:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(49, 92, 59, 0.12);
+}
+
+.btn-submit-feedback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 24px;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(49, 92, 59, 0.25);
+  margin-top: 8px;
+}
+
+.btn-submit-feedback:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(49, 92, 59, 0.35);
+}
+
+.feedback-success-box {
+  display: none;
+  margin-top: 14px;
+  padding: 16px;
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 14px;
+  color: #14532d;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.feedback-success-box .success-icon {
+  font-size: 1.2rem;
+  color: #16a34a;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.feedback-success-box a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1877F2;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Section: Hợp Tác Quán Cafe B2B (Dành cho Thùy BMC)
+   ========================================================================== */
+.b2b-section {
+  padding: var(--space-16) 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--color-border);
+}
+
+.b2b-banner {
+  background: linear-gradient(135deg, #194426 0%, #254e30 45%, #315C3B 100%);
+  border-radius: 28px;
+  padding: 36px 36px;
+  color: #ffffff;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: center;
+  box-shadow: 0 16px 40px rgba(25, 68, 38, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.b2b-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.b2b-banner h2 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.b2b-banner p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.b2b-tier-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.b2b-tier-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 14px 14px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.b2b-tier-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.b2b-tier-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-label);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+}
+
+.b2b-tier-badge.sample {
+  background-color: var(--color-accent);
+  color: #194426;
+}
+
+.b2b-tier-badge.wholesale {
+  background-color: var(--color-primary-fixed);
+  color: #194426;
+}
+
+.b2b-tier-card h4 {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.b2b-tier-card p {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.45;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.b2b-card-check {
+  font-size: 0.78rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.b2b-card-check.wholesale {
+  color: #BEEFC3;
+}
+
+.b2b-chips-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.b2b-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Right Form Box */
+.b2b-form-box {
+  background-color: #ffffff;
+  border-radius: 22px;
+  padding: 24px 22px;
+  color: var(--color-text-main);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(230, 228, 217, 0.8);
+}
+
+.b2b-form-header h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 3px;
+}
+
+.b2b-form-header p {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.b2b-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.b2b-compact-input {
+  height: 42px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid #d9d6cb !important;
+  padding: 8px 12px !important;
+  font-size: 0.85rem !important;
+  background-color: #faf9f5 !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.b2b-compact-input:focus {
+  border-color: var(--color-primary) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(49, 92, 59, 0.12) !important;
+}
+
+.b2b-form-box .form-group {
+  margin-bottom: 10px;
+}
+
+.b2b-form-box .form-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.b2b-submit-btn {
+  width: 100%;
+  border-radius: var(--radius-full) !important;
+  height: 44px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(25, 68, 38, 0.22);
+}
+
+@media (max-width: 600px) {
+  .b2b-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* ==========================================================================
+   Section: Tính Bền Vững & Refill (Circular Economy)
+   ========================================================================== */
+.sustainability-section {
+  padding: var(--space-20) 0;
+  background-color: var(--color-bg-cream);
+}
+
+.sustainability-banner {
+  background-color: #ffffff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 28px;
+  overflow: hidden;
+  padding: var(--space-12);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-8);
+  align-items: center;
+  box-shadow: 0 8px 30px rgba(41, 51, 43, 0.05);
+}
+
+.refill-steps-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.refill-step-item {
+  background-color: var(--color-bg-sage-light);
+  padding: var(--space-4);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.refill-step-item span {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   Section: FAQs
+   ========================================================================== */
+.faq-section {
+  padding: var(--space-16) 0;
+  background-color: #ffffff;
+  border-top: 1px solid var(--color-border);
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: var(--space-8) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-item {
+  background-color: var(--color-bg-cream);
+  border: 1.5px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.faq-item.active {
+  border-color: var(--color-primary);
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-headline);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-text-main);
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  transition: color var(--transition-fast);
+}
+
+.faq-question:hover {
+  color: var(--color-primary-dark);
+}
+
+.faq-item.active .faq-question {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 22px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  opacity: 0;
+  transition: max-height 0.35s ease, padding 0.3s ease, opacity 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 350px;
+  padding: 0 22px 20px;
+  opacity: 1;
+}
+
+.faq-answer p {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 14px;
+}
+
+.faq-icon {
+  transition: transform var(--transition-fast);
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(45deg);
+  color: var(--color-primary-dark);
+}
+
+/* ==========================================================================
+   Footer (Streamlined, Compact & Clean Botanical Layout)
+   ========================================================================== */
+.site-footer {
+  background-color: #ffffff;
+  color: var(--color-text-main);
+  padding: 28px 0 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Compact Trust Strip (1 Clean Row) */
+.footer-trust-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f7faf7;
+  border: 1px solid rgba(49, 92, 59, 0.08);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.trust-pill span {
+  font-size: 1.05rem;
+}
+
+.trust-divider {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(49, 92, 59, 0.12);
+}
+
+/* Compact 4-Column Grid */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 0.9fr 1.2fr;
+  gap: var(--space-6);
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+.footer-brand p {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+.footer-contact-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+.footer-contact-compact a {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-contact-compact a:hover {
+  text-decoration: underline;
+}
+
+.footer-fb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #eff6ff;
+  color: #1877F2 !important;
+  border: 1px solid rgba(24, 119, 242, 0.25);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: all var(--transition-fast);
+  margin-top: 4px;
+}
+
+.footer-fb-link:hover {
+  background-color: #1877F2;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(24, 119, 242, 0.25);
+}
+
+.footer-col h4 {
+  color: var(--color-primary-dark);
+  font-family: var(--font-headline);
+  font-size: 0.98rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-col a {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: var(--color-primary);
+  transform: translateX(3px);
+}
+
+.footer-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.footer-tag.eco {
+  background-color: #ebf7ea;
+  color: #266b37;
+}
+
+.footer-tag.hot {
+  background-color: #fff3d6;
+  color: #b45309;
+}
+
+/* Compact Newsletter Form */
+.footer-newsletter-compact {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-newsletter-compact h4 {
+  color: var(--color-primary-dark);
+  font-family: var(--font-headline);
+  font-size: 0.98rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.footer-newsletter-compact h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.footer-newsletter-compact p {
+  font-size: 0.83rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+
+.newsletter-form {
+  display: flex;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1.5px solid var(--color-border);
+  background: #ffffff;
+  height: 38px;
+}
+
+.newsletter-form input {
+  background: #ffffff;
+  color: var(--color-text-main);
+  border: none;
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  flex: 1;
+}
+
+.newsletter-form input:focus {
+  outline: none;
+}
+
+.newsletter-form button {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 0 16px;
+  font-weight: 600;
+  font-size: 0.84rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.newsletter-form button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.footer-newsletter-note {
+  font-size: 0.74rem;
+  color: var(--color-text-light);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Compact Footer Bottom */
+.footer-bottom {
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.footer-bottom-links a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color var(--transition-fast);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--color-primary);
+}
+
+.admin-link-pill {
+  padding: 3px 10px;
+  background-color: #f0f7f1;
+  border: 1px solid rgba(49, 92, 59, 0.18);
+  border-radius: 9999px;
+  color: var(--color-primary-dark) !important;
+  font-weight: 600;
+  font-size: 0.78rem;
+  transition: all var(--transition-fast);
+}
+
+.admin-link-pill:hover {
+  background-color: var(--color-primary);
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Shopping Cart Slide-Over Drawer
+   ========================================================================== */
+.cart-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(38, 53, 43, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+}
+
+.cart-drawer-overlay.open {
+  display: block;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -460px;
+  width: 440px;
+  max-width: 100vw;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1210;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  transition: right var(--transition-normal);
+}
+
+.cart-drawer.open {
+  right: 0;
+}
+
+.cart-header {
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.cart-free-shipping-bar {
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-bg-sage-light);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+.shipping-progress {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.shipping-progress-bar {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-normal);
+}
+
+.cart-items-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  align-items: center;
+}
+
+.cart-item-img {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-sage-light);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.cart-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.cart-item-volume {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.cart-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: #ffffff;
+}
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-text-main);
+  background: none;
+  cursor: pointer;
+}
+
+.qty-btn:hover {
+  background-color: var(--color-bg-sage);
+}
+
+.qty-val {
+  width: 28px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.cart-item-price {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.cart-footer {
+  padding: var(--space-5) var(--space-6);
+  background-color: #ffffff;
+  border-top: 1px solid var(--color-border);
+}
+
+.cart-promo-box {
+  margin-bottom: var(--space-4);
+}
+
+.promo-input-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.promo-input {
+  flex: 1;
+  height: 42px;
+}
+
+.promo-btn {
+  padding: 0 16px;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-primary-light);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.promo-btn:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.cart-subtotal-row,
+.cart-discount-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: var(--space-2);
+}
+
+.cart-discount-row {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.cart-subtotal-row {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  padding-top: 6px;
+}
+
+/* ==========================================================================
+   Modals (General, Quick View, Checkout)
+   ========================================================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(38, 53, 43, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1300;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.checkout-modal-card,
+.quick-view-card,
+.auth-modal-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--space-8);
+  position: relative;
+  animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: #ffffff;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background-color: var(--color-bg-sage);
+  color: var(--color-text-main);
+  transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   Consultation & Info Modal Styling
+   ========================================================================== */
+.consult-modal-card {
+  background: linear-gradient(180deg, #FBF8F2 0%, #FFFFFF 34%, #FFFFFF 100%);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(49, 92, 59, 0.12);
+  box-shadow: 0 24px 60px -12px rgba(25, 68, 38, 0.2), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+  max-width: 440px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 36px 30px 28px;
+  position: relative;
+  text-align: center;
+  animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.consult-emblem-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.consult-emblem-aura {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(162, 210, 168, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.consult-emblem-img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 10px rgba(49, 92, 59, 0.12));
+}
+
+.consult-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #EDF5EB;
+  border: 1px solid #D2E5D0;
+  color: #234E2D;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+}
+
+.consult-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2E8B47;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(46, 139, 71, 0.7);
+  animation: consultPulse 2s infinite;
+}
+
+@keyframes consultPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(46, 139, 71, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(46, 139, 71, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(46, 139, 71, 0);
+  }
+}
+
+.consult-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.consult-desc {
+  color: #526054;
+  line-height: 1.55;
+  font-size: 0.92rem;
+  margin-bottom: 22px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.consult-channels {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 20px;
+}
+
+.consult-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  text-align: left;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  background: #FFFFFF;
+}
+
+.consult-card-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #FFFFFF;
+  transition: transform 0.22s ease;
+}
+
+.consult-card-icon-wrap.fb-icon-bg {
+  background: linear-gradient(135deg, #0084FF 0%, #0062E0 100%);
+  box-shadow: 0 4px 12px rgba(0, 98, 224, 0.28);
+}
+
+.consult-card-icon-wrap.phone-icon-bg {
+  background: linear-gradient(135deg, #315C3B 0%, #204627 100%);
+  box-shadow: 0 4px 12px rgba(49, 92, 59, 0.25);
+}
+
+.consult-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.consult-card-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #1A261D;
+  line-height: 1.25;
+}
+
+.consult-card-sub {
+  font-size: 0.78rem;
+  color: #667568;
+  line-height: 1.2;
+}
+
+.consult-card-arrow {
+  color: #A0AEA3;
+  transition: all 0.22s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Card Specific Theme & Hover States */
+.consult-card-fb {
+  border: 1.5px solid #E6EEFA;
+}
+
+.consult-card-fb:hover {
+  background: #F4F8FF;
+  border-color: #A8CBFF;
+  box-shadow: 0 6px 20px -2px rgba(0, 98, 224, 0.14);
+  transform: translateY(-2px);
+}
+
+.consult-card-fb:hover .consult-card-icon-wrap {
+  transform: scale(1.05);
+}
+
+.consult-card-fb:hover .consult-card-arrow {
+  color: #0062E0;
+  transform: translateX(3px);
+}
+
+.consult-card-phone {
+  border: 1.5px solid #E4EDE5;
+}
+
+.consult-card-phone:hover {
+  background: #F5FAF5;
+  border-color: #B8DAB9;
+  box-shadow: 0 6px 20px -2px rgba(49, 92, 59, 0.14);
+  transform: translateY(-2px);
+}
+
+.consult-card-phone:hover .consult-card-icon-wrap {
+  transform: scale(1.05);
+}
+
+.consult-card-phone:hover .consult-card-arrow {
+  color: #315C3B;
+  transform: translateX(3px);
+}
+
+.consult-trust-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(49, 92, 59, 0.15);
+  color: #6C7D6F;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.consult-trust-footer svg {
+  color: #315C3B;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .consult-modal-card {
+    padding: 30px 20px 22px;
+  }
+  
+  .consult-title {
+    font-size: 1.3rem;
+  }
+  
+  .consult-card {
+    padding: 11px 14px;
+    gap: 12px;
+  }
+  
+  .consult-card-icon-wrap {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .consult-card-title {
+    font-size: 0.88rem;
+  }
+}
+
+/* ==========================================================================
+   VietQR Payment Modal Styling
+   ========================================================================== */
+.vietqr-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 24px 60px -12px rgba(25, 68, 38, 0.22), 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  max-width: 480px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 32px 28px 24px;
+  position: relative;
+  text-align: center;
+  animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vietqr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #E8F5E9;
+  border: 1px solid #C8E6C9;
+  color: #2E7D32;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 10px;
+}
+
+.vietqr-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin-bottom: 4px;
+}
+
+.vietqr-sub {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 18px;
+}
+
+.vietqr-card-container {
+  background: #F9FBF9;
+  border: 1.5px solid #E1EBE2;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(49, 92, 59, 0.05);
+}
+
+.vietqr-image-wrap {
+  position: relative;
+  width: 230px;
+  max-width: 100%;
+  margin: 0 auto 14px;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #E5EBE6;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.vietqr-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.vietqr-details {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+  font-size: 0.85rem;
+  background: #ffffff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #EBF0EC;
+}
+
+.vietqr-detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.vietqr-detail-label {
+  color: var(--color-text-light);
+  font-size: 0.82rem;
+}
+
+.vietqr-detail-val-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vietqr-detail-val {
+  font-weight: 700;
+  color: var(--color-text-main);
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+.vietqr-copy-btn {
+  background: var(--color-bg-sage);
+  border: 1px solid #D2E4CC;
+  color: var(--color-primary-dark);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.vietqr-copy-btn:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.vietqr-timer-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #728274;
+  margin-bottom: 16px;
+}
+
+.vietqr-timer-val {
+  color: #D97706;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.vietqr-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Quick View Layout */
+.quick-view-card {
+  max-width: 780px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-8);
+  padding: var(--space-8);
+}
+
+.quick-view-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.quick-view-title {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-2);
+}
+
+.quick-view-price {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: var(--space-4);
+}
+
+.quick-view-ingredients {
+  background-color: var(--color-bg-cream);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  border: 1px solid var(--color-border);
+}
+
+.quick-view-ingredients h4 {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   Toast Notification System
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.toast-icon {
+  font-size: 1.15rem;
+}
+
+/* Floating Contact Widget & 1:1 Consultation Badge */
+/* Floating Contact Button */
+.floating-contact-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  left: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(49, 92, 59, 0.35);
+  cursor: pointer;
+  z-index: 990;
+  border: 2.5px solid #ffffff;
+  transition: all var(--transition-fast);
+}
+
+.floating-contact-btn:hover {
+  transform: scale(1.08);
+  background-color: var(--color-primary-dark);
+}
+
+/* ==========================================================================
+   Responsive Media Queries (Thấu Đáo Mọi Thiết Bị)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fragrance-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .survey-card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 32px 24px;
+    border-radius: 22px;
+  }
+
+  .b2b-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .sustainability-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-trust-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .footer-bottom-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links,
+  .nav-actions .btn-fast-order {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 40px;
+    /* display-hero-mobile */
+    font-weight: 600;
+    line-height: 48px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title {
+    font-size: 30px;
+    /* headline-lg-mobile */
+    font-weight: 500;
+    line-height: 38px;
+    letter-spacing: -0.01em;
+  }
+
+  .philosophy-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .philosophy-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-view-card {
+    grid-template-columns: 1fr;
+  }
+
+  .b2b-tier-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .refill-steps-row {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .checkout-modal-card {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .cart-drawer {
+    width: 100vw;
+  }
+}
+</style>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ========================================================================
+       Header / Navbar
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container container-wide">
+      <nav class="nav-wrap">
+        <!-- Brand Logo & Identity (Clean Transparent Horizontal Lockup) -->
+        <a href="#" class="brand-logo" id="headerBrandLogo" title="RE-BORN • Sạch khuẩn từ tự nhiên">
+          <img src="assets/images/logo_horizontal.png" alt="RE-BORN" class="brand-header-logo">
+        </a>
+
+        <!-- Center Navigation Links -->
+        <ul class="nav-links">
+          <li><a href="#products" class="nav-link">Bộ sưu tập</a></li>
+          <li><a href="#philosophy" class="nav-link">Triết lý sống xanh</a></li>
+          <li><a href="#fragrance" class="nav-link">Tầng hương thực vật</a></li>
+          <li><a href="#b2b" class="nav-link">Đối tác B2B</a></li>
+        </ul>
+
+        <!-- Right Action Items -->
+        <div class="nav-actions">
+          <!-- Facebook Fanpage Link -->
+          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Fanpage Facebook Re-Born" aria-label="Fanpage Facebook">
+            <svg width="17" height="17" fill="#1877F2" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+
+          <!-- Search Trigger -->
+          <button class="icon-btn" id="searchBtn" title="Tìm kiếm sản phẩm" aria-label="Tìm kiếm sản phẩm">
+            <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          <!-- Cart Drawer Trigger -->
+          <button class="icon-btn" id="cartOpenBtn" title="Giỏ hàng" aria-label="Xem giỏ hàng">
+            <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="cart-badge" id="cartBadge">1</span>
+          </button>
+
+          <!-- Fast 1-Step Checkout Direct Button -->
+          <button class="btn-fast-order" id="headerFastOrderBtn">
+            <span>Đặt hàng nhanh</span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <!-- Mobile Menu Toggle -->
+          <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="#" style="display: flex; align-items: center;">
+        <img src="assets/images/logo_horizontal.png" alt="RE-BORN"
+          style="height: 40px; width: auto; object-fit: contain;">
+      </a>
+      <button class="modal-close-btn" id="mobileNavCloseBtn" style="position: static;">✕</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#products" class="mobile-link">Bộ sưu tập sản phẩm</a>
+      <a href="#philosophy" class="mobile-link">Triết lý Upcycling</a>
+      <a href="#fragrance" class="mobile-link">Cấu trúc 3 tầng hương</a>
+      <a href="#b2b" class="mobile-link">Đối tác Doanh nghiệp & B2B</a>
+      <a href="#sustainability" class="mobile-link">Chính sách Refill đổi chai</a>
+      <a href="#faqs" class="mobile-link">Câu hỏi thường gặp</a>
+    </div>
+    <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--color-border);">
+      <button class="btn btn-primary" id="mobileFastOrderBtn" style="width: 100%;">
+        Đặt hàng trải nghiệm ngay
+      </button>
+      <p style="font-size: 0.8rem; color: var(--color-text-secondary); text-align: center; margin-top: 10px;">
+        Hotline Founders: 0988.123.456
+      </p>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Hero Section
+       ======================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left Content -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            <span>100% Vỏ Bưởi Tái Sinh</span>
+          </div>
+          <h1 class="hero-title">
+            Sự tươi mát nguyên bản,<br>
+            <span>tái định hình.</span>
+          </h1>
+          <p class="hero-desc">
+            Chăm sóc đôi tay mỗi ngày lấy cảm hứng từ sự thanh khiết phục hồi của vỏ bưởi tái sinh.
+            Chế tác thủ công theo từng mẻ nhỏ với sự trân trọng tuyệt đối dành cho tự nhiên.
+          </p>
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-primary">
+              Khám phá sản phẩm
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+            <button class="btn btn-outline" id="heroQuickRitualBtn">
+              Trải nghiệm nghi thức
+            </button>
+          </div>
+
+          <!-- Fast Value Prop Stats -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-val">100%</span>
+              <span class="stat-label">Vỏ bưởi Upcycling</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">0%</span>
+              <span class="stat-label">Cồn & Paraben</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-val">99.9%</span>
+              <span class="stat-label">Sạch khuẩn dịu nhẹ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Card -->
+        <div class="hero-visual">
+          <div class="hero-visual-card">
+            <img src="assets/images/hero_product.jpg" alt="Sản phẩm Re-Born Nước Rửa Tay Vỏ Bưởi">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: Triết Lý Bản Địa & Upcycling
+       ======================================================================== -->
+  <section class="philosophy-section" id="philosophy">
+    <div class="container">
+      <div class="philosophy-header">
+        <div>
+          <span class="section-label">TRIẾT LÝ BẢN ĐỊA</span>
+          <h2 class="section-title">Nông sản tuần hoàn. Hồi sinh từ vỏ bưởi.</h2>
+        </div>
+        <div>
+          <p class="section-desc">
+            Mỗi năm, hàng tấn vỏ bưởi sau khi lấy múi bị vứt bỏ lãng phí. Re-Born thu gom trực tiếp từ các quán chè,
+            tiệm nước ép đối tác, chưng cất lạnh để giữ trọn tinh túy d-Limonene cho đôi tay bạn.
+          </p>
+        </div>
+      </div>
+
+      <div class="philosophy-cards">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <h3>Thu gom vỏ bưởi sạch</h3>
+          <p>Thu gom vỏ bưởi tươi mỗi ngày từ các đối tác địa phương. Phân loại và rửa sạch bằng nước muối ion kiềm
+            trước khi chế tác.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <h3>Chưng cất lạnh thủ công</h3>
+          <p>Chiết xuất tinh dầu ở nhiệt độ thấp bảo toàn nguyên vẹn hoạt chất d-Limonene kháng khuẩn tự nhiên mà không
+            phá hủy cấu trúc hương.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <h3>Công thức lành tính</h3>
+          <p>Bổ sung Glycerin thực vật và chất tạo bọt hữu cơ gốc dừa, đảm bảo độ ẩm tuyệt đối cho làn da nhạy cảm và
+            trẻ nhỏ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: Danh Mục Sản Phẩm (Catalog)
+       ======================================================================== -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <div class="products-header">
+        <span class="section-label">BỘ SƯU TẬP THƯỜNG NHẬT</span>
+        <h2 class="section-title">Nghi thức thanh sạch. Khơi nguồn từ tự nhiên.</h2>
+        <p class="section-desc">
+          Mỗi sản phẩm là một lời cam kết về lối sống xanh, được đóng gói trong chai rPET tái sinh thân thiện với môi
+          trường.
+        </p>
+      </div>
+
+      <div class="products-grid">
+        <!-- Product 1: Nước rửa tay vỏ bưởi -->
+        <div class="product-card" data-id="pomelo-handwash" data-name="Nước rửa tay vỏ bưởi"
+          data-sub="VỎ BƯỞI ÉP LẠNH • TUYẾT TÙNG • THẢO MỘC" data-price="45000" data-volume="250 ml"
+          data-image="assets/images/product_handwash.jpg">
+          <div class="product-image-wrap">
+            <span class="product-pill-badge">SẠCH KHUẨN • DƯỠNG ẨM</span>
+            <span class="product-stock-tag">
+              <span class="product-stock-dot"></span>
+              Còn hàng (Mẻ tươi)
+            </span>
+            <img src="assets/images/product_handwash.jpg" alt="Nước rửa tay vỏ bưởi Re-Born 250ml">
+          </div>
+          <div class="product-info">
+            <div class="product-head-row">
+              <h3 class="product-title">Nước rửa tay vỏ bưởi</h3>
+            </div>
+            <div class="product-volume">Dung tích: 250 ml • Chai rPET vòi nhấn</div>
+            <div class="product-aroma-notes">
+              VỎ BƯỞI ÉP LẠNH • TUYẾT TÙNG • THẢO MỘC
+            </div>
+            <p class="product-desc">
+              Chứa tinh dầu vỏ bưởi ép chậm kết hợp thảo mộc cấp ẩm dịu nhẹ. Nhẹ nhàng gột rửa 99.9% vi khuẩn, bảo vệ độ
+              ẩm tự nhiên của đôi tay không gây khô ráp.
+            </p>
+            <div class="product-price-box">
+              <span class="product-price">45.000₫</span>
+              <span class="product-original-price">55.000₫</span>
+            </div>
+            <div class="product-actions-row">
+              <div class="product-btn-group">
+                <button class="btn-add-cart-quick" data-id="pomelo-handwash" title="Thêm vào giỏ hàng">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  Thêm giỏ hàng
+                </button>
+                <button class="link-explore-ritual" data-id="pomelo-handwash">
+                  Xem chi tiết →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2: Túi Refill Nước rửa tay vỏ bưởi 500ml -->
+        <div class="product-card" data-id="pomelo-refill" data-name="Túi Refill Nước rửa tay 500ml"
+          data-sub="VỎ BƯỞI ÉP LẠNH • TIẾT KIỆM RÁC NHỰA" data-price="75000" data-volume="500 ml"
+          data-image="assets/images/product_refill.jpg">
+          <div class="product-image-wrap">
+            <span class="product-pill-badge" style="background: var(--color-primary-fixed); color: var(--color-primary-dark); font-weight: 700;">
+              REFILL TIẾT KIỆM
+            </span>
+            <span class="product-stock-tag">
+              <span class="product-stock-dot"></span>
+              Tiết kiệm 20k
+            </span>
+            <img src="assets/images/product_refill.jpg" alt="Túi Refill Nước rửa tay vỏ bưởi 500ml Re-Born">
+          </div>
+          <div class="product-info">
+            <div class="product-head-row">
+              <h3 class="product-title">Túi Refill Nước rửa tay 500ml</h3>
+            </div>
+            <div class="product-volume">Dung tích: 500 ml • Rót đầy 2 chai 250ml</div>
+            <div class="product-aroma-notes">
+              VỎ BƯỞI ÉP LẠNH • GỖ HINOKI • TUYẾT TÙNG
+            </div>
+            <p class="product-desc">
+              Dung tích nhân đôi tiện lợi nạp lại bình vòi nhấn cũ. Giải pháp kinh tế thông minh giúp tiết kiệm 15.000₫ chi phí và chung tay giảm 80% rác thải nhựa.
+            </p>
+            <div class="product-price-box">
+              <span class="product-price">75.000₫</span>
+              <span class="product-original-price">90.000₫</span>
+            </div>
+            <div class="product-actions-row">
+              <div class="product-btn-group">
+                <button class="btn-add-cart-quick" data-id="pomelo-refill" title="Thêm vào giỏ hàng">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  Thêm giỏ hàng
+                </button>
+                <button class="link-explore-ritual" data-id="pomelo-refill">
+                  Xem chi tiết →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3: Combo Đôi Bạn Cùng Tiến (2 Chai Rửa tay 250ml + Túi Vải) -->
+        <div class="product-card" data-id="eco-giftset" data-name="Combo Đôi • 2 Nước rửa tay + Túi vải"
+          data-sub="2 CHAI RỬA TAY 250ML + TÚI VẢI CANVAS" data-price="89000" data-volume="Set 3 món"
+          data-image="assets/images/hero_product.jpg">
+          <div class="product-image-wrap">
+            <span class="product-pill-badge"
+              style="background: var(--color-accent); color: var(--color-text-main); font-weight: 800;">
+              COMBO MUA CHUNG
+            </span>
+            <span class="product-stock-tag">
+              <span class="product-stock-dot"></span>
+              Ưu đãi Campus
+            </span>
+            <img src="assets/images/hero_product.jpg" alt="Combo Nước rửa tay vỏ bưởi Re-Born tặng kèm túi vải">
+          </div>
+          <div class="product-info">
+            <div class="product-head-row">
+              <h3 class="product-title">Combo Đôi • Nước rửa tay & Túi vải</h3>
+            </div>
+            <div class="product-volume">Gồm: 2 Chai rửa tay 250ml + 1 Túi vải Canvas</div>
+            <div class="product-aroma-notes">
+              TIẾT KIỆM PHÍ SHIP • MUA CHUNG BẠN BÈ
+            </div>
+            <p class="product-desc">
+              Gói ưu đãi mua chung 2 chai nước rửa tay vỏ bưởi tặng kèm túi vải dệt thô Canvas Re-Born. Lựa chọn lý tưởng cho bạn bè cùng phòng KTX rủ nhau sống xanh.
+            </p>
+            <div class="product-price-box">
+              <span class="product-price">89.000₫</span>
+              <span class="product-original-price">110.000₫</span>
+            </div>
+            <div class="product-actions-row">
+              <div class="product-btn-group">
+                <button class="btn-add-cart-quick" data-id="eco-giftset" title="Thêm combo vào giỏ hàng">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  Thêm giỏ hàng
+                </button>
+                <button class="link-explore-ritual" data-id="eco-giftset">
+                  Xem chi tiết →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: Cấu Trúc Tầng Hương Thực Vật (Scent Pyramid)
+       ======================================================================== -->
+  <section class="fragrance-section" id="fragrance">
+    <div class="container">
+      <div class="fragrance-grid">
+        <!-- Visual Column -->
+        <div class="fragrance-visual">
+          <div
+            style="border-radius: var(--radius-xl); overflow: hidden; border: 1.5px solid var(--color-border); box-shadow: var(--shadow-md);">
+            <img src="assets/images/sink_ritual.jpg" alt="Nghi thức rửa tay tinh dầu vỏ bưởi">
+          </div>
+        </div>
+
+        <!-- Content Column -->
+        <div class="fragrance-content">
+          <span class="section-label">LIỆU PHÁP HƯƠNG THƠM</span>
+          <h2 class="section-title">Hương thơm đánh thức các giác quan.</h2>
+          <p class="section-desc">
+            Không sử dụng hương liệu hóa học nhân tạo. Re-Born phối ngẫu các phân tử tinh dầu bưởi tự nhiên với thảo mộc
+            bản địa, mở ra 3 tầng chuyển hương êm dịu.
+          </p>
+
+          <div class="scent-tiers">
+            <!-- Tier 1 -->
+            <div class="scent-tier active" data-tier="top">
+              <div class="tier-header">
+                <span class="tier-title">01 • Tầng Hương Đầu (Top Notes)</span>
+                <span class="tier-time">0 – 15 Phút đầu</span>
+              </div>
+              <p class="tier-notes">
+                <strong>Vỏ bưởi ép lạnh & Cam hương (Bergamot)</strong>: Bùng nổ cảm giác thanh mát, sảng khoái tức thì,
+                đánh tan mệt mỏi.
+              </p>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="scent-tier" data-tier="heart">
+              <div class="tier-header">
+                <span class="tier-title">02 • Tầng Hương Giữa (Heart Notes)</span>
+                <span class="tier-time">15 – 60 Phút tiếp theo</span>
+              </div>
+              <p class="tier-notes">
+                <strong>Lá bưởi vò nát & Hoa bưởi non</strong>: Hương xanh tươi dịu ngọt của vườn quê, mang lại sự bình
+                yên, thư giãn sâu cho tâm trí.
+              </p>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="scent-tier" data-tier="base">
+              <div class="tier-header">
+                <span class="tier-title">03 • Tầng Hương Cuối (Base Notes)</span>
+                <span class="tier-time">Lưu hương 2 – 4 Giờ</span>
+              </div>
+              <p class="tier-notes">
+                <strong>Gỗ Tuyết tùng & Thảo mộc dịu nhẹ</strong>: Nốt hương ấm áp, giữ độ ẩm mượt và lưu luyến êm ái
+                trên đôi bàn tay.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: Feedback Loop (Khảo Sát R&D Cho Khánh & Phát)
+       ======================================================================== -->
+  <section class="survey-section" id="feedback">
+    <div class="container">
+      <div class="survey-card">
+        <div class="survey-info">
+          <span class="section-label">ĐỒNG HÀNH HOÀN THIỆN</span>
+          <h3>Góp ý cảm nhận mùi hương mẻ đầu tiên</h3>
+          <p class="survey-desc">
+            Re-Born trân trọng từng phản hồi từ bạn sau khi trải nghiệm sản phẩm. Ý kiến của bạn giúp chúng mình liên tục hoàn thiện công thức chiết xuất vỏ bưởi tự nhiên đạt độ tinh khiết cao nhất.
+          </p>
+
+          <div class="survey-reward-card">
+            <div class="reward-header">
+              <span class="reward-badge">ĐẶC QUYỀN TRẢI NGHIỆM</span>
+              <span class="reward-discount">Voucher Giảm 20%</span>
+            </div>
+            <div class="reward-body">
+              <h5>Quà tặng tri ân từ đội ngũ R&D</h5>
+              <p>Gửi phản hồi nhanh để nhận mã ưu đãi giảm 20% áp dụng cho đơn hàng tiếp theo hoặc combo Refill tiết kiệm.</p>
+              <div class="reward-perks">
+                <span class="perk-item">✓ Nhận mã ngay qua Inbox Facebook</span>
+                <span class="perk-item">✓ Áp dụng toàn bộ sản phẩm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="survey-options" id="feedbackForm">
+          <div class="survey-question">
+            <span class="survey-q-title"><span class="q-num">1</span> Mùi hương tinh dầu bưởi mẻ mới:</span>
+            <div class="survey-pill-group">
+              <button type="button" class="survey-pill-btn active" data-val="Rất thanh mát, tự nhiên"><span class="pill-check">✓</span> Rất thanh mát, tự nhiên</button>
+              <button type="button" class="survey-pill-btn" data-val="Vừa phải"><span class="pill-check">✓</span> Vừa phải</button>
+              <button type="button" class="survey-pill-btn" data-val="Cần thơm đậm hơn"><span class="pill-check">✓</span> Cần thơm đậm hơn</button>
+            </div>
+          </div>
+
+          <div class="survey-question">
+            <span class="survey-q-title"><span class="q-num">2</span> Cảm giác dưỡng ẩm da tay sau khi rửa:</span>
+            <div class="survey-pill-group">
+              <button type="button" class="survey-pill-btn active" data-val="Mềm ẩm, không khô ráp"><span class="pill-check">✓</span> Mềm ẩm, không khô ráp</button>
+              <button type="button" class="survey-pill-btn" data-val="Bình thường"><span class="pill-check">✓</span> Bình thường</button>
+              <button type="button" class="survey-pill-btn" data-val="Cần thêm bọt"><span class="pill-check">✓</span> Cần thêm bọt</button>
+            </div>
+          </div>
+
+          <div class="survey-question">
+            <span class="survey-q-title"><span class="q-num">3</span> Đánh giá mức giá trải nghiệm 45k (250ml):</span>
+            <div class="survey-pill-group">
+              <button type="button" class="survey-pill-btn active" data-val="Rất hợp lý (45k)"><span class="pill-check">✓</span> Rất hợp lý (45k)</button>
+              <button type="button" class="survey-pill-btn" data-val="Chấp nhận được"><span class="pill-check">✓</span> Chấp nhận được</button>
+              <button type="button" class="survey-pill-btn" data-val="Hơi cao so với sinh viên"><span class="pill-check">✓</span> Hơi cao so với sinh viên</button>
+            </div>
+          </div>
+
+          <div class="survey-question">
+            <label for="fbContactInput" class="survey-q-title"><span class="q-num">4</span> Tên hoặc Link Facebook của bạn:</label>
+            <div class="survey-input-wrap">
+              <div class="input-fb-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </div>
+              <input type="text" id="fbContactInput" placeholder="Ví dụ: fb.com/nguyenvana hoặc Tên nick Facebook của bạn" class="survey-text-input" style="padding-left: 48px !important;">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-feedback" id="btnSubmitFbFeedback">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <span>Gửi phản hồi qua Facebook & Nhận Voucher 20%</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <div id="feedbackFbNoticeBox" class="feedback-success-box">
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <span class="success-icon">✓</span>
+              <div>
+                <strong>Đã lưu khảo sát & sao chép nội dung cảm nhận!</strong>
+                <p style="margin: 4px 0 8px; font-size: 0.85rem; color: #166534;">
+                  Cửa sổ Facebook Fanpage Re-Born đang được mở. Hãy dán nội dung tin nhắn để đội ngũ R&D gửi tặng bạn <strong>mã Voucher 20%</strong> ngay nhé!
+                </p>
+                <a href="https://www.facebook.com" id="manualFbOpenBtn" target="_blank" rel="noopener noreferrer">
+                  Mở lại trang Fanpage Facebook Re-Born ➔
+                </a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: B2B Quán Cafe & Homestay (Dành cho Thùy BMC)
+       ======================================================================== -->
+  <!-- ========================================================================
+       Section: B2B Quán Cafe & Homestay (Dành cho Thùy BMC: Dùng thử 500ml & Can sỉ 3L - 5L)
+       ======================================================================== -->
+  <section class="b2b-section" id="b2b">
+    <div class="container">
+      <div class="b2b-banner">
+        <div class="b2b-content-left">
+          <span class="b2b-badge">
+            B2B • ĐỐI TÁC DOANH NGHIỆP "GREEN / ECO"
+          </span>
+          <h2>Giải Pháp Xanh Cho Doanh Nghiệp, Văn Phòng, F&B & Khách Sạn</h2>
+          <p>
+            Trang bị nước rửa tay vỏ bưởi hữu cơ tự nhiên tại <strong>pantry, lavabo & khu vệ sinh</strong>. Re-Born tặng <strong>Chai dùng thử 500ml (0đ)</strong> trải nghiệm thực tế và cung cấp <strong>Can sỉ 3L – 5L</strong> chiết khấu tới 35% cho nhu cầu Refill định kỳ.
+          </p>
+
+          <!-- 2 Distinct Pillars: Mẫu thử 500ml vs Can sỉ 3L - 5L -->
+          <div class="b2b-tier-cards">
+            <div class="b2b-tier-card">
+              <span class="b2b-tier-badge sample">🎁 DÙNG THỬ • 0Đ</span>
+              <h4>Chai Dùng Thử 500ml</h4>
+              <p>Gửi tận nơi 01 chai 500ml để chủ cơ sở, nhân viên và khách trải nghiệm thực tế hương bưởi tự nhiên, độ tạo bọt và dưỡng ẩm da tay.</p>
+              <div class="b2b-card-check">✓ Miễn phí gửi mẫu tận nơi</div>
+            </div>
+
+            <div class="b2b-tier-card">
+              <span class="b2b-tier-badge wholesale">🏢 BÁN CAN SỈ B2B</span>
+              <h4>Can Lớn 3L & 5L (Refill)</h4>
+              <p>Dung tích lớn chuyên dụng cho chiết/refill tại quầy lavabo. Tiết kiệm 25% – 35% chi phí, tặng kèm bình gốm sứ sang trọng và thu gom can rỗng.</p>
+              <div class="b2b-card-check wholesale">✓ Chiết khấu sỉ 25% – 35%</div>
+            </div>
+          </div>
+
+          <div class="b2b-chips-row">
+            <span class="b2b-chip">✓ Đặt quầy vệ sinh & lavabo</span>
+            <span class="b2b-chip">✓ Tặng mẫu thử 500ml</span>
+            <span class="b2b-chip">✓ Bán sỉ can 3L - 5L</span>
+            <span class="b2b-chip">✓ Tặng bình gốm để bàn</span>
+            <span class="b2b-chip">✓ Thu hồi can tái sinh</span>
+          </div>
+        </div>
+
+        <div class="b2b-form-box">
+          <div class="b2b-form-header">
+            <h4>Đăng ký Đối tác Doanh nghiệp</h4>
+            <p>Nhận chai mẫu 500ml miễn phí hoặc bảng báo giá can sỉ 3L - 5L:</p>
+          </div>
+          <form id="b2bLeadForm">
+            <div class="b2b-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="b2bBizType">Loại hình cơ sở</label>
+                <select id="b2bBizType" class="form-input b2b-compact-input" required>
+                  <option value="Quán Cà phê">Quán Cà phê</option>
+                  <option value="Tiệm Trà / Trà Sữa">Tiệm Trà / Trà Sữa</option>
+                  <option value="Homestay">Homestay</option>
+                  <option value="Khách sạn">Khách sạn</option>
+                  <option value="Nhà hàng / Quán ăn">Nhà hàng / Quán ăn</option>
+                  <option value="Co-working Space">Co-working Space</option>
+                  <option value="Khác">Khác</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="b2bStoreName">Tên cơ sở / Doanh nghiệp</label>
+                <input type="text" id="b2bStoreName" class="form-input b2b-compact-input" placeholder="Ví dụ: The Alley, An Homestay..." required>
+              </div>
+            </div>
+
+            <!-- Dynamic Other Input (Show when user selects 'Khác') -->
+            <div class="form-group" id="b2bBizTypeOtherWrap" style="display: none;">
+              <label class="form-label" for="b2bBizTypeOther">Nhập loại hình cơ sở của bạn</label>
+              <input type="text" id="b2bBizTypeOther" placeholder="Ví dụ: Spa, Salon tóc, Studio, Phòng khám..." class="form-input b2b-compact-input">
+            </div>
+
+            <div class="b2b-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="b2bPhone">Số điện thoại</label>
+                <input type="tel" id="b2bPhone" class="form-input b2b-compact-input" placeholder="Ví dụ: 0901 234 567" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="b2bNeedType">Nhu cầu hợp tác</label>
+                <select id="b2bNeedType" class="form-input b2b-compact-input" required>
+                  <option value="Dùng thử chai 500ml (Miễn phí)">🎁 Nhận Chai Dùng Thử 500ml (0đ)</option>
+                  <option value="Mua can sỉ 3L (Refill)">📦 Đặt mua Can sỉ 3L</option>
+                  <option value="Mua can sỉ 5L (Chiết khấu 35%)">🏭 Đặt mua Can sỉ 5L (-35%)</option>
+                  <option value="Combo Nước rửa tay + Túi Refill">🌿 Combo Chai + Túi Refill Tiết Kiệm</option>
+                  <option value="Tư vấn giải pháp Refill & Can sỉ">🤝 Tư vấn trọn gói</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="b2bAddress">Địa chỉ Cơ sở / Khu vực</label>
+              <input type="text" id="b2bAddress" class="form-input b2b-compact-input" placeholder="Ví dụ: Khu Công nghệ cao Hòa Lạc, Hà Nội..." required>
+            </div>
+
+            <button type="submit" class="btn btn-primary b2b-submit-btn">
+              <span>Gửi thông tin hợp tác B2B ngay</span>
+              <span>➔</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: Kinh Tế Tuần Hoàn & Refill
+       ======================================================================== -->
+  <section class="sustainability-section" id="sustainability">
+    <div class="container">
+      <div class="sustainability-banner">
+        <div>
+          <span class="section-label">KINH TẾ TUẦN HOÀN</span>
+          <h2 class="section-title">Chương trình: Gom vỏ chai cũ - Đổi sản phẩm mới</h2>
+          <p class="section-desc">
+            Đừng vứt bỏ vỏ chai sau khi dùng hết! Re-Born tiếp nhận mọi chai rPET đã qua sử dụng để làm sạch, khử khuẩn
+            bằng tia UV và tái nạp mẻ tinh dầu mới, giảm thiểu tối đa rác thải nhựa ra môi trường.
+          </p>
+          <div class="refill-steps-row">
+            <div class="refill-step-item">
+              <span>01. Giữ chai cũ</span>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Giữ lại chai Re-Born rPET đã dùng hết.
+              </p>
+            </div>
+            <div class="refill-step-item">
+              <span>02. Đem đến Pop-up</span>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Gửi lại tại gian hàng Pop-up trên Campus FPT.</p>
+            </div>
+            <div class="refill-step-item">
+              <span>03. Nhận chiết khấu</span>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Giảm ngay 30% khi mua túi nạp refill
+                dung tích lớn.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            style="border-radius: 20px; overflow: hidden; border: 1px solid var(--color-border); box-shadow: var(--shadow-md);">
+            <img src="assets/images/product_refill.jpg" alt="Chương trình Refill tái sinh vỏ chai cùng Re-Born" style="border-radius: 20px; display: block; width: 100%; height: auto;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Section: FAQs
+       ======================================================================== -->
+  <section class="faq-section" id="faqs">
+    <div class="container container-narrow">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="section-label" style="justify-content: center;">GIẢI ĐÁP THẮC MẮC</span>
+        <h2 class="section-title">Câu hỏi thường gặp</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>Sản phẩm có dùng cồn công nghiệp để kháng khuẩn không?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Hoàn toàn không. Re-Born tận dụng hoạt chất tự nhiên d-Limonene từ vỏ bưởi kết hợp chiết xuất thực vật
+              hữu cơ để diệt khuẩn 99.9% mà không làm khô ráp da hay gây cay nồng mũi.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Sinh viên tại campus FPT nhận hàng như thế nào?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Bạn chỉ cần chọn "Nhận hàng tại Campus FPT" khi đặt hàng. Thành viên nhóm sẽ giao trực tiếp đến tận sảnh
+              tòa nhà của bạn hoàn toàn miễn phí vận chuyển trong giờ nghỉ giải lao.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Hạn sử dụng của sản phẩm thủ công là bao lâu?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Do được chưng cất tự nhiên và bảo quản bằng chiết xuất tinh dầu nguyên chất, sản phẩm có hạn sử dụng tối
+              ưu trong vòng 6 - 8 tháng kể từ ngày mở nắp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Footer
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container container-wide">
+      <!-- Compact 4-Column Footer -->
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" style="display: inline-block; margin-bottom: 6px;">
+            <img src="assets/images/logo_horizontal.png" alt="RE-BORN"
+              style="height: 40px; width: auto; object-fit: contain; display: block;">
+          </a>
+          <p>
+            Nước rửa tay từ phụ phẩm vỏ bưởi hữu cơ, sạch khuẩn dịu lành cho làn da và môi trường.
+          </p>
+          <div class="footer-contact-compact">
+            <div>📞 <strong>Hotline:</strong> <a href="tel:0988123456">0988.123.456</a></div>
+            <div>✉️ <strong>Email:</strong> contact@reborn-pomelo.vn</div>
+            <div>
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="footer-fb-link" title="Ghé thăm Fanpage Facebook Re-Born">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>Fanpage Facebook ➔</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sản Phẩm</h4>
+          <ul>
+            <li><a href="#products">Chai vòi nhấn 250ml <span class="footer-tag hot">Bán chạy</span></a></li>
+            <li><a href="#products">Túi Refill tiết kiệm 500ml <span class="footer-tag eco">Eco</span></a></li>
+            <li><a href="#products">Combo Đôi (2 Chai + Túi vải)</a></li>
+            <li><a href="#b2b">Can sỉ B2B 3L - 5L (-35%)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Về Thương Hiệu</h4>
+          <ul>
+            <li><a href="#philosophy">Triết lý Upcycling</a></li>
+            <li><a href="#fragrance">Cấu trúc 3 tầng hương</a></li>
+            <li><a href="#sustainability">Gom vỏ chai & Refill</a></li>
+            <li><a href="#faqs">Câu hỏi thường gặp</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-newsletter-compact">
+            <h4>Nhận Ưu Đãi -15%</h4>
+            <p>
+              Nhập email nhận mã <strong>REBORN15</strong> cho đơn hàng đầu:
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+              <input type="email" placeholder="Email của bạn..." required aria-label="Địa chỉ email nhận bản tin">
+              <button type="submit" aria-label="Gửi">Đăng ký</button>
+            </form>
+            <div class="footer-newsletter-note">
+              <span>🔒</span> Cam kết bảo mật • Không gửi thư rác
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compact Footer Bottom -->
+      <div class="footer-bottom">
+        <div>© 2026 RE-BORN • Sạch Khuẩn Từ Tự Nhiên. All rights reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="#sustainability">Chính sách Refill</a>
+          <a href="#feedback">Khảo sát ý kiến</a>
+          <a href="admin.html" class="admin-link-pill" title="Truy cập Bảng điều khiển Quản trị">🔒 Quản trị Admin ➔</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       Slide-Over Cart Drawer
+       ======================================================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="cart-title">Giỏ hàng của bạn</span>
+        <span style="font-size: 0.85rem; color: var(--color-text-secondary);">(Túi vải sinh thái kèm theo)</span>
+      </div>
+      <button class="modal-close-btn" id="cartCloseBtn" style="position: static;" title="Đóng">✕</button>
+    </div>
+
+    <!-- Free Shipping Progress -->
+    <div class="cart-free-shipping-bar">
+      <div id="shippingProgressText">Mua thêm 105.000₫ để được Miễn phí vận chuyển</div>
+      <div class="shipping-progress">
+        <div class="shipping-progress-bar" id="shippingProgressBar" style="width: 30%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items List -->
+    <div class="cart-items-wrap" id="cartItemsList">
+      <!-- Rendered via JavaScript -->
+    </div>
+
+    <!-- Cart Footer & Checkout Action -->
+    <div class="cart-footer">
+      <div class="cart-promo-box">
+        <div class="promo-input-row">
+          <input type="text" id="promoInput" placeholder="Nhập mã ưu đãi (REBORN15)" class="form-input promo-input">
+          <button type="button" id="applyPromoBtn" class="promo-btn">Áp dụng</button>
+        </div>
+      </div>
+
+      <div class="cart-discount-row" id="cartDiscountRow" style="display: none;">
+        <span>Ưu đãi áp dụng:</span>
+        <span id="cartDiscountVal">-0₫</span>
+      </div>
+
+      <div class="cart-subtotal-row">
+        <span>Tổng thanh toán:</span>
+        <strong id="cartSubtotal" style="color: var(--color-primary-dark);">45.000₫</strong>
+      </div>
+
+      <button class="btn-checkout" id="checkoutBtn" style="margin-top: 12px;">
+        Tiến hành đặt hàng ngay →
+      </button>
+
+      <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--color-text-light);">
+        🔒 Thanh toán khi nhận hàng (COD) hoặc Chuyển khoản VietQR
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       MODAL: Fast 1-Step Checkout Modal (Trọng tâm trải nghiệm)
+       ======================================================================== -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="checkout-modal-card">
+      <button class="modal-close-btn" title="Đóng">✕</button>
+      <div style="margin-bottom: 20px;">
+        <span class="section-label">ĐẶT HÀNG NHANH CHÓNG</span>
+        <h2 class="section-title" style="font-size: 1.65rem; margin-bottom: 4px;">Thông tin nhận hàng</h2>
+        <p style="font-size: 0.88rem; color: var(--color-text-secondary);">
+          Không cần đăng ký tài khoản. Hoàn tất trong 30 giây để nhận sản phẩm mẻ tươi hôm nay.
+        </p>
+      </div>
+
+      <form id="checkoutForm">
+        <div class="form-group" id="groupOrderName">
+          <label class="form-label" for="orderName">Họ và tên của bạn</label>
+          <input type="text" id="orderName" placeholder="Ví dụ: Nguyễn Minh Anh" required>
+          <span class="form-error-msg" id="errOrderName">Vui lòng nhập họ và tên của bạn</span>
+        </div>
+
+        <div class="form-group" id="groupOrderPhone">
+          <label class="form-label" for="orderPhone">Số điện thoại nhận hàng</label>
+          <input type="tel" id="orderPhone" placeholder="Ví dụ: 0988 123 456" required>
+          <span class="form-error-msg" id="errOrderPhone">Vui lòng nhập số điện thoại hợp lệ (10 chữ số)</span>
+        </div>
+
+        <div class="form-group" id="groupOrderAddress">
+          <label class="form-label" for="orderAddress">Nơi nhận hàng</label>
+          <input type="text" id="orderAddress" placeholder="Ví dụ: Sảnh Beta Campus FPT / Hoặc địa chỉ nhà riêng"
+            required>
+          <span class="form-error-msg" id="errOrderAddress">Vui lòng nhập địa chỉ hoặc tòa nhà nhận hàng</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phương thức thanh toán tiện lợi</label>
+          <div class="payment-options-grid">
+            <label class="payment-option-label">
+              <input type="radio" name="paymentMethod" value="cod" checked>
+              <span>💵 Tiền mặt khi nhận hàng (COD)</span>
+            </label>
+            <label class="payment-option-label">
+              <input type="radio" name="paymentMethod" value="qr">
+              <span>📱 Quét mã VietQR chuyển khoản</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Order Summary Box -->
+        <div
+          style="background-color: var(--color-bg-sage-light); border-radius: var(--radius-md); padding: 14px 18px; margin: 16px 0; border: 1px solid var(--color-border);">
+          <div style="display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 6px;">
+            <span>Phí giao hàng:</span>
+            <span style="color: var(--color-primary); font-weight: 600;">Miễn phí tại Campus / Tiêu chuẩn 15k</span>
+          </div>
+          <div
+            style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; color: var(--color-primary-dark); padding-top: 8px; border-top: 1px dashed var(--color-border);">
+            <span>Tổng thanh toán:</span>
+            <span id="checkoutTotalVal">45.000₫</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="btnSubmitOrder"
+          style="width: 100%; padding: 14px; font-size: 1rem;">
+          Xác nhận đặt hàng ngay ➔
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: VietQR Cashless Payment Modal
+       ======================================================================== -->
+  <div class="modal-overlay" id="vietqrModal">
+    <div class="vietqr-modal-card">
+      <button class="modal-close-btn" title="Đóng">✕</button>
+
+      <div class="vietqr-badge">
+        <span>⚡ Thanh toán không tiền mặt • VietQR 24/7</span>
+      </div>
+
+      <h3 class="vietqr-title">Quét Mã VietQR Chuyển Khoản</h3>
+      <p class="vietqr-sub">Mở ứng dụng ngân hàng bất kỳ để quét mã thanh toán tự động</p>
+
+      <div class="vietqr-card-container">
+        <!-- VietQR Dynamic Image -->
+        <div class="vietqr-image-wrap">
+          <img id="vietqrImg" src="assets/images/vietqr_sample.png" onerror="this.src='assets/images/vietqr_sample.png'" alt="Mã VietQR Re-Born" class="vietqr-img">
+        </div>
+
+        <!-- Details List with 1-Click Copy Buttons -->
+        <div class="vietqr-details">
+          <div class="vietqr-detail-row">
+            <span class="vietqr-detail-label">Ngân hàng:</span>
+            <span style="font-weight: 600; color: #15803d;">MB Bank (Quân Đội)</span>
+          </div>
+
+          <div class="vietqr-detail-row">
+            <span class="vietqr-detail-label">Số tài khoản:</span>
+            <div class="vietqr-detail-val-wrap">
+              <span class="vietqr-detail-val" id="vietqrAccNo">0988123456</span>
+              <button type="button" class="vietqr-copy-btn" id="vietqrCopyAccBtn">Sao chép</button>
+            </div>
+          </div>
+
+          <div class="vietqr-detail-row">
+            <span class="vietqr-detail-label">Chủ tài khoản:</span>
+            <span style="font-weight: 700; color: var(--color-text-main);">RE-BORN NATURAL</span>
+          </div>
+
+          <div class="vietqr-detail-row" style="padding-top: 6px; border-top: 1px dashed var(--color-border);">
+            <span class="vietqr-detail-label">Số tiền:</span>
+            <div class="vietqr-detail-val-wrap">
+              <span class="vietqr-detail-val" id="vietqrAmountVal" style="color: var(--color-primary-dark); font-size: 1.05rem;">45.000₫</span>
+              <button type="button" class="vietqr-copy-btn" id="vietqrCopyAmountBtn">Sao chép</button>
+            </div>
+          </div>
+
+          <div class="vietqr-detail-row">
+            <span class="vietqr-detail-label">Nội dung CK:</span>
+            <div class="vietqr-detail-val-wrap">
+              <span class="vietqr-detail-val" id="vietqrContentVal" style="color: #b45309;">REBORN 202688</span>
+              <button type="button" class="vietqr-copy-btn" id="vietqrCopyContentBtn">Sao chép</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vietqr-timer-box">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>Đơn hàng giữ chỗ trong: <span class="vietqr-timer-val" id="vietqrTimer">14:59</span></span>
+      </div>
+
+      <div class="vietqr-actions">
+        <button type="button" class="btn btn-primary" id="btnConfirmVietqrPaid" style="width: 100%; padding: 13px; font-weight: 600; font-size: 0.95rem;">
+          ✓ Tôi đã chuyển khoản thành công
+        </button>
+        <button type="button" class="btn btn-outline" id="btnCancelVietqr" style="width: 100%; padding: 10px; font-size: 0.85rem;">
+          Để tôi thanh toán sau
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: Quick View / Chi Tiết Nghi Thức
+       ======================================================================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="quick-view-card">
+      <button class="modal-close-btn" title="Đóng">✕</button>
+      <div class="quick-view-visual">
+        <img id="qvImage" src="assets/images/product_handwash.jpg" alt="Chi tiết sản phẩm">
+      </div>
+      <div class="quick-view-info">
+        <span class="section-label" id="qvNotes">VỎ BƯỞI ÉP LẠNH • THẢO MỘC</span>
+        <h2 class="quick-view-title" id="qvTitle">Nước rửa tay vỏ bưởi</h2>
+        <div class="quick-view-price" id="qvPrice">45.000₫</div>
+        <p class="section-desc" id="qvDesc" style="margin-bottom: 16px;">Mô tả sản phẩm...</p>
+
+        <div class="quick-view-ingredients">
+          <h4>✦ Thành phần thảo mộc hoạt tính:</h4>
+          <p id="qvIngredients" style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5;">Chiết
+            xuất tinh dầu vỏ bưởi...</p>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+          <h4
+            style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); margin-bottom: 6px;">
+            ✦ Nghi thức sử dụng gợi ý:</h4>
+          <p id="qvRitual" style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5;"></p>
+        </div>
+
+        <button class="btn btn-primary" id="qvAddToCartBtn" style="width: 100%;">
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: Search Dialog
+       ======================================================================== -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="checkout-modal-card" style="max-width: 480px;">
+      <button class="modal-close-btn" title="Đóng">✕</button>
+      <h3 style="font-size: 1.3rem; margin-bottom: 14px;">Tìm kiếm sản phẩm</h3>
+      <div class="form-group">
+        <input type="text" id="searchInput" placeholder="Nhập tên sản phẩm (rửa tay 250ml, túi refill 500ml, combo...)"
+          class="form-input">
+      </div>
+      <div id="searchResults" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: Info & Contact Modal
+       ======================================================================== -->
+  <!-- ========================================================================
+       MODAL: Tư Vấn Sản Phẩm & Trải Nghiệm Mùi Hương
+       ======================================================================== -->
+  <div class="modal-overlay" id="infoModal">
+    <div class="consult-modal-card">
+      <button class="modal-close-btn" title="Đóng" aria-label="Đóng cửa sổ">✕</button>
+      
+      <!-- Logo Brand Emblem (Trong suốt, hào quang thảo mộc tinh tế) -->
+      <div class="consult-emblem-wrap">
+        <div class="consult-emblem-aura"></div>
+        <img src="assets/images/logo_emblem.png" alt="RE-BORN" class="consult-emblem-img">
+      </div>
+      
+      <!-- Trạng thái Hỗ trợ trực tuyến -->
+      <div class="consult-status-badge">
+        <span class="consult-status-dot"></span>
+        <span>Đội ngũ Chăm Sóc Khách Hàng Re-Born</span>
+      </div>
+
+      <h3 id="infoModalTitle" class="consult-title">
+        Tư Vấn Sản Phẩm
+      </h3>
+
+      <div id="infoModalContent" class="consult-desc">
+        Bạn đang băn khoăn về độ dịu nhẹ cho da tay, tầng hương vỏ bưởi tự nhiên hay ưu đãi hôm nay? Đội ngũ Re-Born luôn sẵn sàng đồng hành cùng bạn!
+      </div>
+
+      <!-- Action Cards (Kênh tương tác trực tiếp) -->
+      <div class="consult-channels">
+        <!-- Facebook Fanpage Card -->
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="consult-card consult-card-fb">
+          <div class="consult-card-icon-wrap fb-icon-bg">
+            <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </div>
+          <div class="consult-card-body">
+            <span class="consult-card-title">Nhắn tin Fanpage Facebook</span>
+            <span class="consult-card-sub">Phản hồi trong 5 phút • Tư vấn 1:1</span>
+          </div>
+          <div class="consult-card-arrow">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+
+        <!-- Hotline Phone Card -->
+        <a href="tel:0988123456" class="consult-card consult-card-phone">
+          <div class="consult-card-icon-wrap phone-icon-bg">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div class="consult-card-body">
+            <span class="consult-card-title">Hotline: 0988.123.456</span>
+            <span class="consult-card-sub">Gọi trực tiếp • 8h00 - 21h00 mỗi ngày</span>
+          </div>
+          <div class="consult-card-arrow">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      <!-- Cam kết an tâm từ Re-Born -->
+      <div class="consult-trust-footer">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Tư vấn tận tâm • 100% Thuần thực vật • Hoàn toàn miễn phí</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Contact Widget (Round FAB) -->
+  <button class="floating-contact-btn" id="floatingContactBtn" title="Hỗ trợ & Tư vấn sản phẩm trực tuyến"
+    aria-label="Hỗ trợ & Tư vấn sản phẩm trực tuyến">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <!-- Toast Notifications Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Core JavaScript -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>
