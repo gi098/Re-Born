@@ -59,7 +59,7 @@
 ## 📱 3. CHI TIẾT CÁC TÍNH NĂNG CỐT LÕI (IN-SCOPE FEATURES)
 
 ### 3.1. Phân hệ 1: Truyền tải Tuyên ngôn Giá trị (Value Proposition Display)
-*Khớp với Ô 1 BMC (Khánh phụ trách): Thuần tự nhiên lành tính • Liệu pháp hương thơm • Sống xanh Upcycling.*
+*Khớp với Ô 1 BMC: Thuần tự nhiên lành tính • Liệu pháp hương thơm • Sống xanh Upcycling.*
 
 - **Hero Banner**:
   - Tiêu đề ngắn gọn: *"Sự tươi mát nguyên bản, tái định hình"*.
@@ -73,7 +73,7 @@
   - Hiển thị 3 tầng hương tự nhiên (Hương Đầu: Vỏ bưởi ép lạnh - Hương Giữa: Lá bưởi vò nát - Hương Cuối: Thảo mộc tự nhiên).
 
 ### 3.2. Phân hệ 2: Danh mục Sản phẩm MVP (Product Catalog)
-*Khớp với Ô 2 & Ô 5 BMC (Thùy & Phát phụ trách): Mức giá sinh viên & Dòng sản phẩm bán lẻ.*
+*Khớp với Ô 2 & Ô 5 BMC: Mức giá sinh viên & Dòng sản phẩm bán lẻ.*
 
 - **Sản phẩm 1: Nước rửa tay vỏ bưởi Re-Born (250ml)**
   - *Mức giá MVP*: **45.000₫** (bản trải nghiệm sinh viên) / Bản gốm tái nạp: **280.000₫**.
@@ -124,4 +124,4 @@
 Theo đúng bài học *"Học được từ khách hàng nhanh chóng"*:
 1. **Đo lường định lượng**: Theo dõi số lượng đơn đặt hàng thử nghiệm phát sinh sau 3 ngày đặt QR Code tại campus và quán cà phê.
 2. **Đo lường định tính**: Mỗi khách hàng nhận sản phẩm sẽ được gửi 1 link khảo sát ngắn 3 câu hỏi (1: Độ ưng ý mùi hương / 2: Cảm giác sau khi rửa tay / 3: Mức giá 45k - 65k có sẵn sàng mua lại không).
-3. **Vòng lặp tiếp theo (Next Iteration)**: Dựa trên phản hồi để đội R&D (Khánh) tinh chỉnh công thức và đội IT bổ sung tính năng theo nhu cầu thực tế của người dùng.
+3. **Vòng lặp tiếp theo (Next Iteration)**: Dựa trên phản hồi để đội R&D tinh chỉnh công thức và đội IT bổ sung tính năng theo nhu cầu thực tế của người dùng.
