@@ -889,8 +889,10 @@ input.input-error {
   position: relative;
 }
 
-.nav-link:hover {
-  color: var(--color-primary);
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-primary-dark);
+  font-weight: 600;
 }
 
 .nav-link::after {
@@ -899,12 +901,14 @@ input.input-error {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;
+  height: 2.5px;
   background-color: var(--color-primary);
+  border-radius: 2px;
   transition: width var(--transition-fast);
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   width: 100%;
 }
 
@@ -1406,12 +1410,12 @@ input.input-error {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 10px 14px;
+  padding: 10px 18px;
   background-color: var(--color-primary);
   color: #ffffff;
   font-weight: 600;
   font-size: 0.9rem;
-  border-radius: var(--radius-sm);
+  border-radius: 50px;
   transition: all var(--transition-fast);
 }
 
@@ -1423,9 +1427,9 @@ input.input-error {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 12px;
+  padding: 10px 16px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border-radius: 50px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text-main);
@@ -2868,6 +2872,12 @@ input.survey-text-input:focus,
   box-shadow: 0 4px 12px rgba(49, 92, 59, 0.25);
 }
 
+.consult-card-icon-wrap.zalo-icon-bg {
+  background: #0068FF;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 104, 255, 0.25);
+}
+
 .consult-card-body {
   flex: 1;
   min-width: 0;
@@ -3393,6 +3403,65 @@ input.survey-text-input:focus,
     width: 100vw;
   }
 }
+
+/* ==========================================================================
+   Language Switcher (VI / EN) - Compact Segmented Control
+   ========================================================================== */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  background-color: #F1F4F0;
+  border: 1px solid rgba(49, 92, 59, 0.16);
+  border-radius: 50px;
+  padding: 2px;
+  height: 28px;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: #5A6556;
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 0 8px;
+  height: 22px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-btn:hover {
+  color: var(--color-primary, #315C3B);
+}
+
+.lang-btn.active {
+  background-color: var(--color-primary, #315C3B);
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.lang-sep {
+  display: none !important;
+}
+
+.mobile-lang-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: var(--color-bg-alt, #F5F7F4);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
 </style>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -3410,16 +3479,23 @@ input.survey-text-input:focus,
           <img src="assets/images/logo_horizontal.png" alt="RE-BORN" class="brand-header-logo">
         </a>
 
-        <!-- Center Navigation Links -->
+        <!-- Center Navigation Links (Chuẩn theo yêu cầu) -->
         <ul class="nav-links">
-          <li><a href="#products" class="nav-link">Bộ sưu tập</a></li>
-          <li><a href="#philosophy" class="nav-link">Triết lý sống xanh</a></li>
-          <li><a href="#fragrance" class="nav-link">Tầng hương thực vật</a></li>
-          <li><a href="#b2b" class="nav-link">Đối tác B2B</a></li>
+          <li><a href="#" class="nav-link active" data-i18n="nav_home">Trang chủ</a></li>
+          <li><a href="#philosophy" class="nav-link" data-i18n="nav_about">Giới thiệu</a></li>
+          <li><a href="#products" class="nav-link" data-i18n="nav_products">Sản phẩm</a></li>
+          <li><a href="#fragrance" class="nav-link" data-i18n="nav_benefits">Lợi ích</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Liên hệ</a></li>
         </ul>
 
         <!-- Right Action Items -->
         <div class="nav-actions">
+          <!-- Language Switcher (VI / EN) -->
+          <div class="lang-switcher" id="langSwitcher" role="group" aria-label="Chuyển ngôn ngữ / Switch Language" title="Chuyển ngôn ngữ / Switch Language">
+            <button type="button" class="lang-btn active" data-lang="vi">VI</button>
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+          </div>
+
           <!-- Facebook Fanpage Link -->
           <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Fanpage Facebook Re-Born" aria-label="Fanpage Facebook">
             <svg width="17" height="17" fill="#1877F2" viewBox="0 0 24 24">
@@ -3447,7 +3523,7 @@ input.survey-text-input:focus,
 
           <!-- Fast 1-Step Checkout Direct Button -->
           <button class="btn-fast-order" id="headerFastOrderBtn">
-            <span>Đặt hàng nhanh</span>
+            <span data-i18n="nav_fast_order">Đặt hàng nhanh</span>
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -3470,27 +3546,36 @@ input.survey-text-input:focus,
   <!-- Mobile Drawer Menu -->
   <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
   <aside class="mobile-nav-drawer" id="mobileNavDrawer">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
       <a href="#" style="display: flex; align-items: center;">
         <img src="assets/images/logo_horizontal.png" alt="RE-BORN"
           style="height: 40px; width: auto; object-fit: contain;">
       </a>
       <button class="modal-close-btn" id="mobileNavCloseBtn" style="position: static;">✕</button>
     </div>
+    <div class="mobile-lang-box">
+      <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);" data-i18n="lang_select_lbl">Ngôn ngữ:</span>
+      <div class="lang-switcher" role="group" aria-label="Ngôn ngữ / Language">
+        <button type="button" class="lang-btn active" data-lang="vi">VI</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
     <div class="mobile-nav-links">
-      <a href="#products" class="mobile-link">Bộ sưu tập sản phẩm</a>
-      <a href="#philosophy" class="mobile-link">Triết lý Upcycling</a>
-      <a href="#fragrance" class="mobile-link">Cấu trúc 3 tầng hương</a>
-      <a href="#b2b" class="mobile-link">Đối tác Doanh nghiệp & B2B</a>
-      <a href="#sustainability" class="mobile-link">Chính sách Refill đổi chai</a>
-      <a href="#faqs" class="mobile-link">Câu hỏi thường gặp</a>
+      <a href="#" class="mobile-link active" data-i18n="nav_home">Trang chủ</a>
+      <a href="#philosophy" class="mobile-link" data-i18n="nav_about">Giới thiệu</a>
+      <a href="#products" class="mobile-link" data-i18n="nav_products">Sản phẩm</a>
+      <a href="#fragrance" class="mobile-link" data-i18n="nav_benefits">Lợi ích</a>
+      <a href="#contact" class="mobile-link" data-i18n="nav_contact">Liên hệ</a>
+      <a href="#b2b" class="mobile-link" data-i18n="nav_b2b">Đối tác Doanh nghiệp & B2B</a>
+      <a href="#sustainability" class="mobile-link" data-i18n="nav_refill">Chính sách Refill đổi chai</a>
+      <a href="#faqs" class="mobile-link" data-i18n="nav_faqs">Câu hỏi thường gặp</a>
     </div>
     <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--color-border);">
-      <button class="btn btn-primary" id="mobileFastOrderBtn" style="width: 100%;">
+      <button class="btn btn-primary" id="mobileFastOrderBtn" style="width: 100%; border-radius: 50px;" data-i18n="mobile_cta_order">
         Đặt hàng trải nghiệm ngay
       </button>
       <p style="font-size: 0.8rem; color: var(--color-text-secondary); text-align: center; margin-top: 10px;">
-        Hotline Founders: 0988.123.456
+        <span data-i18n="hotline_founders">Hotline Founders</span>: 0988.123.456
       </p>
     </div>
   </aside>
@@ -3505,25 +3590,25 @@ input.survey-text-input:focus,
         <div class="hero-content">
           <div class="hero-badge">
             <span class="hero-badge-dot"></span>
-            <span>100% Vỏ Bưởi Tái Sinh</span>
+            <span data-i18n="hero_badge">100% Vỏ Bưởi Tái Sinh</span>
           </div>
-          <h1 class="hero-title">
+          <h1 class="hero-title" data-i18n="hero_title">
             Sự tươi mát nguyên bản,<br>
             <span>tái định hình.</span>
           </h1>
-          <p class="hero-desc">
+          <p class="hero-desc" data-i18n="hero_desc">
             Chăm sóc đôi tay mỗi ngày lấy cảm hứng từ sự thanh khiết phục hồi của vỏ bưởi tái sinh.
             Chế tác thủ công theo từng mẻ nhỏ với sự trân trọng tuyệt đối dành cho tự nhiên.
           </p>
           <div class="hero-actions">
             <a href="#products" class="btn btn-primary">
-              Khám phá sản phẩm
+              <span data-i18n="hero_cta_explore">Khám phá sản phẩm</span>
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
               </svg>
             </a>
-            <button class="btn btn-outline" id="heroQuickRitualBtn">
+            <button class="btn btn-outline" id="heroQuickRitualBtn" data-i18n="hero_cta_ritual">
               Trải nghiệm nghi thức
             </button>
           </div>
@@ -3532,15 +3617,15 @@ input.survey-text-input:focus,
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-val">100%</span>
-              <span class="stat-label">Vỏ bưởi Upcycling</span>
+              <span class="stat-label" data-i18n="stat_peel">Vỏ bưởi Upcycling</span>
             </div>
             <div class="stat-item">
               <span class="stat-val">0%</span>
-              <span class="stat-label">Cồn & Paraben</span>
+              <span class="stat-label" data-i18n="stat_clean">Cồn & Paraben</span>
             </div>
             <div class="stat-item">
               <span class="stat-val">99.9%</span>
-              <span class="stat-label">Sạch khuẩn dịu nhẹ</span>
+              <span class="stat-label" data-i18n="stat_antibac">Sạch khuẩn dịu nhẹ</span>
             </div>
           </div>
         </div>
@@ -3562,11 +3647,11 @@ input.survey-text-input:focus,
     <div class="container">
       <div class="philosophy-header">
         <div>
-          <span class="section-label">TRIẾT LÝ BẢN ĐỊA</span>
-          <h2 class="section-title">Nông sản tuần hoàn. Hồi sinh từ vỏ bưởi.</h2>
+          <span class="section-label" data-i18n="philo_label">TRIẾT LÝ BẢN ĐỊA</span>
+          <h2 class="section-title" data-i18n="philo_title">Nông sản tuần hoàn. Hồi sinh từ vỏ bưởi.</h2>
         </div>
         <div>
-          <p class="section-desc">
+          <p class="section-desc" data-i18n="philo_desc">
             Mỗi năm, hàng tấn vỏ bưởi sau khi lấy múi bị vứt bỏ lãng phí. Re-Born thu gom trực tiếp từ các quán chè,
             tiệm nước ép đối tác, chưng cất lạnh để giữ trọn tinh túy d-Limonene cho đôi tay bạn.
           </p>
@@ -3577,24 +3662,24 @@ input.survey-text-input:focus,
         <!-- Step 1 -->
         <div class="step-card">
           <div class="step-number">01</div>
-          <h3>Thu gom vỏ bưởi sạch</h3>
-          <p>Thu gom vỏ bưởi tươi mỗi ngày từ các đối tác địa phương. Phân loại và rửa sạch bằng nước muối ion kiềm
+          <h3 data-i18n="philo_step1_title">Thu gom vỏ bưởi sạch</h3>
+          <p data-i18n="philo_step1_desc">Thu gom vỏ bưởi tươi mỗi ngày từ các đối tác địa phương. Phân loại và rửa sạch bằng nước muối ion kiềm
             trước khi chế tác.</p>
         </div>
 
         <!-- Step 2 -->
         <div class="step-card">
           <div class="step-number">02</div>
-          <h3>Chưng cất lạnh thủ công</h3>
-          <p>Chiết xuất tinh dầu ở nhiệt độ thấp bảo toàn nguyên vẹn hoạt chất d-Limonene kháng khuẩn tự nhiên mà không
+          <h3 data-i18n="philo_step2_title">Chưng cất lạnh thủ công</h3>
+          <p data-i18n="philo_step2_desc">Chiết xuất tinh dầu ở nhiệt độ thấp bảo toàn nguyên vẹn hoạt chất d-Limonene kháng khuẩn tự nhiên mà không
             phá hủy cấu trúc hương.</p>
         </div>
 
         <!-- Step 3 -->
         <div class="step-card">
           <div class="step-number">03</div>
-          <h3>Công thức lành tính</h3>
-          <p>Bổ sung Glycerin thực vật và chất tạo bọt hữu cơ gốc dừa, đảm bảo độ ẩm tuyệt đối cho làn da nhạy cảm và
+          <h3 data-i18n="philo_step3_title">Công thức lành tính</h3>
+          <p data-i18n="philo_step3_desc">Bổ sung Glycerin thực vật và chất tạo bọt hữu cơ gốc dừa, đảm bảo độ ẩm tuyệt đối cho làn da nhạy cảm và
             trẻ nhỏ.</p>
         </div>
       </div>
@@ -3607,9 +3692,9 @@ input.survey-text-input:focus,
   <section class="products-section" id="products">
     <div class="container">
       <div class="products-header">
-        <span class="section-label">BỘ SƯU TẬP THƯỜNG NHẬT</span>
-        <h2 class="section-title">Nghi thức thanh sạch. Khơi nguồn từ tự nhiên.</h2>
-        <p class="section-desc">
+        <span class="section-label" data-i18n="prod_label">BỘ SƯU TẬP THƯỜNG NHẬT</span>
+        <h2 class="section-title" data-i18n="prod_title">Nghi thức thanh sạch. Khơi nguồn từ tự nhiên.</h2>
+        <p class="section-desc" data-i18n="prod_desc">
           Mỗi sản phẩm là một lời cam kết về lối sống xanh, được đóng gói trong chai rPET tái sinh thân thiện với môi
           trường.
         </p>
@@ -3621,22 +3706,22 @@ input.survey-text-input:focus,
           data-sub="VỎ BƯỞI ÉP LẠNH • TUYẾT TÙNG • THẢO MỘC" data-price="45000" data-volume="250 ml"
           data-image="assets/images/product_handwash.jpg">
           <div class="product-image-wrap">
-            <span class="product-pill-badge">SẠCH KHUẨN • DƯỠNG ẨM</span>
+            <span class="product-pill-badge" data-i18n="badge_antibac">SẠCH KHUẨN • DƯỠNG ẨM</span>
             <span class="product-stock-tag">
               <span class="product-stock-dot"></span>
-              Còn hàng (Mẻ tươi)
+              <span data-i18n="stock_in_stock">Còn hàng (Mẻ tươi)</span>
             </span>
             <img src="assets/images/product_handwash.jpg" alt="Nước rửa tay vỏ bưởi Re-Born 250ml">
           </div>
           <div class="product-info">
             <div class="product-head-row">
-              <h3 class="product-title">Nước rửa tay vỏ bưởi</h3>
+              <h3 class="product-title" data-i18n="prod1_title">Nước rửa tay vỏ bưởi</h3>
             </div>
-            <div class="product-volume">Dung tích: 250 ml • Chai rPET vòi nhấn</div>
-            <div class="product-aroma-notes">
+            <div class="product-volume" data-i18n="prod1_vol">Dung tích: 250 ml • Chai rPET vòi nhấn</div>
+            <div class="product-aroma-notes" data-i18n="prod1_notes">
               VỎ BƯỞI ÉP LẠNH • TUYẾT TÙNG • THẢO MỘC
             </div>
-            <p class="product-desc">
+            <p class="product-desc" data-i18n="prod1_desc">
               Chứa tinh dầu vỏ bưởi ép chậm kết hợp thảo mộc cấp ẩm dịu nhẹ. Nhẹ nhàng gột rửa 99.9% vi khuẩn, bảo vệ độ
               ẩm tự nhiên của đôi tay không gây khô ráp.
             </p>
@@ -3651,9 +3736,9 @@ input.survey-text-input:focus,
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
-                  Thêm giỏ hàng
+                  <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
                 </button>
-                <button class="link-explore-ritual" data-id="pomelo-handwash">
+                <button class="link-explore-ritual" data-id="pomelo-handwash" data-i18n="btn_view_detail">
                   Xem chi tiết →
                 </button>
               </div>
@@ -3666,24 +3751,24 @@ input.survey-text-input:focus,
           data-sub="VỎ BƯỞI ÉP LẠNH • TIẾT KIỆM RÁC NHỰA" data-price="75000" data-volume="500 ml"
           data-image="assets/images/product_refill.jpg">
           <div class="product-image-wrap">
-            <span class="product-pill-badge" style="background: var(--color-primary-fixed); color: var(--color-primary-dark); font-weight: 700;">
+            <span class="product-pill-badge" style="background: var(--color-primary-fixed); color: var(--color-primary-dark); font-weight: 700;" data-i18n="badge_refill">
               REFILL TIẾT KIỆM
             </span>
             <span class="product-stock-tag">
               <span class="product-stock-dot"></span>
-              Tiết kiệm 20k
+              <span data-i18n="stock_save_20k">Tiết kiệm 20k</span>
             </span>
             <img src="assets/images/product_refill.jpg" alt="Túi Refill Nước rửa tay vỏ bưởi 500ml Re-Born">
           </div>
           <div class="product-info">
             <div class="product-head-row">
-              <h3 class="product-title">Túi Refill Nước rửa tay 500ml</h3>
+              <h3 class="product-title" data-i18n="prod2_title">Túi Refill Nước rửa tay 500ml</h3>
             </div>
-            <div class="product-volume">Dung tích: 500 ml • Rót đầy 2 chai 250ml</div>
-            <div class="product-aroma-notes">
+            <div class="product-volume" data-i18n="prod2_vol">Dung tích: 500 ml • Rót đầy 2 chai 250ml</div>
+            <div class="product-aroma-notes" data-i18n="prod2_notes">
               VỎ BƯỞI ÉP LẠNH • GỖ HINOKI • TUYẾT TÙNG
             </div>
-            <p class="product-desc">
+            <p class="product-desc" data-i18n="prod2_desc">
               Dung tích nhân đôi tiện lợi nạp lại bình vòi nhấn cũ. Giải pháp kinh tế thông minh giúp tiết kiệm 15.000₫ chi phí và chung tay giảm 80% rác thải nhựa.
             </p>
             <div class="product-price-box">
@@ -3697,9 +3782,9 @@ input.survey-text-input:focus,
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
-                  Thêm giỏ hàng
+                  <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
                 </button>
-                <button class="link-explore-ritual" data-id="pomelo-refill">
+                <button class="link-explore-ritual" data-id="pomelo-refill" data-i18n="btn_view_detail">
                   Xem chi tiết →
                 </button>
               </div>
@@ -3713,24 +3798,24 @@ input.survey-text-input:focus,
           data-image="assets/images/hero_product.jpg">
           <div class="product-image-wrap">
             <span class="product-pill-badge"
-              style="background: var(--color-accent); color: var(--color-text-main); font-weight: 800;">
+              style="background: var(--color-accent); color: var(--color-text-main); font-weight: 800;" data-i18n="badge_combo">
               COMBO MUA CHUNG
             </span>
             <span class="product-stock-tag">
               <span class="product-stock-dot"></span>
-              Ưu đãi Campus
+              <span data-i18n="stock_campus">Ưu đãi Campus</span>
             </span>
             <img src="assets/images/hero_product.jpg" alt="Combo Nước rửa tay vỏ bưởi Re-Born tặng kèm túi vải">
           </div>
           <div class="product-info">
             <div class="product-head-row">
-              <h3 class="product-title">Combo Đôi • Nước rửa tay & Túi vải</h3>
+              <h3 class="product-title" data-i18n="prod3_title">Combo Đôi • Nước rửa tay & Túi vải</h3>
             </div>
-            <div class="product-volume">Gồm: 2 Chai rửa tay 250ml + 1 Túi vải Canvas</div>
-            <div class="product-aroma-notes">
+            <div class="product-volume" data-i18n="prod3_vol">Gồm: 2 Chai rửa tay 250ml + 1 Túi vải Canvas</div>
+            <div class="product-aroma-notes" data-i18n="prod3_notes">
               TIẾT KIỆM PHÍ SHIP • MUA CHUNG BẠN BÈ
             </div>
-            <p class="product-desc">
+            <p class="product-desc" data-i18n="prod3_desc">
               Gói ưu đãi mua chung 2 chai nước rửa tay vỏ bưởi tặng kèm túi vải dệt thô Canvas Re-Born. Lựa chọn lý tưởng cho bạn bè cùng phòng KTX rủ nhau sống xanh.
             </p>
             <div class="product-price-box">
@@ -3744,9 +3829,9 @@ input.survey-text-input:focus,
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
-                  Thêm giỏ hàng
+                  <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
                 </button>
-                <button class="link-explore-ritual" data-id="eco-giftset">
+                <button class="link-explore-ritual" data-id="eco-giftset" data-i18n="btn_view_detail">
                   Xem chi tiết →
                 </button>
               </div>
@@ -3773,9 +3858,9 @@ input.survey-text-input:focus,
 
         <!-- Content Column -->
         <div class="fragrance-content">
-          <span class="section-label">LIỆU PHÁP HƯƠNG THƠM</span>
-          <h2 class="section-title">Hương thơm đánh thức các giác quan.</h2>
-          <p class="section-desc">
+          <span class="section-label" data-i18n="frag_label">LIỆU PHÁP HƯƠNG THƠM</span>
+          <h2 class="section-title" data-i18n="frag_title">Hương thơm đánh thức các giác quan.</h2>
+          <p class="section-desc" data-i18n="frag_desc">
             Không sử dụng hương liệu hóa học nhân tạo. Re-Born phối ngẫu các phân tử tinh dầu bưởi tự nhiên với thảo mộc
             bản địa, mở ra 3 tầng chuyển hương êm dịu.
           </p>
@@ -3784,10 +3869,10 @@ input.survey-text-input:focus,
             <!-- Tier 1 -->
             <div class="scent-tier active" data-tier="top">
               <div class="tier-header">
-                <span class="tier-title">01 • Tầng Hương Đầu (Top Notes)</span>
-                <span class="tier-time">0 – 15 Phút đầu</span>
+                <span class="tier-title" data-i18n="frag_t1_title">01 • Tầng Hương Đầu (Top Notes)</span>
+                <span class="tier-time" data-i18n="frag_t1_time">0 – 15 Phút đầu</span>
               </div>
-              <p class="tier-notes">
+              <p class="tier-notes" data-i18n="frag_t1_desc">
                 <strong>Vỏ bưởi ép lạnh & Cam hương (Bergamot)</strong>: Bùng nổ cảm giác thanh mát, sảng khoái tức thì,
                 đánh tan mệt mỏi.
               </p>
@@ -3796,10 +3881,10 @@ input.survey-text-input:focus,
             <!-- Tier 2 -->
             <div class="scent-tier" data-tier="heart">
               <div class="tier-header">
-                <span class="tier-title">02 • Tầng Hương Giữa (Heart Notes)</span>
-                <span class="tier-time">15 – 60 Phút tiếp theo</span>
+                <span class="tier-title" data-i18n="frag_t2_title">02 • Tầng Hương Giữa (Heart Notes)</span>
+                <span class="tier-time" data-i18n="frag_t2_time">15 – 60 Phút tiếp theo</span>
               </div>
-              <p class="tier-notes">
+              <p class="tier-notes" data-i18n="frag_t2_desc">
                 <strong>Lá bưởi vò nát & Hoa bưởi non</strong>: Hương xanh tươi dịu ngọt của vườn quê, mang lại sự bình
                 yên, thư giãn sâu cho tâm trí.
               </p>
@@ -3808,10 +3893,10 @@ input.survey-text-input:focus,
             <!-- Tier 3 -->
             <div class="scent-tier" data-tier="base">
               <div class="tier-header">
-                <span class="tier-title">03 • Tầng Hương Cuối (Base Notes)</span>
-                <span class="tier-time">Lưu hương 2 – 4 Giờ</span>
+                <span class="tier-title" data-i18n="frag_t3_title">03 • Tầng Hương Cuối (Base Notes)</span>
+                <span class="tier-time" data-i18n="frag_t3_time">Lưu hương 2 – 4 Giờ</span>
               </div>
-              <p class="tier-notes">
+              <p class="tier-notes" data-i18n="frag_t3_desc">
                 <strong>Gỗ Tuyết tùng & Thảo mộc dịu nhẹ</strong>: Nốt hương ấm áp, giữ độ ẩm mượt và lưu luyến êm ái
                 trên đôi bàn tay.
               </p>
@@ -3829,23 +3914,23 @@ input.survey-text-input:focus,
     <div class="container">
       <div class="survey-card">
         <div class="survey-info">
-          <span class="section-label">ĐỒNG HÀNH HOÀN THIỆN</span>
-          <h3>Góp ý cảm nhận mùi hương mẻ đầu tiên</h3>
-          <p class="survey-desc">
+          <span class="section-label" data-i18n="survey_label">ĐỒNG HÀNH HOÀN THIỆN</span>
+          <h3 data-i18n="survey_title">Góp ý cảm nhận mùi hương mẻ đầu tiên</h3>
+          <p class="survey-desc" data-i18n="survey_desc">
             Re-Born trân trọng từng phản hồi từ bạn sau khi trải nghiệm sản phẩm. Ý kiến của bạn giúp chúng mình liên tục hoàn thiện công thức chiết xuất vỏ bưởi tự nhiên đạt độ tinh khiết cao nhất.
           </p>
 
           <div class="survey-reward-card">
             <div class="reward-header">
-              <span class="reward-badge">ĐẶC QUYỀN TRẢI NGHIỆM</span>
-              <span class="reward-discount">Voucher Giảm 20%</span>
+              <span class="reward-badge" data-i18n="survey_reward_badge">ĐẶC QUYỀN TRẢI NGHIỆM</span>
+              <span class="reward-discount" data-i18n="survey_reward_discount">Voucher Giảm 20%</span>
             </div>
             <div class="reward-body">
-              <h5>Quà tặng tri ân từ đội ngũ R&D</h5>
-              <p>Gửi phản hồi nhanh để nhận mã ưu đãi giảm 20% áp dụng cho đơn hàng tiếp theo hoặc combo Refill tiết kiệm.</p>
+              <h5 data-i18n="survey_reward_title">Quà tặng tri ân từ đội ngũ R&D</h5>
+              <p data-i18n="survey_reward_desc">Gửi phản hồi nhanh để nhận mã ưu đãi giảm 20% áp dụng cho đơn hàng tiếp theo hoặc combo Refill tiết kiệm.</p>
               <div class="reward-perks">
-                <span class="perk-item">✓ Nhận mã ngay qua Inbox Facebook</span>
-                <span class="perk-item">✓ Áp dụng toàn bộ sản phẩm</span>
+                <span class="perk-item" data-i18n="survey_perk1">✓ Nhận mã ngay qua Inbox Facebook</span>
+                <span class="perk-item" data-i18n="survey_perk2">✓ Áp dụng toàn bộ sản phẩm</span>
               </div>
             </div>
           </div>
@@ -3853,7 +3938,7 @@ input.survey-text-input:focus,
 
         <form class="survey-options" id="feedbackForm">
           <div class="survey-question">
-            <span class="survey-q-title"><span class="q-num">1</span> Mùi hương tinh dầu bưởi mẻ mới:</span>
+            <span class="survey-q-title"><span class="q-num">1</span> <span data-i18n="survey_q1">Mùi hương tinh dầu bưởi mẻ mới:</span></span>
             <div class="survey-pill-group">
               <button type="button" class="survey-pill-btn active" data-val="Rất thanh mát, tự nhiên"><span class="pill-check">✓</span> Rất thanh mát, tự nhiên</button>
               <button type="button" class="survey-pill-btn" data-val="Vừa phải"><span class="pill-check">✓</span> Vừa phải</button>
@@ -3862,7 +3947,7 @@ input.survey-text-input:focus,
           </div>
 
           <div class="survey-question">
-            <span class="survey-q-title"><span class="q-num">2</span> Cảm giác dưỡng ẩm da tay sau khi rửa:</span>
+            <span class="survey-q-title"><span class="q-num">2</span> <span data-i18n="survey_q2">Cảm giác dưỡng ẩm da tay sau khi rửa:</span></span>
             <div class="survey-pill-group">
               <button type="button" class="survey-pill-btn active" data-val="Mềm ẩm, không khô ráp"><span class="pill-check">✓</span> Mềm ẩm, không khô ráp</button>
               <button type="button" class="survey-pill-btn" data-val="Bình thường"><span class="pill-check">✓</span> Bình thường</button>
@@ -3871,7 +3956,7 @@ input.survey-text-input:focus,
           </div>
 
           <div class="survey-question">
-            <span class="survey-q-title"><span class="q-num">3</span> Đánh giá mức giá trải nghiệm 45k (250ml):</span>
+            <span class="survey-q-title"><span class="q-num">3</span> <span data-i18n="survey_q3">Đánh giá mức giá trải nghiệm 45k (250ml):</span></span>
             <div class="survey-pill-group">
               <button type="button" class="survey-pill-btn active" data-val="Rất hợp lý (45k)"><span class="pill-check">✓</span> Rất hợp lý (45k)</button>
               <button type="button" class="survey-pill-btn" data-val="Chấp nhận được"><span class="pill-check">✓</span> Chấp nhận được</button>
@@ -3880,7 +3965,7 @@ input.survey-text-input:focus,
           </div>
 
           <div class="survey-question">
-            <label for="fbContactInput" class="survey-q-title"><span class="q-num">4</span> Tên hoặc Link Facebook của bạn:</label>
+            <label for="fbContactInput" class="survey-q-title"><span class="q-num">4</span> <span data-i18n="survey_q4">Tên hoặc Link Facebook của bạn:</span></label>
             <div class="survey-input-wrap">
               <div class="input-fb-icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2">
@@ -3893,7 +3978,7 @@ input.survey-text-input:focus,
 
           <button type="submit" class="btn-submit-feedback" id="btnSubmitFbFeedback">
             <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            <span>Gửi phản hồi qua Facebook & Nhận Voucher 20%</span>
+            <span data-i18n="survey_btn">Gửi phản hồi qua Facebook & Nhận Voucher 20%</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
 
@@ -3923,11 +4008,11 @@ input.survey-text-input:focus,
     <div class="container">
       <div class="b2b-banner">
         <div class="b2b-content-left">
-          <span class="b2b-badge">
+          <span class="b2b-badge" data-i18n="b2b_badge">
             B2B • ĐỐI TÁC DOANH NGHIỆP "GREEN / ECO"
           </span>
-          <h2>Giải Pháp Xanh Cho Doanh Nghiệp, Văn Phòng, F&B & Khách Sạn</h2>
-          <p>
+          <h2 data-i18n="b2b_title">Giải Pháp Xanh Cho Doanh Nghiệp, Văn Phòng, F&B & Khách Sạn</h2>
+          <p data-i18n="b2b_desc">
             Trang bị nước rửa tay vỏ bưởi hữu cơ tự nhiên tại <strong>pantry, lavabo & khu vệ sinh</strong>. Re-Born tặng <strong>Chai dùng thử 500ml (0đ)</strong> trải nghiệm thực tế và cung cấp <strong>Can sỉ 3L – 5L</strong> chiết khấu tới 35% cho nhu cầu Refill định kỳ.
           </p>
 
@@ -3935,16 +4020,16 @@ input.survey-text-input:focus,
           <div class="b2b-tier-cards">
             <div class="b2b-tier-card">
               <span class="b2b-tier-badge sample">🎁 DÙNG THỬ • 0Đ</span>
-              <h4>Chai Dùng Thử 500ml</h4>
-              <p>Gửi tận nơi 01 chai 500ml để chủ cơ sở, nhân viên và khách trải nghiệm thực tế hương bưởi tự nhiên, độ tạo bọt và dưỡng ẩm da tay.</p>
-              <div class="b2b-card-check">✓ Miễn phí gửi mẫu tận nơi</div>
+              <h4 data-i18n="b2b_sample_title">Chai Dùng Thử 500ml</h4>
+              <p data-i18n="b2b_sample_desc">Gửi tận nơi 01 chai 500ml để chủ cơ sở, nhân viên và khách trải nghiệm thực tế hương bưởi tự nhiên, độ tạo bọt và dưỡng ẩm da tay.</p>
+              <div class="b2b-card-check" data-i18n="b2b_sample_check">✓ Miễn phí gửi mẫu tận nơi</div>
             </div>
 
             <div class="b2b-tier-card">
               <span class="b2b-tier-badge wholesale">🏢 BÁN CAN SỈ B2B</span>
-              <h4>Can Lớn 3L & 5L (Refill)</h4>
-              <p>Dung tích lớn chuyên dụng cho chiết/refill tại quầy lavabo. Tiết kiệm 25% – 35% chi phí, tặng kèm bình gốm sứ sang trọng và thu gom can rỗng.</p>
-              <div class="b2b-card-check wholesale">✓ Chiết khấu sỉ 25% – 35%</div>
+              <h4 data-i18n="b2b_bulk_title">Can Lớn 3L & 5L (Refill)</h4>
+              <p data-i18n="b2b_bulk_desc">Dung tích lớn chuyên dụng cho chiết/refill tại quầy lavabo. Tiết kiệm 25% – 35% chi phí, tặng kèm bình gốm sứ sang trọng và thu gom can rỗng.</p>
+              <div class="b2b-card-check wholesale" data-i18n="b2b_bulk_check">✓ Chiết khấu sỉ 25% – 35%</div>
             </div>
           </div>
 
@@ -3959,8 +4044,8 @@ input.survey-text-input:focus,
 
         <div class="b2b-form-box">
           <div class="b2b-form-header">
-            <h4>Đăng ký Đối tác Doanh nghiệp</h4>
-            <p>Nhận chai mẫu 500ml miễn phí hoặc bảng báo giá can sỉ 3L - 5L:</p>
+            <h4 data-i18n="b2b_form_title">Đăng ký Đối tác Doanh nghiệp</h4>
+            <p data-i18n="b2b_form_sub">Nhận chai mẫu 500ml miễn phí hoặc bảng báo giá can sỉ 3L - 5L:</p>
           </div>
           <form id="b2bLeadForm">
             <div class="b2b-grid-2">
@@ -4013,7 +4098,7 @@ input.survey-text-input:focus,
             </div>
 
             <button type="submit" class="btn btn-primary b2b-submit-btn">
-              <span>Gửi thông tin hợp tác B2B ngay</span>
+              <span data-i18n="b2b_btn_submit">Gửi thông tin hợp tác B2B ngay</span>
               <span>➔</span>
             </button>
           </form>
@@ -4029,25 +4114,25 @@ input.survey-text-input:focus,
     <div class="container">
       <div class="sustainability-banner">
         <div>
-          <span class="section-label">KINH TẾ TUẦN HOÀN</span>
-          <h2 class="section-title">Chương trình: Gom vỏ chai cũ - Đổi sản phẩm mới</h2>
-          <p class="section-desc">
+          <span class="section-label" data-i18n="sust_label">KINH TẾ TUẦN HOÀN</span>
+          <h2 class="section-title" data-i18n="sust_title">Chương trình: Gom vỏ chai cũ - Đổi sản phẩm mới</h2>
+          <p class="section-desc" data-i18n="sust_desc">
             Đừng vứt bỏ vỏ chai sau khi dùng hết! Re-Born tiếp nhận mọi chai rPET đã qua sử dụng để làm sạch, khử khuẩn
             bằng tia UV và tái nạp mẻ tinh dầu mới, giảm thiểu tối đa rác thải nhựa ra môi trường.
           </p>
           <div class="refill-steps-row">
             <div class="refill-step-item">
-              <span>01. Giữ chai cũ</span>
-              <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Giữ lại chai Re-Born rPET đã dùng hết.
+              <span data-i18n="sust_step1_t">01. Giữ chai cũ</span>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary);" data-i18n="sust_step1_d">Giữ lại chai Re-Born rPET đã dùng hết.
               </p>
             </div>
             <div class="refill-step-item">
-              <span>02. Đem đến Pop-up</span>
-              <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Gửi lại tại gian hàng Pop-up trên Campus FPT.</p>
+              <span data-i18n="sust_step2_t">02. Đem đến Pop-up</span>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary);" data-i18n="sust_step2_d">Gửi lại tại gian hàng Pop-up trên Campus FPT.</p>
             </div>
             <div class="refill-step-item">
-              <span>03. Nhận chiết khấu</span>
-              <p style="font-size: 0.85rem; color: var(--color-text-secondary);">Giảm ngay 30% khi mua túi nạp refill
+              <span data-i18n="sust_step3_t">03. Nhận chiết khấu</span>
+              <p style="font-size: 0.85rem; color: var(--color-text-secondary);" data-i18n="sust_step3_d">Giảm ngay 30% khi mua túi nạp refill
                 dung tích lớn.</p>
             </div>
           </div>
@@ -4068,51 +4153,48 @@ input.survey-text-input:focus,
   <section class="faq-section" id="faqs">
     <div class="container container-narrow">
       <div style="text-align: center; margin-bottom: 24px;">
-        <span class="section-label" style="justify-content: center;">GIẢI ĐÁP THẮC MẮC</span>
-        <h2 class="section-title">Câu hỏi thường gặp</h2>
+        <span class="section-label" style="justify-content: center;" data-i18n="faq_label">GIẢI ĐÁP THẮC MẮC</span>
+        <h2 class="section-title" data-i18n="faq_title">Câu hỏi thường gặp</h2>
       </div>
 
       <div class="faq-list">
         <div class="faq-item active">
           <button class="faq-question">
-            <span>Sản phẩm có dùng cồn công nghiệp để kháng khuẩn không?</span>
+            <span data-i18n="faq_q1">Sản phẩm có dùng cồn công nghiệp để kháng khuẩn không?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Hoàn toàn không. Re-Born tận dụng hoạt chất tự nhiên d-Limonene từ vỏ bưởi kết hợp chiết xuất thực vật
-              hữu cơ để diệt khuẩn 99.9% mà không làm khô ráp da hay gây cay nồng mũi.</p>
+            <p data-i18n="faq_a1">Hoàn toàn không. Re-Born tận dụng hoạt chất tự nhiên d-Limonene từ vỏ bưởi kết hợp chiết xuất thực vật hữu cơ để diệt khuẩn 99.9% mà không làm khô ráp da hay gây cay nồng mũi.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Sinh viên tại campus FPT nhận hàng như thế nào?</span>
+            <span data-i18n="faq_q2">Sinh viên tại campus FPT nhận hàng như thế nào?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Bạn chỉ cần chọn "Nhận hàng tại Campus FPT" khi đặt hàng. Thành viên nhóm sẽ giao trực tiếp đến tận sảnh
-              tòa nhà của bạn hoàn toàn miễn phí vận chuyển trong giờ nghỉ giải lao.</p>
+            <p data-i18n="faq_a2">Bạn chỉ cần chọn "Nhận hàng tại Campus FPT" khi đặt hàng. Thành viên nhóm sẽ giao trực tiếp đến tận sảnh tòa nhà của bạn hoàn toàn miễn phí vận chuyển trong giờ nghỉ giải lao.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Hạn sử dụng của sản phẩm thủ công là bao lâu?</span>
+            <span data-i18n="faq_q3">Hạn sử dụng của sản phẩm thủ công là bao lâu?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Do được chưng cất tự nhiên và bảo quản bằng chiết xuất tinh dầu nguyên chất, sản phẩm có hạn sử dụng tối
-              ưu trong vòng 6 - 8 tháng kể từ ngày mở nắp.</p>
+            <p data-i18n="faq_a3">Do được chưng cất tự nhiên và bảo quản bằng chiết xuất tinh dầu nguyên chất, sản phẩm có hạn sử dụng tối ưu trong vòng 6 - 8 tháng kể từ ngày mở nắp.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Chính sách bảo hành và đổi trả cho da nhạy cảm như thế nào?</span>
+            <span data-i18n="faq_q4">Chính sách bảo hành và đổi trả cho da nhạy cảm như thế nào?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            <p>Re-Born áp dụng cam kết <strong>Bảo hành dịu nhẹ 14 ngày (14-day gentle-care guarantee)</strong>: hỗ trợ 1 đổi 1 hoàn toàn miễn phí nếu khách hàng có bất kỳ dấu hiệu kích ứng da nào, kèm tư vấn trực tiếp 1:1 từ đội ngũ sáng lập.</p>
+            <p data-i18n="faq_a4">Re-Born áp dụng cam kết <strong>Bảo hành dịu nhẹ 14 ngày (14-day gentle-care guarantee)</strong>: hỗ trợ 1 đổi 1 hoàn toàn miễn phí nếu khách hàng có bất kỳ dấu hiệu kích ứng da nào, kèm tư vấn trực tiếp 1:1 từ đội ngũ sáng lập.</p>
           </div>
         </div>
       </div>
@@ -4122,7 +4204,7 @@ input.survey-text-input:focus,
   <!-- ========================================================================
        Footer
        ======================================================================== -->
-  <footer class="site-footer">
+  <footer class="site-footer" id="contact">
     <div class="container container-wide">
       <!-- Compact 4-Column Footer -->
       <div class="footer-top">
@@ -4131,11 +4213,11 @@ input.survey-text-input:focus,
             <img src="assets/images/logo_horizontal.png" alt="RE-BORN"
               style="height: 40px; width: auto; object-fit: contain; display: block;">
           </a>
-          <p>
+          <p data-i18n="footer_about_desc">
             Nước rửa tay từ phụ phẩm vỏ bưởi hữu cơ, sạch khuẩn dịu lành cho làn da và môi trường.
           </p>
           <div class="footer-contact-compact">
-            <div>📞 <strong>Hotline:</strong> <a href="tel:0988123456">0988.123.456</a></div>
+            <div>💬 <strong>Zalo / Hotline:</strong> <a href="https://zalo.me/0988123456" target="_blank" rel="noopener noreferrer">0988.123.456</a></div>
             <div>✉️ <strong>Email:</strong> contact@reborn-pomelo.vn</div>
             <div>
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="footer-fb-link" title="Ghé thăm Fanpage Facebook Re-Born">
@@ -4147,7 +4229,7 @@ input.survey-text-input:focus,
         </div>
 
         <div class="footer-col">
-          <h4>Sản Phẩm</h4>
+          <h4 data-i18n="footer_products_col">Sản Phẩm</h4>
           <ul>
             <li><a href="#products">Chai vòi nhấn 250ml <span class="footer-tag hot">Bán chạy</span></a></li>
             <li><a href="#products">Túi Refill tiết kiệm 500ml <span class="footer-tag eco">Eco</span></a></li>
@@ -4157,27 +4239,28 @@ input.survey-text-input:focus,
         </div>
 
         <div class="footer-col">
-          <h4>Về Thương Hiệu</h4>
+          <h4 data-i18n="footer_brand_col">Về Thương Hiệu</h4>
           <ul>
             <li><a href="#philosophy">Triết lý Upcycling</a></li>
             <li><a href="#fragrance">Cấu trúc 3 tầng hương</a></li>
             <li><a href="#sustainability">Gom vỏ chai & Refill</a></li>
+            <li><a href="#" class="open-tracking-btn">Tra cứu đơn hàng</a></li>
             <li><a href="#faqs">Câu hỏi thường gặp</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
           <div class="footer-newsletter-compact">
-            <h4>Nhận Ưu Đãi -15%</h4>
-            <p>
+            <h4 data-i18n="footer_newsletter_title">Nhận Ưu Đãi -15%</h4>
+            <p data-i18n="footer_newsletter_desc">
               Nhập email nhận mã <strong>REBORN15</strong> cho đơn hàng đầu:
             </p>
             <form class="newsletter-form" id="newsletterForm">
               <input type="email" placeholder="Email của bạn..." required aria-label="Địa chỉ email nhận bản tin">
-              <button type="submit" aria-label="Gửi">Đăng ký</button>
+              <button type="submit" aria-label="Gửi" data-i18n="footer_newsletter_btn">Đăng ký</button>
             </form>
             <div class="footer-newsletter-note">
-              <span>🔒</span> Cam kết bảo mật • Không gửi thư rác
+              <span>🔒</span> <span data-i18n="footer_newsletter_note">Cam kết bảo mật • Không gửi thư rác</span>
             </div>
           </div>
         </div>
@@ -4185,7 +4268,7 @@ input.survey-text-input:focus,
 
       <!-- Compact Footer Bottom -->
       <div class="footer-bottom">
-        <div>© 2026 RE-BORN • Sạch Khuẩn Từ Tự Nhiên. All rights reserved.</div>
+        <div data-i18n="footer_rights">© 2026 RE-BORN • Sạch Khuẩn Từ Tự Nhiên. All rights reserved.</div>
         <div class="footer-bottom-links">
           <a href="#sustainability">Chính sách Refill</a>
           <a href="#feedback">Khảo sát ý kiến</a>
@@ -4202,8 +4285,8 @@ input.survey-text-input:focus,
   <aside class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
       <div style="display: flex; align-items: center; gap: 8px;">
-        <span class="cart-title">Giỏ hàng của bạn</span>
-        <span style="font-size: 0.85rem; color: var(--color-text-secondary);">(Túi vải sinh thái kèm theo)</span>
+        <span class="cart-title" data-i18n="cart_heading">Giỏ hàng của bạn</span>
+        <span style="font-size: 0.85rem; color: var(--color-text-secondary);" data-i18n="cart_bag_note">(Túi vải sinh thái kèm theo)</span>
       </div>
       <button class="modal-close-btn" id="cartCloseBtn" style="position: static;" title="Đóng">✕</button>
     </div>
@@ -4226,26 +4309,29 @@ input.survey-text-input:focus,
       <div class="cart-promo-box">
         <div class="promo-input-row">
           <input type="text" id="promoInput" placeholder="Nhập mã ưu đãi (REBORN15)" class="form-input promo-input">
-          <button type="button" id="applyPromoBtn" class="promo-btn">Áp dụng</button>
+          <button type="button" id="applyPromoBtn" class="promo-btn" data-i18n="cart_apply_btn">Áp dụng</button>
         </div>
       </div>
 
       <div class="cart-discount-row" id="cartDiscountRow" style="display: none;">
-        <span>Ưu đãi áp dụng:</span>
+        <span data-i18n="cart_discount_lbl">Ưu đãi áp dụng:</span>
         <span id="cartDiscountVal">-0₫</span>
       </div>
 
       <div class="cart-subtotal-row">
-        <span>Tổng thanh toán:</span>
+        <span data-i18n="cart_subtotal_lbl">Tổng thanh toán:</span>
         <strong id="cartSubtotal" style="color: var(--color-primary-dark);">45.000₫</strong>
       </div>
 
-      <button class="btn-checkout" id="checkoutBtn" style="margin-top: 12px;">
+      <button class="btn-checkout" id="checkoutBtn" style="margin-top: 12px;" data-i18n="cart_checkout_cta">
         Tiến hành đặt hàng ngay →
       </button>
 
       <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--color-text-light);">
-        🔒 Thanh toán khi nhận hàng (COD) hoặc Chuyển khoản VietQR
+        <span data-i18n="cart_payment_notice">🔒 Thanh toán khi nhận hàng (COD) hoặc Chuyển khoản VietQR</span>
+        <div style="margin-top: 6px;">
+          <a href="#" class="open-tracking-btn" style="color: var(--color-primary); text-decoration: underline; font-size: 0.82rem; font-weight: 500;" data-i18n="cart_track_prompt">📦 Bạn đã đặt hàng? Tra cứu tiến độ giao</a>
+        </div>
       </div>
     </div>
   </aside>
@@ -4257,43 +4343,43 @@ input.survey-text-input:focus,
     <div class="checkout-modal-card">
       <button class="modal-close-btn" title="Đóng">✕</button>
       <div style="margin-bottom: 20px;">
-        <span class="section-label">ĐẶT HÀNG NHANH CHÓNG</span>
-        <h2 class="section-title" style="font-size: 1.65rem; margin-bottom: 4px;">Thông tin nhận hàng</h2>
-        <p style="font-size: 0.88rem; color: var(--color-text-secondary);">
+        <span class="section-label" data-i18n="co_label">ĐẶT HÀNG NHANH CHÓNG</span>
+        <h2 class="section-title" style="font-size: 1.65rem; margin-bottom: 4px;" data-i18n="co_title">Thông tin nhận hàng</h2>
+        <p style="font-size: 0.88rem; color: var(--color-text-secondary);" data-i18n="co_desc">
           Không cần đăng ký tài khoản. Hoàn tất trong 30 giây để nhận sản phẩm mẻ tươi hôm nay.
         </p>
       </div>
 
       <form id="checkoutForm">
         <div class="form-group" id="groupOrderName">
-          <label class="form-label" for="orderName">Họ và tên của bạn</label>
-          <input type="text" id="orderName" placeholder="Ví dụ: Nguyễn Minh Anh" required>
+          <label class="form-label" for="orderName" data-i18n="co_name_lbl">Họ và tên của bạn</label>
+          <input type="text" id="orderName" placeholder="Ví dụ: Nguyễn Minh Anh" data-i18n-ph="co_name_ph" required>
           <span class="form-error-msg" id="errOrderName">Vui lòng nhập họ và tên của bạn</span>
         </div>
 
         <div class="form-group" id="groupOrderPhone">
-          <label class="form-label" for="orderPhone">Số điện thoại nhận hàng</label>
-          <input type="tel" id="orderPhone" placeholder="Ví dụ: 0988 123 456" required>
+          <label class="form-label" for="orderPhone" data-i18n="co_phone_lbl">Số điện thoại nhận hàng</label>
+          <input type="tel" id="orderPhone" placeholder="Ví dụ: 0988 123 456" data-i18n-ph="co_phone_ph" required>
           <span class="form-error-msg" id="errOrderPhone">Vui lòng nhập số điện thoại hợp lệ (10 chữ số)</span>
         </div>
 
         <div class="form-group" id="groupOrderAddress">
-          <label class="form-label" for="orderAddress">Nơi nhận hàng</label>
-          <input type="text" id="orderAddress" placeholder="Ví dụ: Sảnh Beta Campus FPT / Hoặc địa chỉ nhà riêng"
+          <label class="form-label" for="orderAddress" data-i18n="co_addr_lbl">Nơi nhận hàng</label>
+          <input type="text" id="orderAddress" placeholder="Ví dụ: Sảnh Beta Campus FPT / Hoặc địa chỉ nhà riêng" data-i18n-ph="co_addr_ph"
             required>
           <span class="form-error-msg" id="errOrderAddress">Vui lòng nhập địa chỉ hoặc tòa nhà nhận hàng</span>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Phương thức thanh toán tiện lợi</label>
+          <label class="form-label" data-i18n="co_pay_lbl">Phương thức thanh toán tiện lợi</label>
           <div class="payment-options-grid">
             <label class="payment-option-label">
               <input type="radio" name="paymentMethod" value="cod" checked>
-              <span>💵 Tiền mặt khi nhận hàng (COD)</span>
+              <span data-i18n="co_pay_cod">💵 Tiền mặt khi nhận hàng (COD)</span>
             </label>
             <label class="payment-option-label">
               <input type="radio" name="paymentMethod" value="qr">
-              <span>📱 Quét mã VietQR chuyển khoản</span>
+              <span data-i18n="co_pay_qr">📱 Quét mã VietQR chuyển khoản</span>
             </label>
           </div>
         </div>
@@ -4302,18 +4388,18 @@ input.survey-text-input:focus,
         <div
           style="background-color: var(--color-bg-sage-light); border-radius: var(--radius-md); padding: 14px 18px; margin: 16px 0; border: 1px solid var(--color-border);">
           <div style="display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 6px;">
-            <span>Phí giao hàng:</span>
-            <span style="color: var(--color-primary); font-weight: 600;">Miễn phí tại Campus / Tiêu chuẩn 15k</span>
+            <span data-i18n="co_ship_fee_lbl">Phí giao hàng:</span>
+            <span style="color: var(--color-primary); font-weight: 600;" data-i18n="co_ship_fee_val">Miễn phí tại Campus / Tiêu chuẩn 15k</span>
           </div>
           <div
             style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; color: var(--color-primary-dark); padding-top: 8px; border-top: 1px dashed var(--color-border);">
-            <span>Tổng thanh toán:</span>
+            <span data-i18n="co_total_lbl">Tổng thanh toán:</span>
             <span id="checkoutTotalVal">45.000₫</span>
           </div>
         </div>
 
         <button type="submit" class="btn btn-primary" id="btnSubmitOrder"
-          style="width: 100%; padding: 14px; font-size: 1rem;">
+          style="width: 100%; padding: 14px; font-size: 1rem;" data-i18n="co_btn_submit">
           Xác nhận đặt hàng ngay ➔
         </button>
       </form>
@@ -4328,11 +4414,11 @@ input.survey-text-input:focus,
       <button class="modal-close-btn" title="Đóng">✕</button>
 
       <div class="vietqr-badge">
-        <span>⚡ Thanh toán không tiền mặt • VietQR 24/7</span>
+        <span data-i18n="qr_badge">⚡ Thanh toán không tiền mặt • VietQR 24/7</span>
       </div>
 
-      <h3 class="vietqr-title">Quét Mã VietQR Chuyển Khoản</h3>
-      <p class="vietqr-sub">Mở ứng dụng ngân hàng bất kỳ để quét mã thanh toán tự động</p>
+      <h3 class="vietqr-title" data-i18n="qr_title">Quét Mã VietQR Chuyển Khoản</h3>
+      <p class="vietqr-sub" data-i18n="qr_sub">Mở ứng dụng ngân hàng bất kỳ để quét mã thanh toán tự động</p>
 
       <div class="vietqr-card-container">
         <!-- VietQR Dynamic Image -->
@@ -4387,10 +4473,10 @@ input.survey-text-input:focus,
       </div>
 
       <div class="vietqr-actions">
-        <button type="button" class="btn btn-primary" id="btnConfirmVietqrPaid" style="width: 100%; padding: 13px; font-weight: 600; font-size: 0.95rem;">
+        <button type="button" class="btn btn-primary" id="btnConfirmVietqrPaid" style="width: 100%; padding: 13px; font-weight: 600; font-size: 0.95rem;" data-i18n="qr_btn_confirm">
           ✓ Tôi đã chuyển khoản thành công
         </button>
-        <button type="button" class="btn btn-outline" id="btnCancelVietqr" style="width: 100%; padding: 10px; font-size: 0.85rem;">
+        <button type="button" class="btn btn-outline" id="btnCancelVietqr" style="width: 100%; padding: 10px; font-size: 0.85rem;" data-i18n="qr_btn_cancel">
           Để tôi thanh toán sau
         </button>
       </div>
@@ -4413,19 +4499,19 @@ input.survey-text-input:focus,
         <p class="section-desc" id="qvDesc" style="margin-bottom: 16px;">Mô tả sản phẩm...</p>
 
         <div class="quick-view-ingredients">
-          <h4>✦ Thành phần thảo mộc hoạt tính:</h4>
+          <h4 data-i18n="qv_ingr_title">✦ Thành phần thảo mộc hoạt tính:</h4>
           <p id="qvIngredients" style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5;">Chiết
             xuất tinh dầu vỏ bưởi...</p>
         </div>
 
         <div style="margin-bottom: 24px;">
           <h4
-            style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); margin-bottom: 6px;">
+            style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); margin-bottom: 6px;" data-i18n="qv_ritual_title">
             ✦ Nghi thức sử dụng gợi ý:</h4>
           <p id="qvRitual" style="font-size: 0.88rem; color: var(--color-text-secondary); line-height: 1.5;"></p>
         </div>
 
-        <button class="btn btn-primary" id="qvAddToCartBtn" style="width: 100%;">
+        <button class="btn btn-primary" id="qvAddToCartBtn" style="width: 100%;" data-i18n="qv_add_btn">
           Thêm vào giỏ hàng
         </button>
       </div>
@@ -4438,13 +4524,38 @@ input.survey-text-input:focus,
   <div class="modal-overlay" id="searchModal">
     <div class="checkout-modal-card" style="max-width: 480px;">
       <button class="modal-close-btn" title="Đóng">✕</button>
-      <h3 style="font-size: 1.3rem; margin-bottom: 14px;">Tìm kiếm sản phẩm</h3>
+      <h3 style="font-size: 1.3rem; margin-bottom: 14px;" data-i18n="search_title">Tìm kiếm sản phẩm</h3>
       <div class="form-group">
-        <input type="text" id="searchInput" placeholder="Nhập tên sản phẩm (rửa tay 250ml, túi refill 500ml, combo...)"
+        <input type="text" id="searchInput" placeholder="Nhập tên sản phẩm (rửa tay 250ml, túi refill 500ml, combo...)" data-i18n-ph="search_ph"
           class="form-input">
       </div>
       <div id="searchResults" style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
         <!-- Populated via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: Order Tracking (Tra Cứu Tình Trạng Đơn Hàng - Thành viên 1)
+       ======================================================================== -->
+  <div class="modal-overlay" id="orderTrackingModal">
+    <div class="checkout-modal-card" style="max-width: 500px;">
+      <button class="modal-close-btn" title="Đóng">✕</button>
+      <div style="margin-bottom: 16px;">
+        <span class="section-label" data-i18n="track_label">HÀNH TRÌNH ĐƠN HÀNG</span>
+        <h3 style="font-size: 1.4rem; margin-top: 4px; margin-bottom: 6px;" data-i18n="track_title">Tra cứu tình trạng đơn</h3>
+        <p style="font-size: 0.88rem; color: var(--color-text-secondary);" data-i18n="track_desc">
+          Nhập số điện thoại đặt hàng để xem tình trạng giao hàng và lịch sử mua sắm.
+        </p>
+      </div>
+      <div class="form-group" style="display: flex; gap: 8px;">
+        <input type="tel" id="trackPhoneInput" placeholder="Ví dụ: 0988 123 456" data-i18n-ph="track_ph" class="form-input" style="flex: 1;">
+        <button class="btn btn-primary" id="btnTrackOrder" style="padding: 0 20px;" data-i18n="track_btn">
+          Tra cứu
+        </button>
+      </div>
+      <div id="trackOrderResults" style="margin-top: 18px; max-height: 280px; overflow-y: auto;">
+        <!-- Danh sách đơn hàng trả về qua JS -->
       </div>
     </div>
   </div>
@@ -4468,14 +4579,14 @@ input.survey-text-input:focus,
       <!-- Trạng thái Hỗ trợ trực tuyến -->
       <div class="consult-status-badge">
         <span class="consult-status-dot"></span>
-        <span>Đội ngũ Chăm Sóc Khách Hàng Re-Born</span>
+        <span data-i18n="consult_team_badge">Đội ngũ Chăm Sóc Khách Hàng Re-Born</span>
       </div>
 
-      <h3 id="infoModalTitle" class="consult-title">
+      <h3 id="infoModalTitle" class="consult-title" data-i18n="consult_title">
         Tư Vấn Sản Phẩm
       </h3>
 
-      <div id="infoModalContent" class="consult-desc">
+      <div id="infoModalContent" class="consult-desc" data-i18n="consult_desc">
         Bạn đang băn khoăn về độ dịu nhẹ cho da tay, tầng hương vỏ bưởi tự nhiên hay ưu đãi hôm nay? Đội ngũ Re-Born luôn sẵn sàng đồng hành cùng bạn!
       </div>
 
@@ -4489,8 +4600,8 @@ input.survey-text-input:focus,
             </svg>
           </div>
           <div class="consult-card-body">
-            <span class="consult-card-title">Nhắn tin Fanpage Facebook</span>
-            <span class="consult-card-sub">Phản hồi trong 5 phút • Tư vấn 1:1</span>
+            <span class="consult-card-title" data-i18n="consult_fb_title">Nhắn tin Fanpage Facebook</span>
+            <span class="consult-card-sub" data-i18n="consult_fb_sub">Phản hồi trong 5 phút • Tư vấn 1:1</span>
           </div>
           <div class="consult-card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -4499,16 +4610,14 @@ input.survey-text-input:focus,
           </div>
         </a>
 
-        <!-- Hotline Phone Card -->
-        <a href="tel:0988123456" class="consult-card consult-card-phone">
-          <div class="consult-card-icon-wrap phone-icon-bg">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
+        <!-- Zalo Chat Card (Đổi từ Hotline sang Zalo) -->
+        <a href="https://zalo.me/0988123456" target="_blank" rel="noopener noreferrer" class="consult-card consult-card-zalo" title="Chat Zalo với Re-Born">
+          <div class="consult-card-icon-wrap zalo-icon-bg">
+            <span style="font-size: 13px; font-weight: 800; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; letter-spacing: -0.5px;">Zalo</span>
           </div>
           <div class="consult-card-body">
-            <span class="consult-card-title">Hotline: 0988.123.456</span>
-            <span class="consult-card-sub">Gọi trực tiếp • 8h00 - 21h00 mỗi ngày</span>
+            <span class="consult-card-title">Zalo: 0988.123.456</span>
+            <span class="consult-card-sub" data-i18n="consult_zalo_sub">Nhắn tin trực tiếp • Hỗ trợ nhanh 24/7</span>
           </div>
           <div class="consult-card-arrow">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -4523,7 +4632,7 @@ input.survey-text-input:focus,
         <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
         </svg>
-        <span>Tư vấn tận tâm • 100% Thuần thực vật • Hoàn toàn miễn phí</span>
+        <span data-i18n="consult_trust">Tư vấn tận tâm • 100% Thuần thực vật • Hoàn toàn miễn phí</span>
       </div>
     </div>
   </div>
