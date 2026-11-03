@@ -3,8 +3,32 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
-let PORT = parseInt(process.env.PORT || '3000', 10);
 const BASE_DIR = __dirname;
+
+// Tự động đọc file .env nếu có (Zero-dependency parser)
+const envPath = path.join(BASE_DIR, '.env');
+if (fs.existsSync(envPath)) {
+  try {
+    const envLines = fs.readFileSync(envPath, 'utf8').split(/\r?\n/);
+    for (const line of envLines) {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx !== -1) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          const val = trimmed.slice(eqIdx + 1).trim();
+          if (!process.env[key]) {
+            process.env[key] = val;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Lỗi đọc file .env:', err);
+  }
+}
+
+let PORT = parseInt(process.env.PORT || '3000', 10);
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -63,6 +87,13 @@ function startServer(port) {
         }
         if (cleanUrl === '/api/orders/track') {
           return require('./api/orders/track.js')(req, res);
+        }
+        if (cleanUrl === '/api/config') {
+          return res.json({
+            success: true,
+            SUPABASE_URL: process.env.SUPABASE_URL || 'https://uovqydazhplufaezjsxd.supabase.co',
+            SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY || 'sb_publishable_jKJ8BoQ1Cdk-9VCedVtvEg_jaLJulOY'
+          });
         }
 
         res.status(404).json({ success: false, message: 'API endpoint not found' });

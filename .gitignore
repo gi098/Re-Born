@@ -3,4 +3,7 @@ node_modules/
 *.log
 *.tmp
 data/
+.env
+.env.local
+.env.*.local
 
