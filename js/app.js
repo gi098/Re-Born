@@ -7,19 +7,29 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // Global State
   // ==========================================================================
+  let savedCart = null;
+  try {
+    const rawCart = localStorage.getItem('reborn_cart');
+    if (rawCart) savedCart = JSON.parse(rawCart);
+  } catch (e) {
+    console.warn('Lỗi đọc giỏ hàng từ localStorage:', e);
+  }
+
+  const defaultInitialCart = [
+    {
+      id: 'pomelo-handwash',
+      name: 'Nước rửa tay vỏ bưởi',
+      sub: 'Vỏ bưởi ép lạnh & Thảo mộc',
+      price: 45000,
+      volume: '250 ml',
+      image: 'assets/images/product_handwash.jpg',
+      quantity: 1
+    }
+  ];
+
   const state = {
     lang: localStorage.getItem('reborn_lang') || 'vi',
-    cart: [
-      {
-        id: 'pomelo-handwash',
-        name: 'Nước rửa tay vỏ bưởi',
-        sub: 'Vỏ bưởi ép lạnh & Thảo mộc',
-        price: 45000,
-        volume: '250 ml',
-        image: 'assets/images/product_handwash.jpg',
-        quantity: 1
-      }
-    ],
+    cart: Array.isArray(savedCart) && savedCart.length > 0 ? savedCart : defaultInitialCart,
     freeShippingThreshold: 150000,
     discountRate: 0,
     appliedPromoCode: ''
@@ -136,6 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
       lang_select_lbl: 'Ngôn ngữ:',
       mobile_cta_order: 'Đặt hàng trải nghiệm ngay',
       hotline_founders: 'Hotline Founders',
+      nav_login_text: 'Đăng nhập',
+      nav_account: 'Tài khoản',
+      nav_my_orders: 'Đơn hàng của tôi',
+      nav_logout: 'Đăng xuất',
+      auth_required_checkout: 'Vui lòng đăng nhập để hoàn tất đặt hàng!',
 
       // Hero
       hero_badge: '100% Vỏ Bưởi Tái Sinh',
@@ -348,6 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
       lang_select_lbl: 'Language:',
       mobile_cta_order: 'Experience Re-Born Now',
       hotline_founders: 'Founders Hotline',
+      nav_login_text: 'Sign In',
+      nav_account: 'Account',
+      nav_my_orders: 'My Orders',
+      nav_logout: 'Sign Out',
+      auth_required_checkout: 'Please sign in to complete your order!',
 
       // Hero
       hero_badge: '100% Upcycled Pomelo Peels',
@@ -842,6 +862,13 @@ document.addEventListener('DOMContentLoaded', () => {
         shippingProgressBar.style.width = `${percent}%`;
       }
     }
+
+    // Persist cart to localStorage so switching between pages never loses items
+    try {
+      localStorage.setItem('reborn_cart', JSON.stringify(state.cart));
+    } catch (e) {
+      console.warn('Lỗi lưu giỏ hàng vào localStorage:', e);
+    }
   }
 
   // Handle Cart Quantity Changes (+ / -)
@@ -950,11 +977,37 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // Fast 1-Step Checkout Flow
   // ==========================================================================
-  function openCheckout() {
+  async function openCheckout() {
     if (state.cart.length === 0) {
       showToast('Giỏ hàng chưa có sản phẩm. Hãy chọn 1 sản phẩm trước!', '⚠️');
       return;
     }
+
+    // Nghiệp vụ: Bắt buộc đăng nhập Supabase Auth mới được đặt hàng
+    if (window.rebornAuth) {
+      try {
+        const session = await window.rebornAuth.getSession();
+        if (!session || !session.user) {
+          showToast(t('auth_required_checkout') || 'Vui lòng đăng nhập để hoàn tất đặt hàng!', '🔒');
+          setTimeout(() => {
+            window.location.href = 'auth.html?redirect=checkout';
+          }, 600);
+          return;
+        }
+
+        // Khách hàng đã đăng nhập: Tự động điền trước Họ tên và SĐT
+        const profile = await window.rebornAuth.getUserProfile(session.user.id);
+        if (orderName && !orderName.value) {
+          orderName.value = profile?.full_name || session.user.user_metadata?.full_name || '';
+        }
+        if (orderPhone && !orderPhone.value) {
+          orderPhone.value = profile?.phone || session.user.user_metadata?.phone || '';
+        }
+      } catch (err) {
+        console.warn('Lỗi kiểm tra session checkout:', err);
+      }
+    }
+
     closeCart();
     closeMobileNav();
     openModal(checkoutModal);
@@ -976,7 +1029,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Phone Validation Regex for Vietnam
   const vnPhoneRegex = /(03|05|07|08|09)+([0-9]{8})\b/;
 
-  checkoutForm?.addEventListener('submit', (e) => {
+  checkoutForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     let isValid = true;
 
@@ -1007,6 +1060,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!isValid) return;
 
+    // Lấy thông tin user_id từ Supabase Auth
+    let currentUserId = null;
+    if (window.rebornAuth) {
+      try {
+        const session = await window.rebornAuth.getSession();
+        if (session && session.user) {
+          currentUserId = session.user.id;
+        }
+      } catch (e) {}
+    }
+
     // Simulate instant order confirmation
     const btnSubmit = document.getElementById('btnSubmitOrder');
     btnSubmit.classList.add('is-loading');
@@ -1030,6 +1094,7 @@ document.addEventListener('DOMContentLoaded', () => {
           name: customerName,
           phone: orderPhone.value,
           address: orderAddress.value,
+          userId: currentUserId,
           payment: isQr ? 'Quét VietQR' : 'COD (Tiền mặt)',
           total: orderTotalStr,
           status: isQr ? 'Chờ thanh toán QR' : 'Chờ xác nhận'
@@ -1044,6 +1109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         customerName: customerName,
         phone: cleanPhone,
         address: orderAddress.value.trim(),
+        userId: currentUserId,
         items: state.cart,
         voucherCode: state.appliedPromoCode,
         paymentMethod: isQr ? 'VIETQR' : 'COD'
@@ -1546,4 +1612,149 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Language (Load saved preference or default to Vietnamese)
   setLanguage(state.lang, false);
+
+  // ==========================================================================
+  // Supabase Auth Integration & Header User Status
+  // ==========================================================================
+  const navAuthLoginBtn = document.getElementById('navAuthLoginBtn');
+  const navUserDropdown = document.getElementById('navUserDropdown');
+  const userDropdownTrigger = document.getElementById('userDropdownTrigger');
+  const userDropdownMenu = document.getElementById('userDropdownMenu');
+  const userAvatarInitial = document.getElementById('userAvatarInitial');
+  const userNameLabel = document.getElementById('userNameLabel');
+  const userMenuFullName = document.getElementById('userMenuFullName');
+  const userMenuEmail = document.getElementById('userMenuEmail');
+  const userMenuRole = document.getElementById('userMenuRole');
+  const userMenuAdminLink = document.getElementById('userMenuAdminLink');
+  const userMenuSignOutBtn = document.getElementById('userMenuSignOutBtn');
+  const mobileUserStatus = document.getElementById('mobileUserStatus');
+
+  async function updateUserHeaderUI() {
+    if (!window.rebornAuth) return;
+
+    try {
+      const session = await window.rebornAuth.getSession();
+
+      if (session && session.user) {
+        const profile = await window.rebornAuth.getUserProfile(session.user.id);
+        const name = profile?.full_name || session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Khách hàng';
+        const email = session.user.email || '';
+        const role = profile?.role || 'customer';
+        const initial = (name[0] || 'U').toUpperCase();
+
+        // 1. Desktop Nav Status
+        if (navAuthLoginBtn) navAuthLoginBtn.style.display = 'none';
+        if (navUserDropdown) navUserDropdown.style.display = 'inline-block';
+        if (userAvatarInitial) userAvatarInitial.textContent = initial;
+        if (userNameLabel) userNameLabel.textContent = name.length > 12 ? name.substring(0, 10) + '...' : name;
+        if (userMenuFullName) userMenuFullName.textContent = name;
+        if (userMenuEmail) userMenuEmail.textContent = email;
+        if (userMenuRole) {
+          userMenuRole.textContent = role === 'admin' ? 'Quản trị viên (Admin)' : 'Thành viên Re-Born';
+          userMenuRole.style.background = role === 'admin' ? '#e6a817' : 'var(--color-primary-fixed)';
+          userMenuRole.style.color = role === 'admin' ? '#141E17' : 'var(--color-primary-dark)';
+        }
+        if (userMenuAdminLink) {
+          userMenuAdminLink.style.display = role === 'admin' ? 'flex' : 'none';
+        }
+
+        // 2. Mobile Nav Status
+        if (mobileUserStatus) {
+          mobileUserStatus.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px; overflow: hidden;">
+                <div class="user-avatar-initial" style="width: 36px; height: 36px; font-size: 0.95rem; flex-shrink: 0;">${initial}</div>
+                <div style="overflow: hidden;">
+                  <div style="font-weight: 700; font-size: 0.92rem; color: var(--color-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${name}</div>
+                  <div style="font-size: 0.78rem; color: var(--color-text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${email}</div>
+                </div>
+              </div>
+              <button type="button" id="mobileSignOutBtn" style="flex-shrink: 0; background: none; border: 1px solid #c53030; color: #c53030; font-size: 0.8rem; font-weight: 600; padding: 4px 10px; border-radius: 6px; cursor: pointer;">
+                Đăng xuất
+              </button>
+            </div>
+            ${role === 'admin' ? `
+              <a href="admin.html" style="display: block; margin-top: 10px; text-align: center; background: #e6a817; color: #141E17; font-weight: 700; font-size: 0.82rem; padding: 6px 12px; border-radius: 6px; text-decoration: none;">
+                ⚡ Mở Dashboard Admin
+              </a>
+            ` : ''}
+          `;
+          document.getElementById('mobileSignOutBtn')?.addEventListener('click', async () => {
+            await window.rebornAuth.signOut();
+            showToast('Đã đăng xuất tài khoản', '👋');
+            setTimeout(() => { window.location.reload(); }, 400);
+          });
+        }
+
+      } else {
+        // Guest State
+        if (navAuthLoginBtn) navAuthLoginBtn.style.display = 'inline-flex';
+        if (navUserDropdown) navUserDropdown.style.display = 'none';
+
+        if (mobileUserStatus) {
+          mobileUserStatus.innerHTML = `
+            <div style="text-align: center; padding: 4px 0;">
+              <p style="font-size: 0.82rem; color: var(--color-text-secondary); margin-bottom: 8px;">Đăng nhập để theo dõi đơn hàng & tích điểm</p>
+              <a href="auth.html" class="btn btn-primary" style="display: inline-block; width: 100%; padding: 8px 16px; font-size: 0.88rem; border-radius: 50px; text-decoration: none; text-align: center;">
+                Đăng nhập / Đăng ký
+              </a>
+            </div>
+          `;
+        }
+      }
+    } catch (err) {
+      console.warn('Lỗi cập nhật UI Header Auth:', err);
+    }
+  }
+
+  // Dropdown open/close
+  userDropdownTrigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    userDropdownMenu?.classList.toggle('show');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!userDropdownMenu?.contains(e.target) && !userDropdownTrigger?.contains(e.target)) {
+      userDropdownMenu?.classList.remove('show');
+    }
+  });
+
+  // Đăng xuất từ Dropdown
+  userMenuSignOutBtn?.addEventListener('click', async () => {
+    if (window.rebornAuth) {
+      await window.rebornAuth.signOut();
+      showToast('Đã đăng xuất tài khoản', '👋');
+      setTimeout(() => {
+        window.location.reload();
+      }, 400);
+    }
+  });
+
+  // Liên kết đơn hàng của tôi trong menu
+  document.getElementById('userMenuTrackOrders')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    userDropdownMenu?.classList.remove('show');
+    const trackingModal = document.getElementById('trackingModal');
+    if (trackingModal) openModal(trackingModal);
+  });
+
+  // Tự động kiểm tra quay lại checkout sau khi đăng nhập thành công
+  if (window.location.hash === '#checkout') {
+    setTimeout(async () => {
+      if (window.rebornAuth) {
+        const session = await window.rebornAuth.getSession();
+        if (session && session.user && state.cart.length > 0) {
+          openCheckout();
+        }
+      }
+    }, 400);
+  }
+
+  // Khởi chạy cập nhật UI Auth và lắng nghe thay đổi Auth State
+  updateUserHeaderUI();
+  if (window.rebornAuth) {
+    window.rebornAuth.onAuthStateChange(() => {
+      updateUserHeaderUI();
+    });
+  }
 });
