@@ -260,8 +260,11 @@
               👤
               <span style="position: absolute; bottom: 0; right: 0; width: 7px; height: 7px; border-radius: 50%; background: #22c55e; border: 1.5px solid #ffffff;"></span>
             </div>
-            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);">Admin Re-Born</span>
+            <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-text-main);" id="adminHeaderName">Admin Re-Born</span>
           </div>
+          <button type="button" class="btn btn-outline" id="adminSignOutBtn" style="font-size: 0.82rem; padding: 7px 12px; color: #c53030; border-color: rgba(197, 48, 48, 0.3);">
+            Đăng xuất
+          </button>
         </div>
       </header>
 
@@ -421,6 +424,10 @@
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Supabase JS SDK v2 & Auth Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
 
   <!-- Admin JS -->
   <script src="js/admin.js"></script>

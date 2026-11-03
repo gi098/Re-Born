@@ -3,7 +3,56 @@
  * Fully synchronized with Storefront orders and BMC touchpoints
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1. Kiểm tra Quyền Quản trị viên (Admin RBAC Check)
+  if (window.rebornAuth) {
+    try {
+      const session = await window.rebornAuth.getSession();
+      const isAdmin = await window.rebornAuth.isAdmin();
+
+      if (!session || !session.user || !isAdmin) {
+        document.body.innerHTML = `
+          <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f4f7f5; font-family: 'Be Vietnam Pro', sans-serif; padding: 20px;">
+            <div style="background: #ffffff; border-radius: 16px; padding: 40px 32px; max-width: 480px; text-align: center; box-shadow: 0 16px 40px rgba(30, 58, 43, 0.08); border: 1px solid #dbe4de;">
+              <div style="font-size: 3rem; margin-bottom: 12px;">🛡️</div>
+              <h2 style="font-family: 'Noto Serif', serif; color: #1e3a2b; font-size: 1.5rem; margin-bottom: 10px;">Yêu Cầu Quyền Quản Trị (Admin)</h2>
+              <p style="color: #647569; font-size: 0.92rem; line-height: 1.5; margin-bottom: 24px;">
+                Trang này được bảo vệ bởi Supabase Auth và chỉ dành cho Ban Quản trị RE-BORN. Vui lòng đăng nhập với tài khoản có phân quyền Admin.
+              </p>
+              <div style="display: flex; gap: 12px; justify-content: center;">
+                <a href="index.html" style="padding: 10px 18px; border-radius: 8px; border: 1px solid #dbe4de; color: #1e3a2b; text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+                  ← Về Trang chủ
+                </a>
+                <a href="auth.html?redirect=admin" style="padding: 10px 22px; border-radius: 8px; background: #1e3a2b; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(30,58,43,0.2);">
+                  Đăng nhập Admin
+                </a>
+              </div>
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #dbe4de; font-size: 0.8rem; color: #888;">
+                Tài khoản Admin mẫu: <code>admin@reborn.vn</code> • Mật khẩu: <code>AdminPassword123!</code>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Đã xác thực thành công là Admin: Cập nhật tên/email trên header
+      const adminHeaderName = document.getElementById('adminHeaderName');
+      if (adminHeaderName) {
+        const profile = await window.rebornAuth.getUserProfile(session.user.id);
+        adminHeaderName.textContent = profile?.full_name || session.user.email || 'Admin Re-Born';
+      }
+
+      // Xử lý nút Đăng xuất Admin
+      document.getElementById('adminSignOutBtn')?.addEventListener('click', async () => {
+        await window.rebornAuth.signOut();
+        window.location.href = 'auth.html?redirect=admin';
+      });
+
+    } catch (err) {
+      console.warn('Lỗi kiểm tra quyền Admin:', err);
+    }
+  }
   // Sample Initial Data if localStorage is empty
   const defaultOrders = [
     {
