@@ -44,9 +44,9 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
 
-  // GET: Lấy danh sách đơn hàng (hỗ trợ lọc theo SĐT hoặc mã đơn)
+  // GET: Lấy danh sách đơn hàng (hỗ trợ lọc theo SĐT, user_id hoặc mã đơn)
   if (req.method === 'GET') {
-    const { phone, code } = req.query || {};
+    const { phone, code, userId } = req.query || {};
     const orders = getStoredOrders();
 
     if (code) {
@@ -55,6 +55,11 @@ module.exports = async (req, res) => {
         return res.status(404).json({ success: false, message: 'Không tìm thấy đơn hàng' });
       }
       return res.status(200).json({ success: true, order: match });
+    }
+
+    if (userId) {
+      const matches = orders.filter(o => o.userId === userId);
+      return res.status(200).json({ success: true, count: matches.length, orders: matches });
     }
 
     if (phone) {
@@ -70,7 +75,7 @@ module.exports = async (req, res) => {
   if (req.method === 'POST') {
     try {
       const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-      const { customerName, phone, address, items, voucherCode, paymentMethod, notes } = body || {};
+      const { customerName, phone, address, items, voucherCode, paymentMethod, notes, userId } = body || {};
 
       // 1. Validate dữ liệu đầu vào (Validation Checks)
       if (!customerName || !customerName.trim()) {
@@ -134,6 +139,7 @@ module.exports = async (req, res) => {
         customerName: customerName.trim(),
         phone: cleanPhone,
         address: address.trim(),
+        userId: userId || null,
         subtotal,
         shippingFee,
         discountAmount,
