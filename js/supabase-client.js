@@ -11,8 +11,8 @@
   'use strict';
 
   // 1. Cấu hình Supabase (Đọc từ window.__ENV__ hoặc localStorage hoặc hằng số)
-  const DEFAULT_SUPABASE_URL = 'https://xywuvrstbglomknfhejd.supabase.co';
-  const DEFAULT_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5d3V2cnN0Ymdsb21rbmZoZWpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1MDM2MDAsImV4cCI6MjAyNTA4MDAwMH0.placeholder';
+  const DEFAULT_SUPABASE_URL = 'https://uovqydazhplufaezjsxd.supabase.co';
+  const DEFAULT_SUPABASE_ANON_KEY = 'sb_publishable_jKJ8BoQ1Cdk-9VCedVtvEg_jaLJulOY';
 
   const envConfig = (typeof window !== 'undefined' && window.__ENV__) ? window.__ENV__ : {};
   const SUPABASE_URL = envConfig.SUPABASE_URL || 
@@ -430,3 +430,4 @@
   window.supabaseClient = realClient;
 
 })();
+
