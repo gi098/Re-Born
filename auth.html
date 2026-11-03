@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập & Đăng ký • RE-BORN Nước Rửa Tay Vỏ Bưởi</title>
+  <link rel="icon" type="image/png" href="assets/images/logo_emblem.png">
+
+  <!-- Google Fonts: Be Vietnam Pro & Noto Serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/auth.css">
+
+  <!-- Supabase JS SDK v2 via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="auth-page">
+
+  <!-- Header -->
+  <header class="auth-header">
+    <a href="index.html" class="auth-header-logo" title="Trang chủ RE-BORN">
+      <img src="assets/images/logo_horizontal.png" alt="RE-BORN Logo" onerror="this.src='assets/images/logo_master.png'">
+    </a>
+    <a href="index.html" class="auth-back-link">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Về trang chủ</span>
+    </a>
+  </header>
+
+  <!-- Main Auth Container -->
+  <main class="auth-main">
+    <div class="auth-card">
+      <div class="auth-brand-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        </svg>
+        RE-BORN BOTANICAL AUTH
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="auth-tabs" id="authTabs" role="tablist">
+        <button type="button" class="auth-tab-btn active" id="tabSignInBtn" role="tab" aria-selected="true" data-tab="signin">Đăng nhập</button>
+        <button type="button" class="auth-tab-btn" id="tabSignUpBtn" role="tab" aria-selected="false" data-tab="signup">Đăng ký</button>
+      </div>
+
+      <!-- Alert Notification Banner -->
+      <div class="auth-alert" id="authAlert" role="alert">
+        <svg class="alert-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="authAlertText">Nội dung thông báo</span>
+      </div>
+
+      <!-- TAB 1: FORM ĐĂNG NHẬP -->
+      <form class="auth-form active" id="signInForm" autocomplete="on" novalidate>
+        <div>
+          <h1 class="auth-title">Chào mừng trở lại</h1>
+          <p class="auth-subtitle">Đăng nhập để tiếp tục mua hàng và tra cứu đơn hàng của bạn.</p>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group" id="grpSignInEmail">
+          <label class="form-label" for="signInEmail">Địa chỉ Email</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" class="form-input" id="signInEmail" name="email" placeholder="ví dụ: ban@gmail.com" required>
+          </div>
+          <span class="field-error-text" id="errSignInEmail">Vui lòng nhập email hợp lệ</span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group" id="grpSignInPassword">
+          <label class="form-label" for="signInPassword">Mật khẩu</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" class="form-input" id="signInPassword" name="password" placeholder="Nhập mật khẩu của bạn" required>
+            <button type="button" class="input-password-toggle" data-target="signInPassword" aria-label="Hiện hoặc ẩn mật khẩu">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error-text" id="errSignInPassword">Mật khẩu không được để trống</span>
+        </div>
+
+        <!-- Options: Remember & Forgot -->
+        <div class="form-options-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rememberMe" checked>
+            <span>Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="btn-forgot-link" id="linkForgotPassword">Quên mật khẩu?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-auth-submit" id="btnSubmitSignIn">
+          <span class="spinner"></span>
+          <span class="btn-text">Đăng nhập</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <p class="auth-switch-text">
+          Chưa có tài khoản RE-BORN? <a href="#" id="linkSwitchToSignUp">Đăng ký ngay</a>
+        </p>
+      </form>
+
+      <!-- TAB 2: FORM ĐĂNG KÝ -->
+      <form class="auth-form" id="signUpForm" autocomplete="on" novalidate>
+        <div>
+          <h1 class="auth-title">Đăng ký tài khoản</h1>
+          <p class="auth-subtitle">Trở thành thành viên RE-BORN để nhận ưu đãi và tích lũy vỏ chai.</p>
+        </div>
+
+        <!-- Họ và tên -->
+        <div class="form-group" id="grpSignUpName">
+          <label class="form-label" for="signUpName">Họ và tên</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input type="text" class="form-input" id="signUpName" name="name" placeholder="Nguyễn Văn A" required>
+          </div>
+          <span class="field-error-text" id="errSignUpName">Vui lòng nhập họ và tên của bạn</span>
+        </div>
+
+        <!-- Số điện thoại -->
+        <div class="form-group" id="grpSignUpPhone">
+          <label class="form-label" for="signUpPhone">Số điện thoại</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <input type="tel" class="form-input" id="signUpPhone" name="phone" placeholder="0988 123 456" required>
+          </div>
+          <span class="field-error-text" id="errSignUpPhone">Số điện thoại không hợp lệ (10 chữ số)</span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group" id="grpSignUpEmail">
+          <label class="form-label" for="signUpEmail">Địa chỉ Email</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" class="form-input" id="signUpEmail" name="email" placeholder="ban@gmail.com" required>
+          </div>
+          <span class="field-error-text" id="errSignUpEmail">Vui lòng nhập định dạng email hợp lệ</span>
+        </div>
+
+        <!-- Mật khẩu -->
+        <div class="form-group" id="grpSignUpPassword">
+          <label class="form-label" for="signUpPassword">Mật khẩu (Tối thiểu 6 ký tự)</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" class="form-input" id="signUpPassword" name="password" placeholder="Tạo mật khẩu an toàn" required>
+            <button type="button" class="input-password-toggle" data-target="signUpPassword" aria-label="Hiện hoặc ẩn mật khẩu">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error-text" id="errSignUpPassword">Mật khẩu phải từ 6 ký tự trở lên</span>
+        </div>
+
+        <!-- Nhập lại mật khẩu -->
+        <div class="form-group" id="grpSignUpConfirmPassword">
+          <label class="form-label" for="signUpConfirmPassword">Xác nhận mật khẩu</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input type="password" class="form-input" id="signUpConfirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu vừa tạo" required>
+            <button type="button" class="input-password-toggle" data-target="signUpConfirmPassword" aria-label="Hiện hoặc ẩn mật khẩu">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <span class="field-error-text" id="errSignUpConfirmPassword">Mật khẩu xác nhận không trùng khớp</span>
+        </div>
+
+        <!-- Checkbox Điều khoản -->
+        <div class="form-options-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="termsAgree" required>
+            <span>Tôi đồng ý với <a href="#" style="color: var(--auth-forest-green); font-weight:600;">Điều khoản dịch vụ</a> và <a href="#" style="color: var(--auth-forest-green); font-weight:600;">Bảo mật</a></span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-auth-submit" id="btnSubmitSignUp">
+          <span class="spinner"></span>
+          <span class="btn-text">Hoàn tất đăng ký</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </button>
+
+        <p class="auth-switch-text">
+          Đã có tài khoản? <a href="#" id="linkSwitchToSignIn">Đăng nhập ngay</a>
+        </p>
+      </form>
+
+      <!-- TAB 3: FORM QUÊN MẬT KHẨU -->
+      <form class="auth-form" id="forgotPasswordForm" autocomplete="on" novalidate>
+        <div>
+          <h1 class="auth-title">Khôi phục mật khẩu</h1>
+          <p class="auth-subtitle">Nhập email bạn đã đăng ký để nhận liên kết khôi phục mật khẩu qua Supabase Auth.</p>
+        </div>
+
+        <div class="form-group" id="grpForgotEmail">
+          <label class="form-label" for="forgotEmail">Email đã đăng ký</label>
+          <div class="form-input-wrapper">
+            <svg class="form-input-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <input type="email" class="form-input" id="forgotEmail" name="forgotEmail" placeholder="ví dụ: ban@gmail.com" required>
+          </div>
+          <span class="field-error-text" id="errForgotEmail">Vui lòng nhập email hợp lệ</span>
+        </div>
+
+        <button type="submit" class="btn-auth-submit" id="btnSubmitForgot">
+          <span class="spinner"></span>
+          <span class="btn-text">Gửi liên kết khôi phục</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+
+        <p class="auth-switch-text">
+          <a href="#" id="linkBackToSignInFromForgot">← Quay lại Đăng nhập</a>
+        </p>
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="auth-footer">
+    <p>© 2026 RE-BORN • Nước Rửa Tay Vỏ Bưởi Ép Lạnh. Sạch Khuẩn Từ Tự Nhiên.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
