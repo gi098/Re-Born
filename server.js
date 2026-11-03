@@ -25,6 +25,51 @@ const MIME_TYPES = {
 function startServer(port) {
   const server = http.createServer((req, res) => {
     let cleanUrl = req.url.split('?')[0];
+
+    // Local routing for Serverless APIs (/api/*)
+    if (cleanUrl.startsWith('/api/')) {
+      let bodyData = '';
+      req.on('data', chunk => { bodyData += chunk; });
+      req.on('end', () => {
+        try {
+          req.body = bodyData ? JSON.parse(bodyData) : {};
+        } catch {
+          req.body = bodyData;
+        }
+
+        const urlParts = req.url.split('?');
+        req.query = {};
+        if (urlParts[1]) {
+          const searchParams = new URLSearchParams(urlParts[1]);
+          for (const [k, v] of searchParams.entries()) {
+            req.query[k] = v;
+          }
+        }
+
+        res.status = (code) => {
+          res.statusCode = code;
+          return res;
+        };
+        res.json = (data) => {
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(JSON.stringify(data));
+        };
+
+        if (cleanUrl === '/api/orders') {
+          return require('./api/orders.js')(req, res);
+        }
+        if (cleanUrl === '/api/vouchers/verify') {
+          return require('./api/vouchers/verify.js')(req, res);
+        }
+        if (cleanUrl === '/api/orders/track') {
+          return require('./api/orders/track.js')(req, res);
+        }
+
+        res.status(404).json({ success: false, message: 'API endpoint not found' });
+      });
+      return;
+    }
+
     let filePath = path.join(BASE_DIR, cleanUrl === '/' ? 'index.html' : cleanUrl);
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
