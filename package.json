@@ -1,0 +1,21 @@
+{
+  "name": "reborn-natural-ecommerce",
+  "version": "1.0.0",
+  "description": "RE-BORN • Nước Rửa Tay Vỏ Bưởi Hữu Cơ - Sạch Khuẩn Từ Tự Nhiên",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/test_member1_flow.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "reborn",
+    "pomelo",
+    "handwash",
+    "upcycling",
+    "circular-economy"
+  ],
+  "author": "RE-BORN Core Team",
+  "license": "MIT"
+}
+
