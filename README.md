@@ -15,7 +15,7 @@ RE-BORN là dòng sản phẩm nước rửa tay sinh học chiết xuất từ 
 ```
 c:\ReBorn\
 ├── api/                          # Serverless APIs (Chạy trên Vercel / Node.js)
-│   ├── orders.js                 # API Tạo đơn & lấy danh sách đơn hàng
+│   ├── orders.js                 # API Tạo đơn & lấy danh sách đơn hàng (hỗ trợ userId)
 │   ├── orders/
 │   │   └── track.js              # API Tra cứu đơn hàng theo Số Điện Thoại
 │   └── vouchers/
@@ -23,18 +23,25 @@ c:\ReBorn\
 ├── assets/
 │   └── images/                   # Hình ảnh sản phẩm, Logo HD trong suốt
 ├── css/
+│   ├── auth.css                  # Giao diện Đăng nhập / Đăng ký Botanical
 │   └── style.css                 # Hệ thống Design Tokens: Botanical, Responsive
 ├── database/
-│   └── schema_orders.sql         # Cấu trúc CSDL chuẩn Postgres / Supabase
+│   ├── schema_auth_profiles.sql  # Cấu trúc Supabase Auth, Profiles & RLS Policies
+│   └── schema_orders.sql         # Cấu trúc CSDL đơn hàng, vouchers & items
 ├── docs/                         # Hồ sơ tài liệu & Kế hoạch dự án
 │   ├── IT_MVP_SPECIFICATION.md   # Bản đặc tả kỹ thuật MVP chi tiết
 │   └── TASK_ALLOCATION.md        # Bảng phân công nhiệm vụ 50/50 chi tiết
 ├── js/
-│   └── app.js                    # Tương tác Giỏ hàng, Modal, Tra cứu, Checkout
+│   ├── admin.js                  # Tương tác Admin Dashboard & Kiểm tra phân quyền RBAC
+│   ├── app.js                    # Tương tác Giỏ hàng, Modal, Tra cứu, Checkout
+│   ├── auth.js                   # Logic xác thực form, đăng nhập/ký/quên mật khẩu
+│   └── supabase-client.js        # Supabase SDK v2 Client & Session Management
 ├── tests/
+│   ├── test_auth_flow.js         # Kiểm thử 10 kịch bản Supabase Auth & Bảo vệ đơn hàng
 │   └── test_member1_flow.js      # Kịch bản kiểm thử API tự động (Unit Tests)
-├── admin.html                    # Trang quản trị đơn hàng nội bộ
-├── index.html                    # Trang web bán lẻ chính thức (SEO Semantic)
+├── admin.html                    # Trang quản trị đơn hàng nội bộ (Bảo vệ bởi Admin Auth)
+├── auth.html                     # Trang Đăng nhập, Đăng ký & Quên mật khẩu
+├── index.html                    # Trang web bán lẻ chính thức (SEO Semantic & User Menu)
 ├── package.json                  # Cấu hình dự án & Scripts (npm start, npm test)
 ├── server.js                     # Máy chủ chạy thử nghiệm nội bộ (Port 3000)
 └── README.md                     # Tài liệu tổng quan & Hướng dẫn toàn diện
@@ -231,18 +238,70 @@ git push -u origin main
 
 ---
 
-## 💻 6. HƯỚNG DẪN CHẠY LOCAL ĐỂ PHÁT TRIỂN
+## 🔐 6. TÍCH HỢP XÁC THỰC SUPABASE AUTH & PHÂN QUYỀN (RBAC)
 
-### Cách 1: Mở trực tiếp (Kiểm tra nhanh giao diện)
-Nhấp đúp chuột vào file:
-`c:\ReBorn\index.html`
+### 6.1. Quy định nghiệp vụ chuẩn E-Commerce
+1. **Khách vãng lai (Guest)**: Được phép xem danh mục sản phẩm, xem chi tiết và thêm/bớt hàng vào giỏ hàng hoàn toàn tự do.
+2. **Bắt buộc Đăng nhập khi Đặt hàng**: Khi bấm "Đặt hàng ngay" hoặc "Tiến hành đặt hàng", nếu chưa đăng nhập, hệ thống sẽ lưu giỏ hàng và chuyển hướng tới `auth.html?redirect=checkout`.
+3. **Bảo toàn Giỏ hàng (Cart Persistence)**: Toàn bộ giỏ hàng được đồng bộ tự động vào `localStorage` (`reborn_cart`), đảm bảo không bị mất món khi chuyển sang trang đăng ký/đăng nhập và quay lại.
+4. **Tự động điền thông tin**: Sau khi đăng nhập, hệ thống tự động quay lại quy trình thanh toán (`index.html#checkout`) và tự điền Họ tên, Số điện thoại từ hồ sơ người dùng (`profiles`).
+5. **Cách ly Dữ liệu (Row Level Security - RLS)**:
+   - Khách hàng chỉ xem và cập nhật hồ sơ của chính mình (`auth.uid() = id`).
+   - Khách hàng chỉ truy vấn được danh sách đơn hàng do chính mình tạo ra (`auth.uid() = user_id`).
+6. **Bảo vệ Trang Quản trị (Admin Protection)**:
+   - Khách hàng đăng ký mới mặc định 100% nhận role `'customer'`.
+   - Client tuyệt đối không thể tự nâng quyền lên `'admin'`.
+   - Trang `admin.html` tự động chặn khách hàng thông thường và yêu cầu quyền Admin.
 
-### Cách 2: Chạy Server Node.js nội bộ (Port 3000)
+### 6.2. Cấu trúc CSDL Supabase Auth & Profiles (`database/schema_auth_profiles.sql`)
+Nhóm mở **Supabase Dashboard** ➔ **SQL Editor** ➔ Dán và chạy file `database/schema_auth_profiles.sql`:
+- Bảng `public.profiles`: Liên kết khóa ngoại `id UUID REFERENCES auth.users(id) ON DELETE CASCADE`.
+- Trigger `on_auth_user_created`: Tự động đồng bộ `full_name` và `phone` từ metadata khi người dùng đăng ký, đồng thời thiết lập an toàn `role = 'customer'`.
+- Cột `user_id` trong bảng `orders`: Lưu mã định danh của khách hàng để thực thi chính sách RLS.
+- Để cấp quyền Admin cho tài khoản quản trị:
+  ```sql
+  UPDATE public.profiles SET role = 'admin' WHERE id = 'UUID_CUA_ADMIN';
+  ```
+
+### 6.3. Tài khoản Quản trị Admin Mẫu phục vụ Kiểm thử
+Hệ thống cung cấp sẵn một tài khoản Admin mẫu để ban giám khảo / nhóm kiểm thử phân quyền ngay lập tức:
+- **Email**: `admin@reborn.vn`
+- **Mật khẩu**: `AdminPassword123!`
+- **Quyền hạn**: Quản trị viên (Toàn quyền truy cập Dashboard `/admin.html`).
+
+### 6.4. Cách kết nối Dự án với Supabase Live của Nhóm
+1. Đăng ký tài khoản miễn phí tại [https://supabase.com](https://supabase.com).
+2. Tạo Project mới (ví dụ: `reborn-prod`).
+3. Vào **Project Settings** ➔ **API** để lấy:
+   - `Project URL` (Ví dụ: `https://xxxx.supabase.co`)
+   - `anon / public key` (Khóa công khai ở client).
+4. Cấu hình vào file `js/supabase-client.js` hoặc thêm vào biến môi trường Vercel:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+5. *Lưu ý*: Nếu chưa cấu hình Supabase Cloud, hệ thống sẽ tự động kích hoạt **Offline Mock Auth Storage**, đảm bảo toàn bộ giao diện, đăng ký, đăng nhập, bảo vệ checkout và quản trị Admin hoạt động trơn tru 100%.
+
+---
+
+## 💻 7. HƯỚNG DẪN CHẠY LOCAL VÀ KIỂM THỬ
+
+### 7.1. Chạy Máy chủ Thử nghiệm
 Mở PowerShell tại thư mục `c:\ReBorn` và chạy:
 ```powershell
-node server.js
+npm start
 ```
-Sau đó truy cập trình duyệt: **[http://localhost:3000](http://localhost:3000)** (Hoặc trang quản trị: **[http://localhost:3000/admin.html](http://localhost:3000/admin.html)**).
+Truy cập trình duyệt:
+- **Cửa hàng Storefront**: [http://localhost:3000](http://localhost:3000)
+- **Đăng ký / Đăng nhập**: [http://localhost:3000/auth.html](http://localhost:3000/auth.html)
+- **Trang Quản trị Admin**: [http://localhost:3000/admin.html](http://localhost:3000/admin.html)
+
+### 7.2. Chạy Bộ Kiểm thử Tự động (Automated Test Suites)
+Chạy toàn bộ 13 bài kiểm thử (Phân hệ Thành viên 1 + Xác thực Supabase Auth):
+```powershell
+npm test
+```
+Hoặc chạy riêng từng kịch bản:
+- `npm run test:auth`: Kiểm thử 10 kịch bản đăng ký, đăng nhập, session, bảo vệ giỏ hàng, RLS & Admin.
+- `npm run test:member1`: Kiểm thử tạo đơn hàng, áp voucher và tra cứu đơn theo SĐT.
 
 ---
 
