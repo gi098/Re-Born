@@ -954,6 +954,179 @@ input.input-error {
   transform: translateY(-1px);
 }
 
+/* User Auth Header & Dropdown */
+.nav-user-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-sand-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.nav-auth-btn:hover {
+  background-color: var(--color-primary-fixed-dim);
+  color: var(--color-primary-dark);
+  border-color: var(--color-secondary);
+}
+
+.user-dropdown {
+  position: relative;
+}
+
+.user-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 6px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-sand-border);
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  transition: all var(--transition-fast);
+}
+
+.user-dropdown-btn:hover {
+  border-color: var(--color-primary);
+  background-color: #ffffff;
+}
+
+.user-avatar-initial {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.user-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  background: #ffffff;
+  border: 1px solid var(--color-sand-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+  flex-direction: column;
+  animation: fadeInUserMenu 0.15s ease-out;
+}
+
+.user-dropdown-menu.show {
+  display: flex;
+}
+
+@keyframes fadeInUserMenu {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-menu-header {
+  padding: 8px 10px;
+}
+
+.user-menu-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-menu-email {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.user-menu-role {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-fixed);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 6px;
+}
+
+.user-menu-divider {
+  height: 1px;
+  background: var(--color-sand-border);
+  margin: 6px 0;
+}
+
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-main);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.user-menu-item:hover {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.user-menu-item.btn-signout {
+  color: #c53030;
+}
+
+.user-menu-item.btn-signout:hover {
+  background-color: #fff5f5;
+  color: #9b2c2c;
+}
+
+/* Mobile User Card */
+.mobile-user-card {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-sand-border);
+}
+
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -3530,6 +3703,49 @@ input.survey-text-input:focus,
             </svg>
           </button>
 
+          <!-- User Authentication Status / Profile Menu -->
+          <div class="nav-user-container" id="headerUserStatus">
+            <!-- Guest State (Default) -->
+            <a href="auth.html" class="nav-auth-btn" id="navAuthLoginBtn" title="Đăng nhập / Đăng ký" aria-label="Đăng nhập tài khoản">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span data-i18n="nav_login_text">Đăng nhập</span>
+            </a>
+            <!-- Logged-in State (Dropdown) -->
+            <div class="user-dropdown" id="navUserDropdown" style="display: none;">
+              <button type="button" class="user-dropdown-btn" id="userDropdownTrigger" aria-expanded="false">
+                <span class="user-avatar-initial" id="userAvatarInitial">U</span>
+                <span class="user-name-label" id="userNameLabel">Tài khoản</span>
+                <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <div class="user-dropdown-menu" id="userDropdownMenu">
+                <div class="user-menu-header">
+                  <div class="user-menu-name" id="userMenuFullName">Khách hàng</div>
+                  <div class="user-menu-email" id="userMenuEmail">khachhang@gmail.com</div>
+                  <span class="user-menu-role" id="userMenuRole">Thành viên Re-Born</span>
+                </div>
+                <div class="user-menu-divider"></div>
+                <a href="#trackingModal" class="user-menu-item" id="userMenuTrackOrders">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM19 17a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/><path d="M5 17H3V6a1 1 0 0 1 1-1h9v12m0 0h2m4 0h1a1 1 0 0 0 1-1v-5l-3-4h-5v9"/></svg>
+                  <span>Đơn hàng của tôi</span>
+                </a>
+                <a href="admin.html" class="user-menu-item" id="userMenuAdminLink" style="display: none;">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <span>Trang Quản Trị Admin</span>
+                </a>
+                <div class="user-menu-divider"></div>
+                <button type="button" class="user-menu-item btn-signout" id="userMenuSignOutBtn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                  <span>Đăng xuất</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Mobile Menu Toggle -->
           <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Mở menu">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -3560,6 +3776,7 @@ input.survey-text-input:focus,
         <button type="button" class="lang-btn" data-lang="en">EN</button>
       </div>
     </div>
+    <div class="mobile-user-card" id="mobileUserStatus"></div>
     <div class="mobile-nav-links">
       <a href="#" class="mobile-link active" data-i18n="nav_home">Trang chủ</a>
       <a href="#philosophy" class="mobile-link" data-i18n="nav_about">Giới thiệu</a>
@@ -4647,6 +4864,10 @@ input.survey-text-input:focus,
 
   <!-- Toast Notifications Container -->
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Supabase JS SDK v2 & Auth Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
 
   <!-- Core JavaScript -->
   <script src="js/app.js"></script>
