@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
 
       // Hiển thị thông báo thành công
-      showAlert('Đăng ký tài khoản thành công! Vui lòng nhập mật khẩu để đăng nhập.', 'success');
+      showAlert('Đăng ký tài khoản thành công! Vui lòng kiểm tra hộp thư email để bấm xác nhận tài khoản, sau đó đăng nhập tại đây.', 'success');
 
     } catch (err) {
       showAlert(err.message || 'Đăng ký không thành công. Vui lòng thử lại!', 'error');

@@ -149,6 +149,7 @@
           email: cleanEmail,
           password: password,
           options: {
+            emailRedirectTo: typeof window !== 'undefined' ? (window.location.origin + '/auth.html') : undefined,
             data: {
               full_name: cleanName,
               phone: cleanPhone
