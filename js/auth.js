@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 7. Xử lý Chuyển hướng sau Đăng nhập / Đăng ký thành công
+  // 7. Xử lý Chuyển hướng sau Đăng nhập thành công
   async function handleRedirectAfterAuth() {
     if (redirectTarget === 'checkout') {
       window.location.href = 'index.html#checkout';
@@ -272,11 +272,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         phone
       });
 
-      showAlert('Đăng ký tài khoản thành công! Đang chuyển hướng...', 'success');
+      // Đăng xuất phiên tạm (nếu có) để người dùng chủ động đăng nhập lại
+      await window.rebornAuth.signOut();
 
-      setTimeout(() => {
-        handleRedirectAfterAuth();
-      }, 900);
+      // Reset dữ liệu form đăng ký
+      signUpForm.reset();
+
+      // Chuyển ngay sang tab Đăng nhập
+      switchTab('signin');
+
+      // Điền sẵn email vừa đăng ký và trỏ chuột vào ô mật khẩu
+      if (signInEmail) signInEmail.value = email;
+      if (signInPassword) {
+        signInPassword.value = '';
+        signInPassword.focus();
+      }
+
+      // Hiển thị thông báo thành công
+      showAlert('Đăng ký tài khoản thành công! Vui lòng nhập mật khẩu để đăng nhập.', 'success');
 
     } catch (err) {
       showAlert(err.message || 'Đăng ký không thành công. Vui lòng thử lại!', 'error');
