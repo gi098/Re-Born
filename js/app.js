@@ -892,31 +892,42 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCart();
   });
 
-  // Add Product to Cart Action
+  // Add Product to Cart Action (Giai đoạn 2: Hỗ trợ kiểm tra tồn kho & nạp dữ liệu động)
   function addToCart(productId) {
-    const data = productData[productId];
+    const data = productData[productId] || (state.products && state.products.find(p => String(p.id) === String(productId)));
     if (!data) return;
 
-    const existing = state.cart.find(i => i.id === productId);
+    // Kiểm tra trạng thái tồn kho (Out-of-stock check)
+    if (typeof data.stock_quantity === 'number' && data.stock_quantity <= 0) {
+      showToast('Sản phẩm hiện đang tạm hết hàng. Vui lòng chọn sản phẩm khác nhé!', '⚠️');
+      return;
+    }
+
+    const existing = state.cart.find(i => String(i.id) === String(productId));
+    const nameStr = typeof data.name === 'object' ? getLocalizedText(data.name) : data.name;
+    const subStr = typeof data.sub === 'object' ? getLocalizedText(data.sub) : (data.sub || '');
+    const volStr = typeof data.volume === 'object' ? getLocalizedText(data.volume) : (data.volume || '250 ml');
+    const imgStr = data.image_url || data.image || 'assets/images/product_handwash.jpg';
+
     if (existing) {
       existing.quantity += 1;
     } else {
       state.cart.push({
         id: data.id,
-        name: data.name,
-        sub: data.sub,
+        name: nameStr,
+        sub: subStr,
         price: data.price,
-        volume: data.volume,
-        image: data.image,
+        volume: volStr,
+        image: imgStr,
         quantity: 1
       });
     }
     renderCart();
-    showToast(`Đã thêm ${data.name} vào giỏ hàng!`, '🌿');
+    showToast(`Đã thêm ${nameStr} vào giỏ hàng!`, '🌿');
     openCart();
   }
 
-  // Attach Add-to-cart to buttons on cards
+  // Attach Add-to-cart to static buttons on cards if any
   document.querySelectorAll('.btn-add-cart-quick').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.id;
@@ -1348,20 +1359,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const qvDesc = document.getElementById('qvDesc');
   const qvIngredients = document.getElementById('qvIngredients');
   const qvRitual = document.getElementById('qvRitual');
+  const qvCategoryName = document.getElementById('qvCategoryName');
+  const qvSku = document.getElementById('qvSku');
+  const qvStockTag = document.getElementById('qvStockTag');
+  const qvStockText = document.getElementById('qvStockText');
   const qvAddToCartBtn = document.getElementById('qvAddToCartBtn');
   let currentQvId = 'pomelo-handwash';
 
   function openQuickView(id) {
-    const data = productData[id];
+    const data = productData[id] || (state.products && state.products.find(p => String(p.id) === String(id)));
     if (!data) return;
     currentQvId = id;
-    qvImage.src = data.image;
-    qvNotes.textContent = getLocalizedText(data.sub);
-    qvTitle.textContent = getLocalizedText(data.name);
-    qvPrice.textContent = data.price.toLocaleString('vi-VN') + '₫';
-    qvDesc.textContent = getLocalizedText(data.desc);
-    qvIngredients.textContent = getLocalizedText(data.ingredients);
-    qvRitual.textContent = getLocalizedText(data.ritual);
+
+    if (qvImage) qvImage.src = data.image_url || data.image || 'assets/images/product_handwash.jpg';
+    if (qvNotes) qvNotes.textContent = typeof data.sub === 'object' ? getLocalizedText(data.sub) : (data.sub || 'VỎ BƯỞI ÉP LẠNH • THẢO MỘC');
+    if (qvTitle) qvTitle.textContent = typeof data.name === 'object' ? getLocalizedText(data.name) : data.name;
+    if (qvPrice) qvPrice.textContent = data.price.toLocaleString('vi-VN') + '₫';
+    if (qvDesc) qvDesc.textContent = typeof data.desc === 'object' ? getLocalizedText(data.desc) : (data.description || data.desc || '');
+    if (qvIngredients) qvIngredients.textContent = typeof data.ingredients === 'object' ? getLocalizedText(data.ingredients) : (data.ingredients || 'Tinh dầu vỏ bưởi tự nhiên, Glycerin thực vật, Nước khoáng tinh khiết.');
+    if (qvRitual) qvRitual.textContent = typeof data.ritual === 'object' ? getLocalizedText(data.ritual) : (data.usage || data.ritual || 'Bơm 1 lượng vừa đủ, tạo bọt nhẹ khắp bàn tay trong 30 giây rồi xả sạch.');
+
+    if (qvCategoryName) qvCategoryName.textContent = data.category_name || 'Nước Rửa Tay';
+    if (qvSku) qvSku.textContent = data.sku || (`RB-${id}`);
+
+    // Xử lý trạng thái hết hàng (Out of stock handling)
+    const isOutOfStock = typeof data.stock_quantity === 'number' && data.stock_quantity <= 0;
+    if (qvStockTag && qvStockText) {
+      if (isOutOfStock) {
+        qvStockTag.className = 'product-stock-tag out-of-stock';
+        qvStockText.textContent = 'Tạm hết hàng';
+      } else {
+        qvStockTag.className = 'product-stock-tag';
+        qvStockText.textContent = 'Còn hàng (Mẻ tươi)';
+      }
+    }
+
+    if (qvAddToCartBtn) {
+      if (isOutOfStock) {
+        qvAddToCartBtn.disabled = true;
+        qvAddToCartBtn.classList.add('is-out-of-stock');
+        qvAddToCartBtn.textContent = 'Sản phẩm tạm hết hàng';
+      } else {
+        qvAddToCartBtn.disabled = false;
+        qvAddToCartBtn.classList.remove('is-out-of-stock');
+        qvAddToCartBtn.textContent = t('qv_add_btn') || 'Thêm vào giỏ hàng';
+      }
+    }
+
     openModal(quickViewModal);
   }
 
@@ -1382,6 +1426,211 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================================================
+  // Dynamic Product Catalog Loader (Giai đoạn 2: Tải sản phẩm từ Supabase / API)
+  // ==========================================================================
+  const productsGrid = document.getElementById('productsGrid');
+  const categoryFilterBar = document.getElementById('categoryFilterBar');
+
+  function renderProductSkeleton() {
+    if (!productsGrid) return;
+    productsGrid.innerHTML = Array(3).fill(0).map(() => `
+      <div class="product-skeleton-card">
+        <div class="skeleton-box" style="aspect-ratio: 4/3; width: 100%;"></div>
+        <div class="skeleton-box" style="height: 16px; width: 45%;"></div>
+        <div class="skeleton-box" style="height: 24px; width: 85%;"></div>
+        <div class="skeleton-box" style="height: 14px; width: 65%;"></div>
+        <div class="skeleton-box" style="height: 42px; width: 100%; margin-top: auto;"></div>
+      </div>
+    `).join('');
+  }
+
+  function renderProducts(productsToRender) {
+    if (!productsGrid) return;
+
+    if (!productsToRender || productsToRender.length === 0) {
+      productsGrid.innerHTML = `
+        <div class="products-empty-state">
+          <div style="font-size: 3rem; margin-bottom: 12px;">🌿</div>
+          <h3 style="font-family: 'Noto Serif', serif; color: var(--color-primary); font-size: 1.35rem; margin-bottom: 8px;">Không tìm thấy sản phẩm phù hợp</h3>
+          <p style="color: var(--color-text-secondary); font-size: 0.92rem; max-width: 440px; margin: 0 auto 20px auto; line-height: 1.5;">
+            Danh mục này đang được cập nhật mẻ bưởi tươi mới hoặc từ khóa tìm kiếm không khớp. Hãy chọn danh mục khác để khám phá nhé!
+          </p>
+          <button type="button" class="btn btn-primary" id="btnResetFilter" style="border-radius: 50px;">
+            Xem tất cả sản phẩm
+          </button>
+        </div>
+      `;
+      document.getElementById('btnResetFilter')?.addEventListener('click', () => {
+        document.querySelectorAll('.category-filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.category-filter-btn[data-category="all"]')?.classList.add('active');
+        fetchProducts('all');
+      });
+      return;
+    }
+
+    productsGrid.innerHTML = productsToRender.map(p => {
+      const isOutStock = typeof p.stock_quantity === 'number' && p.stock_quantity <= 0;
+      const stockBadge = isOutStock
+        ? `<span class="product-stock-tag out-of-stock"><span class="product-stock-dot"></span><span>Tạm hết hàng</span></span>`
+        : `<span class="product-stock-tag"><span class="product-stock-dot"></span><span data-i18n="stock_in_stock">Còn hàng (Mẻ tươi)</span></span>`;
+
+      const categoryPill = p.category_name 
+        ? `<span class="product-pill-badge">${p.category_name.toUpperCase()}</span>`
+        : `<span class="product-pill-badge" data-i18n="badge_antibac">SẠCH KHUẨN • DƯỠNG ẨM</span>`;
+
+      const addBtnHtml = isOutStock
+        ? `<button class="btn-add-cart-quick is-out-of-stock" disabled title="Sản phẩm tạm hết hàng">
+             <span>Hết hàng</span>
+           </button>`
+        : `<button class="btn-add-cart-quick" data-id="${p.id}" title="Thêm vào giỏ hàng">
+             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+               <line x1="12" y1="5" x2="12" y2="19"></line>
+               <line x1="5" y1="12" x2="19" y2="12"></line>
+             </svg>
+             <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
+           </button>`;
+
+      const originalPriceHtml = p.original_price
+        ? `<span class="product-original-price">${p.original_price.toLocaleString('vi-VN')}₫</span>`
+        : '';
+
+      const nameStr = typeof p.name === 'object' ? getLocalizedText(p.name) : p.name;
+      const subStr = typeof p.sub === 'object' ? getLocalizedText(p.sub) : (p.sub || 'VỎ BƯỞI ÉP LẠNH • THẢO MỘC');
+      const descStr = typeof p.desc === 'object' ? getLocalizedText(p.desc) : (p.description || p.desc || '');
+      const volStr = typeof p.volume === 'object' ? getLocalizedText(p.volume) : (p.volume || '250 ml');
+
+      return `
+        <div class="product-card" data-id="${p.id}">
+          <div class="product-image-wrap" style="cursor: pointer;">
+            ${categoryPill}
+            ${stockBadge}
+            <img src="${p.image_url || p.image || 'assets/images/product_handwash.jpg'}" 
+                 alt="${nameStr}" 
+                 onerror="this.src='assets/images/product_handwash.jpg'">
+          </div>
+          <div class="product-info">
+            <div class="product-head-row">
+              <h3 class="product-title" style="cursor: pointer;">${nameStr}</h3>
+            </div>
+            <div class="product-volume">${volStr} ${p.sku ? `• SKU: ${p.sku}` : ''}</div>
+            <div class="product-aroma-notes">${subStr}</div>
+            <p class="product-desc">${descStr}</p>
+            <div class="product-price-box">
+              <span class="product-price">${p.price.toLocaleString('vi-VN')}₫</span>
+              ${originalPriceHtml}
+            </div>
+            <div class="product-actions-row">
+              <div class="product-btn-group">
+                ${addBtnHtml}
+                <button class="link-explore-ritual" data-id="${p.id}" data-i18n="btn_view_detail">
+                  Xem chi tiết →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Gắn sự kiện click cho các nút trên thẻ vừa tạo
+    productsGrid.querySelectorAll('.btn-add-cart-quick:not(.is-out-of-stock)').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        addToCart(id);
+      });
+    });
+
+    productsGrid.querySelectorAll('.link-explore-ritual').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.dataset.id;
+        openQuickView(id);
+      });
+    });
+
+    productsGrid.querySelectorAll('.product-image-wrap, .product-title').forEach(el => {
+      el.addEventListener('click', () => {
+        const card = el.closest('.product-card');
+        const id = card?.dataset.id;
+        if (id) openQuickView(id);
+      });
+    });
+  }
+
+  async function fetchProducts(category = 'all', search = '') {
+    renderProductSkeleton();
+    try {
+      let url = '/api/products';
+      const params = new URLSearchParams();
+      if (category && category !== 'all') params.append('category', category);
+      if (search && search.trim()) params.append('search', search.trim());
+      if (params.toString()) url += `?${params.toString()}`;
+
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+        state.products = data.products;
+
+        // Đồng bộ vào productData để các chức năng giỏ hàng, search kế thừa trơn tru
+        data.products.forEach(p => {
+          productData[p.id] = {
+            id: p.id,
+            name: p.name,
+            sub: p.sub || 'VỎ BƯỞI ÉP LẠNH • THẢO MỘC',
+            price: p.price,
+            original_price: p.original_price,
+            volume: p.volume,
+            image: p.image_url || p.image || 'assets/images/product_handwash.jpg',
+            image_url: p.image_url || p.image,
+            category_id: p.category_id,
+            category_name: p.category_name,
+            category_slug: p.category_slug,
+            sku: p.sku,
+            stock_quantity: p.stock_quantity,
+            desc: p.description || p.desc,
+            description: p.description || p.desc,
+            ingredients: p.ingredients,
+            ritual: p.usage || p.ritual,
+            usage: p.usage || p.ritual
+          };
+        });
+
+        renderProducts(state.products);
+      } else {
+        renderProducts([]);
+      }
+    } catch (err) {
+      console.warn('Lỗi tải sản phẩm từ API /api/products, hiển thị fallback:', err);
+      // Fallback an toàn sang dữ liệu sẵn có
+      const fallbackList = Object.values(productData).map(p => ({
+        ...p,
+        image_url: p.image,
+        description: typeof p.desc === 'object' ? getLocalizedText(p.desc) : p.desc,
+        stock_quantity: typeof p.stock_quantity === 'number' ? p.stock_quantity : 25
+      }));
+      state.products = fallbackList;
+      renderProducts(fallbackList);
+    }
+  }
+
+  // Category Filter Buttons Handler
+  categoryFilterBar?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.category-filter-btn');
+    if (!btn) return;
+    categoryFilterBar.querySelectorAll('.category-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const chosenCat = btn.dataset.category || 'all';
+    state.activeCategory = chosenCat;
+    fetchProducts(chosenCat);
+  });
+
+  // Khởi động nạp danh sách sản phẩm động từ API
+  fetchProducts('all');
+
+  // ==========================================================================
   // Search Modal
   // ==========================================================================
   const searchBtn = document.getElementById('searchBtn');
@@ -1400,11 +1649,14 @@ document.addEventListener('DOMContentLoaded', () => {
     searchResults.innerHTML = '';
     if (!query) return;
 
-    const matches = Object.values(productData).filter(p => 
-      p.name.toLowerCase().includes(query) || 
-      p.sub.toLowerCase().includes(query) ||
-      p.desc.toLowerCase().includes(query)
-    );
+    const list = state.products && state.products.length > 0 ? state.products : Object.values(productData);
+    const matches = list.filter(p => {
+      const name = typeof p.name === 'object' ? getLocalizedText(p.name) : (p.name || '');
+      const sub = typeof p.sub === 'object' ? getLocalizedText(p.sub) : (p.sub || '');
+      const desc = typeof p.desc === 'object' ? getLocalizedText(p.desc) : (p.description || p.desc || '');
+      const sku = p.sku || '';
+      return name.toLowerCase().includes(query) || sub.toLowerCase().includes(query) || desc.toLowerCase().includes(query) || sku.toLowerCase().includes(query);
+    });
 
     if (matches.length === 0) {
       searchResults.innerHTML = `<p style="font-size: 0.88rem; color: var(--color-text-secondary); padding: 8px 0;">Không tìm thấy sản phẩm phù hợp.</p>`;
@@ -1412,11 +1664,12 @@ document.addEventListener('DOMContentLoaded', () => {
       matches.forEach(item => {
         const itemRow = document.createElement('div');
         itemRow.style.cssText = 'display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--color-bg-sage-light); border-radius: var(--radius-sm); border: 1px solid var(--color-border); cursor: pointer;';
+        const nameStr = typeof item.name === 'object' ? getLocalizedText(item.name) : item.name;
         itemRow.innerHTML = `
           <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="${item.image}" style="width: 36px; height: 36px; border-radius: 4px; object-fit: cover;">
+            <img src="${item.image_url || item.image || 'assets/images/product_handwash.jpg'}" style="width: 38px; height: 38px; border-radius: 6px; object-fit: cover;">
             <div>
-              <strong style="font-size: 0.9rem; color: var(--color-text-main); display: block;">${item.name}</strong>
+              <strong style="font-size: 0.9rem; color: var(--color-text-main); display: block;">${nameStr}</strong>
               <span style="font-size: 0.78rem; color: var(--color-primary); font-weight: 600;">${item.price.toLocaleString('vi-VN')}₫</span>
             </div>
           </div>

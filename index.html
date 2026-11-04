@@ -1409,6 +1409,98 @@ input.input-error {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
+  min-height: 380px;
+}
+
+/* Category Filter Bar (Giai đoạn 2) */
+.category-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 auto 36px auto;
+}
+
+.category-filter-btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid var(--color-sand-border);
+  background-color: #ffffff;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.category-filter-btn:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-primary-dark);
+}
+
+.category-filter-btn.active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(49, 92, 59, 0.2);
+}
+
+/* Out of Stock Styling */
+.product-stock-tag.out-of-stock {
+  background-color: #fff1f0;
+  border-color: #ffa39e;
+  color: #cf1322;
+}
+
+.product-stock-tag.out-of-stock .product-stock-dot {
+  background-color: #cf1322;
+}
+
+.btn-add-cart-quick.is-out-of-stock {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #e5e7eb;
+  color: #9ca3af;
+}
+
+.btn-add-cart-quick.is-out-of-stock:hover {
+  transform: none;
+  background-color: #e5e7eb;
+}
+
+/* Skeleton Loading & Empty State */
+.product-skeleton-card {
+  background: #ffffff;
+  border: 1px solid var(--color-sand-border);
+  border-radius: 20px;
+  padding: 16px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #f0f3f1 25%, #e2e8e4 50%, #f0f3f1 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.products-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border: 1px dashed var(--color-sand-border);
+  border-radius: 20px;
 }
 
 .product-card {
@@ -3917,144 +4009,17 @@ input.survey-text-input:focus,
         </p>
       </div>
 
-      <div class="products-grid">
-        <!-- Product 1: Nước rửa tay vỏ bưởi -->
-        <div class="product-card" data-id="pomelo-handwash" data-name="Nước rửa tay vỏ bưởi"
-          data-sub="VỎ BƯỞI ÉP LẠNH • TUYẾT TÙNG • THẢO MỘC" data-price="45000" data-volume="250 ml"
-          data-image="assets/images/product_handwash.jpg">
-          <div class="product-image-wrap">
-            <span class="product-pill-badge" data-i18n="badge_antibac">SẠCH KHUẨN • DƯỠNG ẨM</span>
-            <span class="product-stock-tag">
-              <span class="product-stock-dot"></span>
-              <span data-i18n="stock_in_stock">Còn hàng (Mẻ tươi)</span>
-            </span>
-            <img src="assets/images/product_handwash.jpg" alt="Nước rửa tay vỏ bưởi Re-Born 250ml">
-          </div>
-          <div class="product-info">
-            <div class="product-head-row">
-              <h3 class="product-title" data-i18n="prod1_title">Nước rửa tay vỏ bưởi</h3>
-            </div>
-            <div class="product-volume" data-i18n="prod1_vol">Dung tích: 250 ml • Chai rPET vòi nhấn</div>
-            <div class="product-aroma-notes" data-i18n="prod1_notes">
-              VỎ BƯỞI ÉP LẠNH • TUYẾT TÙNG • THẢO MỘC
-            </div>
-            <p class="product-desc" data-i18n="prod1_desc">
-              Chứa tinh dầu vỏ bưởi ép chậm kết hợp thảo mộc cấp ẩm dịu nhẹ. Nhẹ nhàng gột rửa 99.9% vi khuẩn, bảo vệ độ
-              ẩm tự nhiên của đôi tay không gây khô ráp.
-            </p>
-            <div class="product-price-box">
-              <span class="product-price">45.000₫</span>
-              <span class="product-original-price">55.000₫</span>
-            </div>
-            <div class="product-actions-row">
-              <div class="product-btn-group">
-                <button class="btn-add-cart-quick" data-id="pomelo-handwash" title="Thêm vào giỏ hàng">
-                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                  <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
-                </button>
-                <button class="link-explore-ritual" data-id="pomelo-handwash" data-i18n="btn_view_detail">
-                  Xem chi tiết →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Category Filter Tabs (Lọc sản phẩm theo danh mục - Giai đoạn 2) -->
+      <div class="category-filter-bar" id="categoryFilterBar" role="tablist" aria-label="Lọc theo danh mục sản phẩm">
+        <button type="button" class="category-filter-btn active" data-category="all">Tất cả</button>
+        <button type="button" class="category-filter-btn" data-category="nuoc-rua-tay">Nước Rửa Tay</button>
+        <button type="button" class="category-filter-btn" data-category="tui-refill">Túi Refill</button>
+        <button type="button" class="category-filter-btn" data-category="combo-qua-tang">Combo Tiết Kiệm</button>
+      </div>
 
-        <!-- Product 2: Túi Refill Nước rửa tay vỏ bưởi 500ml -->
-        <div class="product-card" data-id="pomelo-refill" data-name="Túi Refill Nước rửa tay 500ml"
-          data-sub="VỎ BƯỞI ÉP LẠNH • TIẾT KIỆM RÁC NHỰA" data-price="75000" data-volume="500 ml"
-          data-image="assets/images/product_refill.jpg">
-          <div class="product-image-wrap">
-            <span class="product-pill-badge" style="background: var(--color-primary-fixed); color: var(--color-primary-dark); font-weight: 700;" data-i18n="badge_refill">
-              REFILL TIẾT KIỆM
-            </span>
-            <span class="product-stock-tag">
-              <span class="product-stock-dot"></span>
-              <span data-i18n="stock_save_20k">Tiết kiệm 20k</span>
-            </span>
-            <img src="assets/images/product_refill.jpg" alt="Túi Refill Nước rửa tay vỏ bưởi 500ml Re-Born">
-          </div>
-          <div class="product-info">
-            <div class="product-head-row">
-              <h3 class="product-title" data-i18n="prod2_title">Túi Refill Nước rửa tay 500ml</h3>
-            </div>
-            <div class="product-volume" data-i18n="prod2_vol">Dung tích: 500 ml • Rót đầy 2 chai 250ml</div>
-            <div class="product-aroma-notes" data-i18n="prod2_notes">
-              VỎ BƯỞI ÉP LẠNH • GỖ HINOKI • TUYẾT TÙNG
-            </div>
-            <p class="product-desc" data-i18n="prod2_desc">
-              Dung tích nhân đôi tiện lợi nạp lại bình vòi nhấn cũ. Giải pháp kinh tế thông minh giúp tiết kiệm 15.000₫ chi phí và chung tay giảm 80% rác thải nhựa.
-            </p>
-            <div class="product-price-box">
-              <span class="product-price">75.000₫</span>
-              <span class="product-original-price">90.000₫</span>
-            </div>
-            <div class="product-actions-row">
-              <div class="product-btn-group">
-                <button class="btn-add-cart-quick" data-id="pomelo-refill" title="Thêm vào giỏ hàng">
-                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                  <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
-                </button>
-                <button class="link-explore-ritual" data-id="pomelo-refill" data-i18n="btn_view_detail">
-                  Xem chi tiết →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Product 3: Combo Đôi Bạn Cùng Tiến (2 Chai Rửa tay 250ml + Túi Vải) -->
-        <div class="product-card" data-id="eco-giftset" data-name="Combo Đôi • 2 Nước rửa tay + Túi vải"
-          data-sub="2 CHAI RỬA TAY 250ML + TÚI VẢI CANVAS" data-price="89000" data-volume="Set 3 món"
-          data-image="assets/images/hero_product.jpg">
-          <div class="product-image-wrap">
-            <span class="product-pill-badge"
-              style="background: var(--color-accent); color: var(--color-text-main); font-weight: 800;" data-i18n="badge_combo">
-              COMBO MUA CHUNG
-            </span>
-            <span class="product-stock-tag">
-              <span class="product-stock-dot"></span>
-              <span data-i18n="stock_campus">Ưu đãi Campus</span>
-            </span>
-            <img src="assets/images/hero_product.jpg" alt="Combo Nước rửa tay vỏ bưởi Re-Born tặng kèm túi vải">
-          </div>
-          <div class="product-info">
-            <div class="product-head-row">
-              <h3 class="product-title" data-i18n="prod3_title">Combo Đôi • Nước rửa tay & Túi vải</h3>
-            </div>
-            <div class="product-volume" data-i18n="prod3_vol">Gồm: 2 Chai rửa tay 250ml + 1 Túi vải Canvas</div>
-            <div class="product-aroma-notes" data-i18n="prod3_notes">
-              TIẾT KIỆM PHÍ SHIP • MUA CHUNG BẠN BÈ
-            </div>
-            <p class="product-desc" data-i18n="prod3_desc">
-              Gói ưu đãi mua chung 2 chai nước rửa tay vỏ bưởi tặng kèm túi vải dệt thô Canvas Re-Born. Lựa chọn lý tưởng cho bạn bè cùng phòng KTX rủ nhau sống xanh.
-            </p>
-            <div class="product-price-box">
-              <span class="product-price">89.000₫</span>
-              <span class="product-original-price">110.000₫</span>
-            </div>
-            <div class="product-actions-row">
-              <div class="product-btn-group">
-                <button class="btn-add-cart-quick" data-id="eco-giftset" title="Thêm combo vào giỏ hàng">
-                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                  <span data-i18n="btn_add_cart">Thêm giỏ hàng</span>
-                </button>
-                <button class="link-explore-ritual" data-id="eco-giftset" data-i18n="btn_view_detail">
-                  Xem chi tiết →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Dynamic Products Grid (Hiển thị sản phẩm động từ CSDL / API) -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Được hiển thị tự động qua API /api/products -->
       </div>
     </div>
   </section>
@@ -4710,7 +4675,16 @@ input.survey-text-input:focus,
         <img id="qvImage" src="assets/images/product_handwash.jpg" alt="Chi tiết sản phẩm">
       </div>
       <div class="quick-view-info">
-        <span class="section-label" id="qvNotes">VỎ BƯỞI ÉP LẠNH • THẢO MỘC</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;">
+          <span class="section-label" id="qvNotes" style="margin-bottom: 0;">VỎ BƯỞI ÉP LẠNH • THẢO MỘC</span>
+          <span class="product-stock-tag" id="qvStockTag">
+            <span class="product-stock-dot"></span>
+            <span id="qvStockText">Còn hàng (Mẻ tươi)</span>
+          </span>
+        </div>
+        <div style="font-size: 0.82rem; color: var(--color-text-light); margin-bottom: 8px;" id="qvMetaRow">
+          Danh mục: <strong id="qvCategoryName" style="color: var(--color-text-main);">Nước Rửa Tay</strong> • SKU: <strong id="qvSku" style="color: var(--color-text-main);">RB-HW-250</strong>
+        </div>
         <h2 class="quick-view-title" id="qvTitle">Nước rửa tay vỏ bưởi</h2>
         <div class="quick-view-price" id="qvPrice">45.000₫</div>
         <p class="section-desc" id="qvDesc" style="margin-bottom: 16px;">Mô tả sản phẩm...</p>

@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node tests/test_member1_flow.js && node tests/test_auth_flow.js",
+    "test": "node tests/test_member1_flow.js && node tests/test_auth_flow.js && node tests/test_products_flow.js",
     "test:auth": "node tests/test_auth_flow.js",
-    "test:member1": "node tests/test_member1_flow.js"
+    "test:member1": "node tests/test_member1_flow.js",
+    "test:products": "node tests/test_products_flow.js"
   },
   "keywords": [
     "ecommerce",

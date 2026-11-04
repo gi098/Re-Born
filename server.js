@@ -82,6 +82,12 @@ function startServer(port) {
         if (cleanUrl === '/api/orders') {
           return require('./api/orders.js')(req, res);
         }
+        if (cleanUrl === '/api/products') {
+          return require('./api/products.js')(req, res);
+        }
+        if (cleanUrl === '/api/categories') {
+          return require('./api/categories.js')(req, res);
+        }
         if (cleanUrl === '/api/vouchers/verify') {
           return require('./api/vouchers/verify.js')(req, res);
         }
